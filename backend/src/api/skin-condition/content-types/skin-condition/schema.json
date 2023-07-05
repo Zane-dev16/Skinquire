@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skin_conditions",
+  "info": {
+    "singularName": "skin-condition",
+    "pluralName": "skin-conditions",
+    "displayName": "Skin Condition",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "condition": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "skin_conditions"
+    }
+  }
+}

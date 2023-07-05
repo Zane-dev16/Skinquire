@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skin_types",
+  "info": {
+    "singularName": "skin-type",
+    "pluralName": "skin-types",
+    "displayName": "Skin Type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "skin_types"
+    }
+  }
+}
