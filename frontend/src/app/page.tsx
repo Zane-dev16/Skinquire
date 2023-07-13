@@ -1,5 +1,10 @@
+import ProductCard from "./components/ProductCard";
+import styles from "./page.module.css";
+
 async function getData() {
-  const res = await fetch("http://127.0.0.1:1337/api/products/1");
+  const res = await fetch("http://127.0.0.1:1337/api/products?populate=*", {
+    cache: "no-store",
+  });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -15,5 +20,15 @@ async function getData() {
 export default async function Page() {
   const data = await getData();
 
-  return <main></main>;
+  return (
+    <main>
+      <div className={styles["product-list"]}>
+        {data.data.map((product) => (
+          <div>
+            <ProductCard key={product.id} {...product.attributes} />
+          </div>
+        ))}
+      </div>
+    </main>
+  );
 }
