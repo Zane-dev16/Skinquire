@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./ProductCard.module.css";
+import Image from "next/image";
 
 interface ProductCardProps {
   image: {
@@ -50,7 +51,10 @@ const ProductCard: FC<ProductCardProps> = ({
           {brand.data.attributes.name}
         </div>
         <div className={styles["product-price"]}>{price}€</div>
-        <div className={styles["product-rating"]}>{rating} stars</div>
+        <div className={styles["product-rating"]}>
+          <Image src="/rating-star.svg" alt="rating:" width={20} height={20} />
+          <div className={styles["rating"]}>{rating} </div>
+        </div>
       </div>
     </div>
   );

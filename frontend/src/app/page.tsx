@@ -23,7 +23,7 @@ export default async function Page() {
   return (
     <main>
       <div className={styles["product-list"]}>
-        {data.data.map((product) => (
+        {data.data.map((product: any) => (
           <div>
             <ProductCard key={product.id} {...product.attributes} />
           </div>

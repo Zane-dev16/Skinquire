@@ -1,9 +1,5 @@
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     width: 100%;
-    left: 50%;
-    transform: translate(-50%);
-    position:absolute;
 }
