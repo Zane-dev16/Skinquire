@@ -1,0 +1,36 @@
+
+.menuLinks {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  .menuLinks li {
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
