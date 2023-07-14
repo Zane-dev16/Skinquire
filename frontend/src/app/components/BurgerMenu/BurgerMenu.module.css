@@ -1,5 +1,59 @@
+/* HamburgerMenu.module.css */
 
-.menuLinks {
+.hamburgerMenu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+  }
+  
+  .hamburgerIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .hamburgerIcon span {
+    display: block;
+    height: 3px;
+    background-color: #000;
+    transition: opacity 0.2s ease, transform 0.3s ease;
+    border-radius: 3px;
+  }
+  
+  .hamburgerIcon.open {
+    transform: rotate(45deg);
+  }
+  
+  .hamburgerIcon.open span:first-child {
+    transform: translateY(8.2px);
+  }
+  
+  .hamburgerIcon.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburgerIcon.open span:last-child {
+    transform: translateY(-8.2px) rotate(-90deg);
+  }
+  
+.menuBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 20%;
+/*  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  animation: slideInBackground 0.3s ease forwards; 
+*/
+}
+
+  .menuLinks {
     margin-top: 20px;
     list-style: none;
     padding: 0;
@@ -10,13 +64,27 @@
   
   .menuLinks li {
     margin-bottom: 10px;
+    opacity: 0;
     animation: slideIn 0.3s ease forwards;
+  }
+
+  .link {
+    display: inline-block;
+    font-size: 20px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.5s ease;
+  }
+
+  .link:hover {
+    color: #333;
+    transform: translateX(10px);
   }
   
   @keyframes fadeIn {
     0% {
       opacity: 0;
-      transform: translateX(-20px);
+      transform: translateX(-10px);
     }
     100% {
       opacity: 1;
@@ -27,10 +95,11 @@
   @keyframes slideIn {
     0% {
       opacity: 0;
-      transform: translateX(-20px);
+      transform: translateX(-10px);
     }
     100% {
       opacity: 1;
       transform: translateX(0);
     }
   }
+  
