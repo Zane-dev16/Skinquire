@@ -16,9 +16,5 @@ async function getData() {
 
 export default async function Page() {
   const data = await getData();
-  return (
-    <main>
-      <Link href="/product-list">See Product List</Link>
-    </main>
-  );
+  return <main></main>;
 }

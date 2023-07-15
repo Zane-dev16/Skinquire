@@ -45,21 +45,21 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 20%;
-  height: 20%;
-/*  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99;
+  width: 200px;
+  height: 100%;
+  background-color:beige;
+  border-right: 3px solid #000;
   animation: slideInBackground 0.3s ease forwards; 
-*/
+}
+
+.closeMenu {
+    animation-direction: reverse;
 }
 
   .menuLinks {
     margin-top: 20px;
     list-style: none;
     padding: 0;
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeIn 0.3s ease forwards;
   }
   
   .menuLinks li {
@@ -81,7 +81,7 @@
     transform: translateX(10px);
   }
   
-  @keyframes fadeIn {
+  @keyframes slideIn {
     0% {
       opacity: 0;
       transform: translateX(-10px);
@@ -91,11 +91,12 @@
       transform: translateX(0);
     }
   }
-  
-  @keyframes slideIn {
+
+
+@keyframes slideInBackground {
     0% {
       opacity: 0;
-      transform: translateX(-10px);
+      transform: translateX(-100%);
     }
     100% {
       opacity: 1;

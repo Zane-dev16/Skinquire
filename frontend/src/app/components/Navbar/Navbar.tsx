@@ -1,8 +1,9 @@
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   return (
-    <div>
+    <div className={styles.navbar}>
       <BurgerMenu></BurgerMenu>
     </div>
   );
