@@ -29,6 +29,13 @@ const BurgerMenu = () => {
 
   return (
     <div className={styles.hamburgerMenu}>
+      {isOpen && (
+        <div
+          className={`${styles.menuBackground}  ${
+            isOpen ? styles.openMenu : styles.closeMenu
+          }`}
+        ></div>
+      )}
       <div
         className={`${styles.hamburgerIcon} ${isOpen ? styles.open : ""}`}
         onClick={toggleMenu}
@@ -38,23 +45,24 @@ const BurgerMenu = () => {
         <span></span>
       </div>
       {isOpen && (
-        <>
-          <div className={styles.menuBackground}></div>
-          <ul className={styles.menuLinks}>
-            {menuLinks.map((link, index) => (
-              <li
-                key={index}
-                style={{
-                  animationDelay: `${getMenuLinkDelay(index)}s`,
-                }}
+        <ul className={styles.menuLinks}>
+          {menuLinks.map((link, index) => (
+            <li
+              key={index}
+              style={{
+                animationDelay: `${getMenuLinkDelay(index)}s`,
+              }}
+            >
+              <Link
+                href={link.href}
+                className={styles.link}
+                onClick={toggleMenu}
               >
-                <Link href={link.href} className={styles.link}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
