@@ -1,8 +1,7 @@
 /* HamburgerMenu.module.css */
 
 .hamburgerMenu {
-    position: fixed;
-    top: 20px;
+    margin: 20px;
     left: 20px;
     z-index: 100;
   }

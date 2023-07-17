@@ -13,12 +13,11 @@ export async function generateStaticParams() {
 }
 
 async function getData(id: number) {
-  const res = await fetch(`http://127.0.0.1:1337/api/products/${id}`, {
-    next: { revalidate: 10 },
-  });
+  const res = await fetch(`http://127.0.0.1:1337/api/products/${id}`, {});
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    console.log(id);
+    throw new Error(`Failed to fetch data`);
   }
 
   return res.json();
