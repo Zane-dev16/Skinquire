@@ -1,9 +1,8 @@
 import styles from "./Navbar.module.css";
-import { useState } from "react";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import SearchBar from "../SearchBar/SearchBar";
 
-const Navbar = () => {
+export default async function Navbar() {
   return (
     <div className={styles.navbar}>
       <BurgerMenu></BurgerMenu>
@@ -11,6 +10,4 @@ const Navbar = () => {
       <div>Profile section</div>
     </div>
   );
-};
-
-export default Navbar;
+}
