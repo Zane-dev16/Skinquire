@@ -1,29 +1,46 @@
 import ProductCard from "../components/ProductCard/ProductCard";
 import styles from "./page.module.css";
 
-async function getData() {
-  const res = await fetch("http://127.0.0.1:1337/api/products?populate=*", {
-    next: { revalidate: 30 },
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+import { getClient } from "@/lib/client";
+import { gql } from "@apollo/client";
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+export const revalidate = 5;
+const query = gql`
+  query {
+    products {
+      data {
+        id
+        attributes {
+          name
+          rating
+          price
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          brand {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
   }
-
-  return res.json();
-}
-
+`;
 export default async function Page() {
-  const data = await getData();
+  const client = getClient();
+  const { data } = await client.query({ query });
 
   return (
     <main>
       <div className={styles["product-list"]}>
-        {data.data.map((product: any) => (
+        {data.products.data.map((product: any) => (
           <div>
             <ProductCard key={product.id} {...product.attributes} />
           </div>

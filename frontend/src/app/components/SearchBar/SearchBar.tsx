@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 async function getData(query: string) {
   const res = await fetch(
@@ -41,7 +42,9 @@ export default function SearchBar() {
       {query && (
         <div>
           {data.map((product: any) => (
-            <div key={product.id}>{product.attributes.name}</div>
+            <div key={product.id}>
+              <Link href={`/${product.id}`}>{product.attributes.name}</Link>
+            </div>
           ))}
         </div>
       )}

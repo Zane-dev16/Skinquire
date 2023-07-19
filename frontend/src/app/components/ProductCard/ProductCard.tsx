@@ -6,11 +6,7 @@ interface ProductCardProps {
   image: {
     data: {
       attributes: {
-        formats: {
-          thumbnail: {
-            url: string;
-          };
-        };
+        url: string;
       };
     };
   };
@@ -33,7 +29,7 @@ const ProductCard: FC<ProductCardProps> = ({
   brand,
   price,
 }) => {
-  const imageUrl = image?.data?.attributes?.formats?.thumbnail?.url ?? "";
+  const imageUrl = image?.data?.attributes.url ?? "";
 
   return (
     <div className={styles["product-card"]}>

@@ -11,15 +11,17 @@
   }
 
   .image-container {
-    width: 30%
+    width: 30%;
   }
   
   .product-image {
     margin: auto;
+    max-width: 100%;
   }
   
   .product-content {
     width: 70%;
+    padding-left: 16px;
     position: relative;
   }
   
