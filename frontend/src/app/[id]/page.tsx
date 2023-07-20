@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: { id: number } }) {
   });
 
   if (error) {
-    console.error("WEEEEEEEEEEEEE");
+    console.error("failed to get product by id");
   }
   return (
     <main>
