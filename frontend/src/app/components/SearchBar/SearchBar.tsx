@@ -1,35 +1,47 @@
 "use client";
 
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { gql } from "@apollo/client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-async function getData(query: string) {
-  const res = await fetch(
-    `http://127.0.0.1:1337/api/products?filters[name][$containsi]=${query}`
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+interface Product {
+  id: number;
+  attributes: {
+    name: string;
+  };
 }
+
+interface ResponseData {
+  products: {
+    data: Product[];
+  };
+}
+
+export const revalidate = 5;
+
+const QUERY_PRODUCTS = gql`
+  query SearchProducts($searchQuery: String!) {
+    products(filters: { name: { containsi: $searchQuery } }) {
+      data {
+        id
+        attributes {
+          name
+        }
+      }
+    }
+  }
+`;
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
-  const [data, setData] = useState<any[]>([]);
+  const { data, error } = useSuspenseQuery<ResponseData>(QUERY_PRODUCTS, {
+    variables: { searchQuery: query },
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getData(query);
-        setData(result.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [query]);
+  if (error) {
+    console.error("Error fetching products:", error);
+  }
 
   return (
     <div>
@@ -41,7 +53,7 @@ export default function SearchBar() {
       />
       {query && (
         <div>
-          {data.map((product: any) => (
+          {data.products.data.map((product: any) => (
             <div key={product.id}>
               <Link href={`/${product.id}`}>{product.attributes.name}</Link>
             </div>
