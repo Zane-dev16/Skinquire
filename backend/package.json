@@ -15,7 +15,9 @@
     "@strapi/plugin-seo": "^1.9.2",
     "@strapi/plugin-users-permissions": "4.11.5",
     "@strapi/strapi": "4.11.5",
-    "better-sqlite3": "8.0.1"
+    "better-sqlite3": "8.0.1",
+    "strapi-google-auth": "^0.1.2",
+    "strapi-plugin-passwordless": "^4.0.12"
   },
   "author": {
     "name": "A Strapi developer"

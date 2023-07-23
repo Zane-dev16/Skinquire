@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { useAppContext } from "@/context/AppContext";
 import { gql, useMutation } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { ApolloError } from "@apollo/client";
@@ -10,7 +10,6 @@ import { ApolloError } from "@apollo/client";
 import Cookie from "js-cookie";
 
 import Form from "../components/Form/Form";
-import Loader from "../product-list/loading";
 
 interface ResponseData {
   register: {
@@ -37,6 +36,7 @@ const REGISTER_MUTATION = gql`
 `;
 
 export default function RegisterRoute() {
+  const { setUser } = useAppContext();
   const router = useRouter();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -50,6 +50,7 @@ export default function RegisterRoute() {
       variables: { username: email, email: email, password },
     });
     if (data?.register.user) {
+      setUser(data.register.user);
       router.push("/product-list");
       Cookie.set("token", data.register.jwt);
     }
