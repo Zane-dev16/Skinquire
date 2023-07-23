@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { ApolloError } from "@apollo/client";
+import styles from "./Form.module.css"; // Import the CSS module
 
 interface FormData {
   email: string;
@@ -25,13 +26,13 @@ const Form: React.FC<FormProps> = ({
 }) => {
   return (
     <section>
-      <div>
-        <div>
+      <div className={styles.formContainer}>
+        <form onSubmit={callback} className={styles.form}>
           <h3>{title}</h3>
-        </div>
-        <form onSubmit={callback}>
-          <div>
-            <label htmlFor="email">Email</label>
+          <div className={styles.formGroup}>
+            <label htmlFor="email" className={styles.label}>
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -41,10 +42,13 @@ const Form: React.FC<FormProps> = ({
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
+              className={styles.input}
             />
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
+          <div className={styles.formGroup}>
+            <label htmlFor="password" className={styles.label}>
+              Password
+            </label>
             <input
               id="password"
               type="password"
@@ -54,10 +58,13 @@ const Form: React.FC<FormProps> = ({
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
+              className={styles.input}
             />
           </div>
-          {error && <div>Error: {error.message}</div>}
-          <button type="submit">{buttonText}</button>
+          {error && <div className={styles.error}>Error: {error.message}</div>}
+          <button type="submit" className={styles.button}>
+            {buttonText}
+          </button>
         </form>
       </div>
     </section>

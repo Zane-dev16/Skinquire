@@ -28,8 +28,11 @@ const QUERY_PRODUCT_BY_ID = gql`
 
 export async function generateStaticParams() {
   const client = getClient();
-  const { data } = await client.query({ query: QUERY_PRODUCTS });
+  const { data, error } = await client.query({ query: QUERY_PRODUCTS });
 
+  if (error) {
+    console.error("failed to get product by id");
+  }
   return data.products.data.map((product: { id: number }) => ({
     id: product.id.toString(),
   }));

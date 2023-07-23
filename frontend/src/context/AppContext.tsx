@@ -7,7 +7,6 @@ import {
 } from "react";
 import Cookie from "js-cookie";
 import { gql } from "@apollo/client";
-import { getClient } from "@/lib/client";
 
 // Define the type for the user object
 interface User {
@@ -30,14 +29,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const fetchData = async () => {
       const userData = await getUser();
       setUser(userData);
     };
     fetchData();
   }, []);
-
+ */
   return (
     <AppContext.Provider
       value={{
@@ -49,7 +48,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     </AppContext.Provider>
   );
 };
-
+/* 
 const getUser = async () => {
   const token = Cookie.get("token");
   if (!token) return null;
@@ -80,3 +79,4 @@ export const useAppContext = (): AppContextType => {
   }
   return context;
 };
+ */

@@ -1,0 +1,7 @@
+body {
+    margin: none;
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+}

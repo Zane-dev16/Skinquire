@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "@/context/AppContext";
+// import { useAppContext } from "@/context/AppContext";
 import { gql, useMutation } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import { ApolloError } from "@apollo/client";
+import Image from "next/image";
 
 import Cookie from "js-cookie";
-
 import Form from "../components/Form/Form";
+import styles from "./page.module.css";
 
 interface ResponseData {
   register: {
@@ -36,7 +36,7 @@ const REGISTER_MUTATION = gql`
 `;
 
 export default function RegisterRoute() {
-  const { setUser } = useAppContext();
+  // const { setUser } = useAppContext();
   const router = useRouter();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -50,20 +50,30 @@ export default function RegisterRoute() {
       variables: { username: email, email: email, password },
     });
     if (data?.register.user) {
-      setUser(data.register.user);
+      // setUser(data.register.user);
       router.push("/product-list");
       Cookie.set("token", data.register.jwt);
     }
   };
 
   return (
-    <Form
-      title="Sign Up"
-      buttonText="Sign Up"
-      formData={formData}
-      setFormData={setFormData}
-      callback={handleRegister}
-      error={error}
-    />
+    <div className={styles.signUpPage}>
+      <div>
+        <Form
+          title="Sign Up"
+          buttonText="Sign Up"
+          formData={formData}
+          setFormData={setFormData}
+          callback={handleRegister}
+          error={error}
+        />
+        <a href="http://127.0.0.1:1337/api/connect/google">
+          <div className={styles.googleSignIn}>
+            <Image src="/google-icon.svg" alt="" width={20} height={20} />
+            <span className={styles.googleText}>Continue with Google</span>
+          </div>
+        </a>
+      </div>
+    </div>
   );
 }

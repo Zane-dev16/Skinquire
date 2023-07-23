@@ -9,7 +9,6 @@ export default async function Page() {
       <div>a</div>
       <div>a</div>
       <div>a</div>
-      <a href="http://127.0.0.1:1337/api/connect/google">google login</a>
     </main>
   );
 }

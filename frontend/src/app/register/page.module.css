@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.signUpPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:   90vh;
+}
+
+.googleSignIn {
+    width: 300px;
+    margin-top: 10px;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    border: 2px black solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Target the <a> tag and override default link styles */
+.googleText {
+  color: rgb(139, 139, 139); /* Change link color to a desired color, here it's blue (#007bff) */
+  font-family: 'Roboto', sans-serif; /* Apply Roboto font and fallback to a system sans-serif font */
+  font-size: 20px; /* Set the desired font size */
+    transition: color 0.2s ease-out;
+}
+
+/* Optional: Add styles for link hover state */
+.googleText:hover {
+  color: black; /* Change link color on hover */
+  /* Add any other hover styles as needed */
+}
