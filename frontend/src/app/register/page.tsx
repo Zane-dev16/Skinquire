@@ -7,7 +7,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import Image from "next/image";
 
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import Form from "../components/Form/Form";
 import styles from "./page.module.css";
 
@@ -52,7 +52,7 @@ export default function RegisterRoute() {
     if (data?.register.user) {
       // setUser(data.register.user);
       router.push("/product-list");
-      Cookie.set("token", data.register.jwt);
+      Cookies.set("token", data.register.jwt);
     }
   };
 

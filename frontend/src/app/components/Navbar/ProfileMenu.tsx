@@ -1,12 +1,56 @@
 "use client";
-import { useState } from "react";
 
 import styles from "./ProfileMenu.module.css";
+
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { ApolloError } from "@apollo/client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+import Cookies from "js-cookie";
+
+const LOGIN_MUTATION = gql`
+  mutation Login($identifier: String!, $password: String!) {
+    login(input: { identifier: $identifier, password: $password }) {
+      jwt
+      user {
+        username
+        email
+      }
+    }
+  }
+`;
+
 export default function ProfileMenu() {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loginMutation, { loading, error }] = useMutation(LOGIN_MUTATION);
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { email, password } = formData;
+    try {
+      const { data } = await loginMutation({
+        variables: { identifier: email, password },
+      });
+
+      if (data?.login.user) {
+        Cookies.set("token", data.login.jwt);
+        router.push("/");
+      }
+    } catch (error: ApolloError | any) {
+      // Explicitly specify the type as ApolloError
+      console.error("Login Error:", error.message);
+    }
+  };
+
+  if (loading) return <div>Login Loading...</div>;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,9 +67,29 @@ export default function ProfileMenu() {
       ></Image>
       {isOpen && (
         <div className={styles.profileMenu}>
-          <form>
-            <input type="text" placeholder="email" />
-            <input type="password" placeholder="password" />
+          <form onSubmit={handleLogin}>
+            <input
+              id="email"
+              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+            <input
+              id="password"
+              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
             <button type="submit">LOG IN</button>
           </form>
           <a href="http://127.0.0.1:1337/api/connect/google">
@@ -45,6 +109,7 @@ export default function ProfileMenu() {
               Sign Up!
             </Link>
           </div>
+          {error && <div className={styles.error}>Error: {error.message}</div>}
         </div>
       )}
     </>
