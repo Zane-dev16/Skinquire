@@ -1,0 +1,125 @@
+/* Base styles */
+.profileAvatar {
+    margin-top: 1vh;
+    margin-right: 5vh; /* Use vh for responsive margin */
+    z-index: 999;
+    transition: transform 1s;
+  }
+  
+  .profileMenu {
+    position: fixed;
+    top: 2vh; /* Use vh for responsive distance from the top */
+    right: 5vh; /* Use vh for responsive distance from the right */
+    padding: 2vh; /* Use vh for responsive padding around the form */
+    padding-top: 50px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 30vh; /* Use vh for responsive width */
+    max-width: 300px; /* Add a maximum width to limit the menu size on larger screens */
+    height: 35vh; /* Use vh for responsive height */
+    z-index: 998;
+  }
+  
+  .profileMenu form {
+    display: flex;
+    width: 100%;
+    gap: 1vh; /* Use em for responsive gap between form elements */
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .profileMenu input {
+    padding: 2vh; /* Use vh for responsive padding */
+    font-size: 2vh; /* Use vh for responsive font size */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .profileMenu button {
+    width: 20vh; /* Use vh for responsive width */
+    padding: 1vh 2vh; /* Use vh for responsive padding */
+    font-size: 2vh; /* Use vh for responsive font size */
+    align-self: center;
+    background-color: palegoldenrod;
+    border: 1px black solid;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Adjust the positioning for the SignUp div */
+  .signUp {
+    width: 100%;
+    position: absolute;
+    bottom: 2vh; /* Use vh for responsive distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .newHereText {
+    font-size: 4vh; /* Use vh for responsive font size */
+  }
+
+  .signUpLink {
+    font-size: 2vh
+  }
+  
+.open {
+    transform: translateX(-16vh);
+}
+  
+.googleSignIn {
+  width: 27vh;
+  margin-top: 10px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  border: 2px black solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Target the <a> tag and override default link styles */
+.googleText {
+color: rgb(139, 139, 139); /* Change link color to a desired color, here it's blue (#007bff) */
+font-family: 'Roboto', sans-serif; /* Apply Roboto font and fallback to a system sans-serif font */
+font-size: 16px; /* Set the desired font size */
+  transition: color 0.2s ease-out;
+}
+
+/* Optional: Add styles for link hover state */
+.googleText:hover {
+color: black; /* Change link color on hover */
+/* Add any other hover styles as needed */
+}
+
+  /* Responsive styles for smaller screens */
+  @media screen and (max-width: 768px) {
+    .profileAvatar {
+      margin-right: 3vh;
+    }
+  
+    .profileMenu {
+      top: 3vh;
+      right: 3vh;
+      padding: 2vh;
+      padding-top: 6vh;
+      max-width: 250px;
+    }
+  
+    .profileMenu input,
+    .profileMenu button {
+      padding: 2vh;
+      font-size: 3vh;
+    }
+  
+    .newHereText {
+      font-size: 6vh;
+    }
+  }
+  
