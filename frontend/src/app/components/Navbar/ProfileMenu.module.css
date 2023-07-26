@@ -4,6 +4,7 @@
     margin-right: 4.6vh; /* Use vh for responsive margin */
     z-index: 999;
     transition: transform 1s ease;
+    cursor: pointer;
   }
   
   .profileMenu {
@@ -98,6 +99,11 @@ font-size: 2.2vh; /* Set the desired font size */
 .googleText:hover {
 color: black; /* Change link color on hover */
 /* Add any other hover styles as needed */
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
 }
 
 .error {
