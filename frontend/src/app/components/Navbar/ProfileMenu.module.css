@@ -13,9 +13,8 @@
     right: 5vh; /* Use vh for responsive distance from the right */
     padding: 2vh; /* Use vh for responsive padding around the form */
     padding-top: 50px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    background-color: rgba(70, 70, 70, 0.416);
+    border: 1px solid #50443a;
     width: 30vh; /* Use vh for responsive width */
     max-width: 300px; /* Add a maximum width to limit the menu size on larger screens */
     height: 35vh; /* Use vh for responsive height */

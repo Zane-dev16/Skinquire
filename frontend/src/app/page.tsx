@@ -1,14 +1,27 @@
-import ProductCard from "./components/ProductCard/ProductCard";
-import Link from "next/link";
+// pages/index.js
+import Head from "next/head";
+import styles from "./page.module.css";
+import ProductCategoryCard from "./components/HomeSections/ProductCategoryCard";
+import ProductCategorySection from "./components/HomeSections/productCategorySection";
 
-export default async function Page() {
+const Home = () => {
+  const ProductCategories = [
+    "CLEANSER",
+    "EXFOLIATOR",
+    "MOISTURISER",
+    "SUNSCREEN",
+  ];
   return (
-    <main>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-      <div>a</div>
-    </main>
+    <>
+      <div className={styles.heroSection}>
+        <div>
+          <h1 className={styles.heroTitle}>Skinqu!re</h1>
+        </div>
+      </div>
+      <ProductCategorySection></ProductCategorySection>
+      <section className={styles.issue}></section>
+    </>
   );
-}
+};
+
+export default Home;

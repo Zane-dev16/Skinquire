@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');
+
+.heroSection {
+    background: url("/hero-image.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+.heroTitle {
+    font-size: 10vw;
+    color: #fffbed;
+    font-family:'Yeseva One';
+}
+
+.issue {
+  height: 100vh;
+  background-color: #a0ab9d;
+}

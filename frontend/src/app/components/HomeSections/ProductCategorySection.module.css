@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Vanity'; /* Provide a name for the font */
+  src: url('/fonts/Vanity-LightWide.otf')
+}
+
+.productCategorieSection {
+    position: relative;
+    background-color: #fffbed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+  }
+
+.title {
+  font-family: 'Vanity';
+  font-size: 5vw;
+  text-align: center;
+  color: #50443a;
+  margin: 3vh;
+  margin-top: 10vh;
+}
+  
+  .productCategories {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
