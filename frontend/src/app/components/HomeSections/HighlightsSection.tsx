@@ -59,6 +59,10 @@ const HighlightCard = ({ title }: { title: string }) => {
     hidden: { x: "-150%" },
     show: { x: 0, transition: { duration: 1 } },
   };
+  const line = {
+    hidden: { y: "-100%" },
+    show: { transition: { duration: 1 }, y: 0 },
+  };
   return (
     <div className={styles.highlightCard}>
       <motion.div variants={card}>
@@ -68,7 +72,7 @@ const HighlightCard = ({ title }: { title: string }) => {
           VIEW DETAILS
         </Link>
       </motion.div>
-      <div className={styles.separator}></div>
+      <motion.div variants={line} className={styles.separator}></motion.div>
     </div>
   );
 };

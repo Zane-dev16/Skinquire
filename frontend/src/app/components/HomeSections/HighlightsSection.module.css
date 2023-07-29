@@ -37,8 +37,13 @@
     display: flex;
     width: 96vw;
     overflow: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
 
+.highlightsContainer::-webkit-scrollbar {
+    display: none;
+}
 
 .highlightCard {
     position: relative;
