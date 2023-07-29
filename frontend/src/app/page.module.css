@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');
 
+@font-face {
+  font-family: 'Alecko'; /* Provide a name for the font */
+  src: url('/fonts/Alecko-HighContrast.otf')
+}
+
+
 .heroSection {
     background: url("/hero-image.jpg");
     background-size: cover;
@@ -14,9 +20,16 @@
   }
 
 .heroTitle {
-    font-size: 10vw;
-    color: #fffbed;
-    font-family:'Yeseva One';
+  height: 10vw;
+  overflow: hidden;
+}
+
+.titleLetter {
+  margin: 0;
+  font-size: 10vw;
+  color: #fffbed;
+  font-family:'Alecko';
+  display: inline-block;
 }
 
 .issue {

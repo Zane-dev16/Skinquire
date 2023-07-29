@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Shamery'; /* Provide a name for the font */
+    src: url('/fonts/shamery.ttf')
+  }
+
+.titleContainer {
+    padding: 5% 0 0 5%;
+    overflow: hidden;
+}
+
+.title {
+    display: inline-block;
+    font-family: "Shamery";
+    font-size: 5vw;
+}
+
+.highlightsSection {
+    position: relative;
+    background-color: #fffbed;
+    height: 100vh;
+    width: 100vw;
+}
+
+.horizontalLine {
+    position: absolute;
+    top: 11vw;
+    right: 50%;
+    background-color: black;
+    height: 1px;
+    width: 90%;
+}
+
+.highlightsContainer {
+    position: relative;
+    margin: 40px 0 0 0;
+    padding-left: 4vw;
+    display: flex;
+    width: 96vw;
+    overflow: scroll;
+}
+
+
+.highlightCard {
+    position: relative;
+    padding: 0 70px 20px 70px;
+    min-width: 270px;
+    overflow: hidden;
+}
+
+.highlightImage {
+    background: url("/hero-image.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    border-radius: 4%;
+    width: 270px;
+    height: 400px;
+}
+
+
+.separator {
+    position: absolute;
+    background-color: black;
+    height: 100%;
+    width: 1px;
+    top: 0;
+    right: 0;
+}
+
+.highlightName {
+    margin: 0;
+    font-family: "Shamery";
+    font-size: 20px;
+    margin: 20px 0 5px 10px;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+    height:fit-content;
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px #50443a solid;
+    background-color: transparent;
+    font-family: 'Gruppo', sans-serif;
+    font-size: 15px;
+    color: #50443a;
+}
