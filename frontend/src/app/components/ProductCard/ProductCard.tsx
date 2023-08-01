@@ -36,7 +36,7 @@ const ProductCard: FC<ProductCardProps> = ({
       <div className={styles["image-container"]}>
         <img
           src={`http://localhost:1337${imageUrl}`}
-          alt={name}
+          alt={`${name} product image`}
           className={styles["product-image"]}
         />
       </div>

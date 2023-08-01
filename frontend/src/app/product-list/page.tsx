@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProductCard from "../components/ProductCard/ProductCard";
 import styles from "./page.module.css";
 
@@ -35,15 +36,18 @@ const query = gql`
 `;
 export default async function Page() {
   const client = getClient();
-  const { data } = await client.query({ query });
+  const { data, error } = await client.query({ query });
+  if (error) {
+    return <div>Could not find product list</div>;
+  }
 
   return (
     <main>
       <div className={styles["product-list"]}>
         {data.products.data.map((product: any) => (
-          <div>
+          <Link href={`/product-list/${product.id}`}>
             <ProductCard key={product.id} {...product.attributes} />
-          </div>
+          </Link>
         ))}
       </div>
     </main>

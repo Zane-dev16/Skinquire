@@ -55,7 +55,12 @@ export default function SearchBar() {
         <div>
           {data.products.data.map((product: any) => (
             <div key={product.id}>
-              <Link href={`/${product.id}`}>{product.attributes.name}</Link>
+              <Link
+                onClick={() => setQuery("")}
+                href={`/product-list/${product.id}`}
+              >
+                {product.attributes.name}
+              </Link>
             </div>
           ))}
         </div>

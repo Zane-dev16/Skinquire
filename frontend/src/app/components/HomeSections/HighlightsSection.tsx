@@ -45,9 +45,7 @@ const HighlightsSection = () => {
         className={styles.highlightsContainer}
       >
         {highlights.map((highlight, index) => (
-          <>
-            <HighlightCard title={highlight} key={index} />
-          </>
+          <HighlightCard key={index} title={highlight} />
         ))}
       </motion.div>
     </section>

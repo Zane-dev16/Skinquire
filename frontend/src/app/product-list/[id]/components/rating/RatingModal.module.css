@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+
+.backdrop {
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.133);
+}
+
+.modal {
+    height: 30vh;
+    width: 60vw;
+    background-color: #fffbed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ratingMeter {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 3em;
+    font-family: "Gruppo", sans-serif;
+}
+
+.ratingNumber {
+    padding: 15px;
+}
+
+.currentRating {
+    display: flex;
+    align-items: center;
+}
+
+.ratingIcon {
+    padding: 0 5px 3px 0;
+}
+.currentRatingNumber {
+}

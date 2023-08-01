@@ -22,8 +22,11 @@ const ProductCategorySection = () => {
         SKINCARE 101
       </motion.h3>
       <div className={styles.productCategories}>
-        {ProductCategories.map((category) => (
-          <ProductCategoryCard category={category}></ProductCategoryCard>
+        {ProductCategories.map((category, index) => (
+          <ProductCategoryCard
+            key={index}
+            category={category}
+          ></ProductCategoryCard>
         ))}
       </div>
     </section>
