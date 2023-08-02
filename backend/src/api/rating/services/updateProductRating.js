@@ -1,26 +1,31 @@
 "use strict";
 
 /**
- * rating service
+ * updateProductRating service
  */
 
-const { createCoreService } = require("@strapi/strapi").factories;
-module.exports = createCoreService("api::rating.rating", ({ strapi }) => ({
-  /*  async updateProductAverageRating(productId) {
+module.exports = () => ({
+  async updateProductAverageRating(productId) {
     const product = await strapi.entityService.findOne(
       "api::product.product",
       productId,
       {
-        fields: ["ratings"],
+        fields: ["id"],
+        populate: {
+          ratings: {
+            fields: ["rating"],
+          },
+        },
       }
     );
-    if (!product || !product.ratings || product.ratings.length === 0) {
+    console.log(product);
+    if (!product || !product.ratings) {
+      console.log("Error: not found");
       return;
     }
-
     const totalRatings = product.ratings.length;
     const totalRatingValue = product.ratings.reduce(
-      (acc, rating) => acc + rating.value,
+      (acc, rating) => acc + rating.rating,
       0
     );
     const averageRating = totalRatingValue / totalRatings;
@@ -30,5 +35,5 @@ module.exports = createCoreService("api::rating.rating", ({ strapi }) => ({
       productId,
       { data: { overall_rating: averageRating } }
     );
-  }, */
-}));
+  },
+});

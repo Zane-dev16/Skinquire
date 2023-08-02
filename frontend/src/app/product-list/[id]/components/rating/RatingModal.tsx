@@ -4,29 +4,6 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-const getUserID = async (access_token: string | undefined) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `query {
-                  me {
-                    id
-                  }
-                }`,
-      }),
-    }
-  );
-
-  const data = await response.json();
-  return data.data.me.id;
-};
-
 const createRating = async ({
   access_token,
   product,
@@ -53,6 +30,7 @@ const createRating = async ({
             data {
               attributes {
                 rating
+
               }
             }
           }
@@ -66,16 +44,61 @@ const createRating = async ({
   return data.data.createRating.data;
 };
 
+const updateRating = async ({
+  access_token,
+  userRatingId,
+  rating,
+}: {
+  access_token: string | undefined;
+  userRatingId: number | null;
+  rating: number;
+}) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+        mutation {
+          updateRating(id: ${userRatingId}, data: {rating: ${rating}}){
+            data {
+              id
+              attributes {
+                product {
+                  data {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }`,
+      }),
+    }
+  );
+
+  const data = await response.json();
+  return data.data.createRating.data;
+};
+
 interface RatingModalProps {
   handleClose: MouseEventHandler<HTMLDivElement>;
   product: number;
   hasUserRating: boolean;
+  userRatingId: number | null;
+  userId: number | undefined;
 }
 
 const RatingModal: FC<RatingModalProps> = ({
   product,
   handleClose,
   hasUserRating,
+  userRatingId,
+  userId,
 }) => {
   const [rating, setRating] = useState<number | null>(null);
   const [displayRating, setDisplayRating] = useState<number | null>(null);
@@ -100,20 +123,29 @@ const RatingModal: FC<RatingModalProps> = ({
     if (rating === null) {
       // If the rating is null, display an error message to the user
       console.log("Please select a rating before submitting.");
-      return;
-    }
-
-    try {
-      const userID = await getUserID(access_token);
-      const data = await createRating({
-        access_token,
-        product: product,
-        user: userID,
-        rating: rating,
-      });
-      console.log("Rating created:", data);
-    } catch (error) {
-      console.error(error);
+    } else if (!userId) {
+      console.log("Please login first.");
+    } else {
+      try {
+        const userID = userId;
+        if (!hasUserRating) {
+          const data = await createRating({
+            access_token,
+            product: product,
+            user: userID,
+            rating: rating,
+          });
+          console.log("Rating created:", data);
+        } else {
+          const data = await updateRating({
+            access_token,
+            userRatingId,
+            rating,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

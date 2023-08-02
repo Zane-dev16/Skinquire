@@ -48,6 +48,7 @@ const getUserRating = ({
                     attributes {
                       ratings {
                         data {
+                          id
                           attributes {
                             rating
                           }
@@ -65,6 +66,7 @@ const getUserRating = ({
     );
 
 type UserRatingData = {
+  id: number;
   attributes: {
     rating: number;
   };
@@ -97,17 +99,22 @@ const RatingButton: FC<RatingButtonProps> = ({ product }) => {
   const hasUserRating =
     Array.isArray(userRatingData) && userRatingData.length > 0;
 
+  const userRatingId = hasUserRating ? userRatingData[0].id : null;
+
   return (
     <div>
-      {(userIdLoading || userRatingLoading) && <div>aaaa</div>}
-      <span onClick={() => setIsOpen(true)}>
-        {hasUserRating ? "Change Rating" : "Rate This Product"}
-      </span>
+      <div onClick={() => setIsOpen(true)}>
+        {hasUserRating
+          ? `Rating: ${userRatingData[0].attributes.rating}      Change Rating`
+          : "Rate This Product"}
+      </div>
       {isOpen && (
         <RatingModal
           product={product}
           handleClose={() => setIsOpen(false)}
-          hasUserRating
+          hasUserRating={hasUserRating}
+          userRatingId={userRatingId}
+          userId={userIdData}
         ></RatingModal>
       )}
     </div>

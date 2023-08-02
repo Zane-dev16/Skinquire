@@ -73,6 +73,11 @@
       "relation": "oneToMany",
       "target": "api::rating.rating",
       "mappedBy": "product"
+    },
+    "overall_rating": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
     }
   }
 }
