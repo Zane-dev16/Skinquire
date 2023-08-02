@@ -4,9 +4,28 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-interface RatingModalProps {
-  handleClose: MouseEventHandler<HTMLDivElement>;
-}
+const getUserID = async (access_token: string | undefined) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `query {
+                  me {
+                    id
+                  }
+                }`,
+      }),
+    }
+  );
+
+  const data = await response.json();
+  return data.data.me.id;
+};
 
 const createRating = async ({
   access_token,
@@ -47,7 +66,17 @@ const createRating = async ({
   return data.data.createRating.data;
 };
 
-const RatingModal: FC<RatingModalProps> = ({ handleClose }) => {
+interface RatingModalProps {
+  handleClose: MouseEventHandler<HTMLDivElement>;
+  product: number;
+  hasUserRating: boolean;
+}
+
+const RatingModal: FC<RatingModalProps> = ({
+  product,
+  handleClose,
+  hasUserRating,
+}) => {
   const [rating, setRating] = useState<number | null>(null);
   const [displayRating, setDisplayRating] = useState<number | null>(null);
   const router = useRouter();
@@ -68,8 +97,6 @@ const RatingModal: FC<RatingModalProps> = ({ handleClose }) => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
     if (rating === null) {
       // If the rating is null, display an error message to the user
       console.log("Please select a rating before submitting.");
@@ -77,10 +104,11 @@ const RatingModal: FC<RatingModalProps> = ({ handleClose }) => {
     }
 
     try {
+      const userID = await getUserID(access_token);
       const data = await createRating({
         access_token,
-        product: 2,
-        user: 23,
+        product: product,
+        user: userID,
         rating: rating,
       });
       console.log("Rating created:", data);

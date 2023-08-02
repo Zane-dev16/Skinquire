@@ -3,6 +3,25 @@ import { gql } from "@apollo/client";
 import Head from "next/head";
 import RatingButton from "./components/rating/RatingButton";
 import Link from "next/link";
+import Cookies from "js-cookie";
+
+interface Ingredient {
+  attributes: {
+    name: string;
+  };
+}
+
+interface SkinCondition {
+  attributes: {
+    condition: string;
+  };
+}
+
+interface SkinType {
+  attributes: {
+    type: string;
+  };
+}
 
 const QUERY_PRODUCTS = gql`
   query {
@@ -114,7 +133,7 @@ export default async function Page({ params }: { params: { id: number } }) {
         <p>
           Ingredients:{" "}
           {product.ingredients.data
-            .map((ingredient) => ingredient.attributes.name)
+            .map((ingredient: Ingredient) => ingredient.attributes.name)
             .join(", ")}
         </p>
         <p>Type: {product.productType}</p>
@@ -122,17 +141,17 @@ export default async function Page({ params }: { params: { id: number } }) {
         <p>
           Skin Condition:{" "}
           {product.skin_conditions.data
-            .map((condition) => condition.attributes.condition)
+            .map((condition: SkinCondition) => condition.attributes.condition)
             .join(", ")}
         </p>
         <p>
           Skin Type:{" "}
           {product.skin_types.data
-            .map((type) => type.attributes.type)
+            .map((type: SkinType) => type.attributes.type)
             .join(", ")}
         </p>
       </div>
-      <RatingButton></RatingButton>
+      <RatingButton product={params.id}></RatingButton>
     </div>
   );
 }
