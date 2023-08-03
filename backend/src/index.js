@@ -14,13 +14,33 @@ module.exports = {
       resolversConfig: {
         "Mutation.createRating": {
           policies: [
-            (context, { strapi }) => {
-              console.log("hello", context);
+            async (context) => {
+              const { product, user } = context.args.data;
+              const entries = await strapi.entityService.findMany(
+                "api::rating.rating",
+                {
+                  filters: {
+                    $and: [
+                      {
+                        product: {
+                          id: 2,
+                        },
+                      },
+                      {
+                        user: {
+                          id: 25,
+                        },
+                      },
+                    ],
+                  },
+                }
+              );
+              console.log(entries);
 
               return true;
             },
           ],
-          auth: false,
+          auth: true,
         },
       },
     });
