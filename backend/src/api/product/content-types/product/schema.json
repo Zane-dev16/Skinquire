@@ -75,7 +75,7 @@
       "mappedBy": "product"
     },
     "overall_rating": {
-      "type": "integer",
+      "type": "decimal",
       "max": 10,
       "min": 1
     }

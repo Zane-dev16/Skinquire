@@ -18,7 +18,6 @@ module.exports = () => ({
         },
       }
     );
-    console.log(product);
     if (!product || !product.ratings) {
       console.log("Error: not found");
       return;
@@ -28,7 +27,9 @@ module.exports = () => ({
       (acc, rating) => acc + rating.rating,
       0
     );
+    console.log(totalRatingValue);
     const averageRating = totalRatingValue / totalRatings;
+    console.log(averageRating);
 
     const entry = await strapi.entityService.update(
       "api::product.product",
