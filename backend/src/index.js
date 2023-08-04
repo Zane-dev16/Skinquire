@@ -35,9 +35,12 @@ module.exports = {
                   },
                 }
               );
-              console.log(entries);
+              if (entries.length == 0) {
+                console.log("trusted");
+                return true;
+              }
 
-              return true;
+              return false;
             },
           ],
           auth: true,
