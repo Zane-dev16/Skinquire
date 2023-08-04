@@ -1,0 +1,33 @@
+  
+  .option {
+    cursor: pointer;
+    padding: 8px;
+    transition: background-color 0.2s ease;
+    margin: 1px;
+  }
+  
+  .option:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .optionSelected {
+    background-color: black;
+    color: white;
+  }
+  
+  .optionNotSelected {
+    background-color: white;
+    color: #333;
+  }
+  
+  /* Additional styles to improve the appearance of the dropdown */
+  .dropdownList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdownTitle {
+    margin-bottom: 10px;
+  }
+  
