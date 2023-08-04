@@ -3,6 +3,7 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useCallback } from "react";
+import styles from "./FilterOptions.module.css";
 
 const FilterOptions = () => {
   const router = useRouter();
@@ -25,24 +26,22 @@ const FilterOptions = () => {
     <>
       <p>Sort By</p>
 
-      {/* using useRouter */}
-      <button
-        onClick={() => {
-          // <pathname>?sort=asc
-          router.push(pathname + "?" + createQueryString("sort", "asc"));
-        }}
-      >
-        ASC
-      </button>
-
-      {/* using <Link> */}
       <Link
         href={
-          // <pathname>?sort=desc
-          pathname + "?" + createQueryString("sort", "desc")
+          // <pathname>?order=desc
+          pathname + "?" + createQueryString("order", ":asc")
         }
       >
-        DESC
+        <div className={styles.button}>ASC</div>
+      </Link>
+
+      <Link
+        href={
+          // <pathname>?order=desc
+          pathname + "?" + createQueryString("order", ":desc")
+        }
+      >
+        <div className={styles.button}>DESC</div>
       </Link>
     </>
   );

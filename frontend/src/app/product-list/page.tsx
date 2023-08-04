@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductCard from "../components/ProductCard/ProductCard";
 import FilterOptions from "./components/FilterOptions";
+import ProductList from "./components/ProductList";
 import styles from "./page.module.css";
 
 import { getClient } from "@/lib/client";
@@ -46,11 +47,7 @@ export default async function Page() {
     <main>
       <FilterOptions></FilterOptions>
       <div className={styles["product-list"]}>
-        {data.products.data.map((product: any) => (
-          <Link href={`/product-list/${product.id}`}>
-            <ProductCard key={product.id} {...product.attributes} />
-          </Link>
-        ))}
+        <ProductList></ProductList>
       </div>
     </main>
   );
