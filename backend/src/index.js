@@ -23,19 +23,19 @@ module.exports = {
                     $and: [
                       {
                         product: {
-                          id: 2,
+                          id: product,
                         },
                       },
                       {
                         user: {
-                          id: 25,
+                          id: user,
                         },
                       },
                     ],
                   },
                 }
               );
-              if (entries.length == 0) {
+              if (entries.length === 0 && user == context.state.user.id) {
                 console.log("trusted");
                 return true;
               }
