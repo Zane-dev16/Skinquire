@@ -7,20 +7,23 @@ const SearchFilterOptions = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const retrievedBrandParam = searchParams.get("brands");
+  const retrievedBrandsParam = searchParams.get("brands");
 
-  let retrievedBrands = [];
-  if (retrievedBrandParam) {
+  let selectedBrands: string[] = [];
+  if (retrievedBrandsParam) {
     // Parse the JSON string to get back the array
-    retrievedBrands = JSON.parse(retrievedBrandParam);
+    selectedBrands = JSON.parse(retrievedBrandsParam);
   }
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const brands = ["Brand A", "Brand B", "Brand C", "Brand D"];
+
   const handleItemClick = useCallback((item: string) => {
-    console.log("clicked");
+    if (selectedBrands.includes(item)) {
+      selectedBrands = selectedBrands.filter((brand) => brand !== item);
+    } else {
+      selectedBrands = [...selectedBrands, item];
+    }
     const params = new URLSearchParams(searchParams.toString());
-    const setBrands = ["Brand A", "Brand B"];
-    params.set("brands", JSON.stringify(setBrands));
+    params.set("brands", JSON.stringify(selectedBrands));
     router.push(pathname + "?" + params.toString());
   }, []);
 
@@ -33,7 +36,7 @@ const SearchFilterOptions = () => {
             key={item}
             onClick={() => handleItemClick(item)}
             className={`${styles.option} ${
-              selectedItems.includes(item)
+              selectedBrands.includes(item)
                 ? styles.optionSelected
                 : styles.optionNotSelected
             }`}
