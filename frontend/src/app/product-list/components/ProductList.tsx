@@ -5,23 +5,10 @@ import ProductCard from "@/app/components/ProductCard/ProductCard";
 import Link from "next/link";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
-
-const fetcher = (query: string) =>
-  fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      query,
-    }),
-  })
-    .then((res) => res.json())
-    .then((json) => json.data);
+import fetcher from "@/app/api/graphql";
 
 const createProductListQuery = (searchParams: any) => {
   const order = searchParams.get("order") || "";
-  console.log(order);
   return `
     query {
         products(sort: "id${order}") {
