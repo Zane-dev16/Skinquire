@@ -13,16 +13,6 @@ const FilterOptions = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const brands = ["Brand A", "Brand B", "Brand C", "Brand D"];
-  const handleItemClick = (item) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems(selectedItems.filter((selected) => selected !== item));
-    } else {
-      setSelectedItems([...selectedItems, item]);
-    }
-  };
-
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair
   const createQueryString = useCallback(
