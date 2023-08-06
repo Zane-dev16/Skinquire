@@ -36,6 +36,7 @@ const query = gql`
     }
   }
 `;
+
 export default async function Page() {
   const client = getClient();
   const { data, error } = await client.query({ query });
