@@ -25,7 +25,7 @@ const ProductList = () => {
     return `${containSelectedFilters.join(", ")}`;
   };
 
-  const groupContainSelectedFilters = (filters: string[]) => {
+  const groupFilters = (filters: string[]) => {
     const actualFilters = filters.filter(Boolean);
 
     if (actualFilters.length == 0) {
@@ -34,17 +34,33 @@ const ProductList = () => {
     return `and: [${actualFilters.join(",")}]`;
   };
 
-  const createBrandFilter = (selectedBrands: string[]) => {
+  const createBrandFilter = () => {
+    const selectedBrands = getSelectedItems(searchParams, "brands");
     if (selectedBrands.length === 0) {
       return "";
     }
 
     return `brand: { name: { in: ${JSON.stringify(selectedBrands)} } }`;
   };
+  const createSkinTypeFilter = () => {
+    const selectedSkinType = searchParams.get("skinType");
+    if (selectedSkinType) {
+      return `or: [{skin_types: { name: { eq: "All Skin Types" } }}, {skin_types: { name: { eq: "${selectedSkinType}" } }}]`;
+    }
+    return "";
+  };
+  const createPriceFilter = (paramKey: string) => {
+    const price = searchParams.get(paramKey);
+    if (price) {
+      return `{price: {${paramKey == "min" ? "gte" : "lte"}: ${price}}}`;
+    }
+    return "";
+  };
+
   const createProductListQuery = (searchParams: any) => {
+    const sortOption = searchParams.get("sort") || "id";
     const order = searchParams.get("order") || "";
 
-    const selectedBrands = getSelectedItems(searchParams, "brands");
     const selectedSkinConditions = getSelectedItems(
       searchParams,
       "skinConditions"
@@ -55,20 +71,25 @@ const ProductList = () => {
       selectedIngredients,
       "ingredients"
     );
-    console.log(ingredientFilter);
     const skinConditionFilter = createContainSelectedFilter(
       selectedSkinConditions,
       "skin_conditions"
     );
     const filters = [
-      createBrandFilter(selectedBrands),
-      groupContainSelectedFilters([ingredientFilter, skinConditionFilter]),
+      createBrandFilter(),
+      createSkinTypeFilter(),
+      groupFilters([
+        ingredientFilter,
+        skinConditionFilter,
+        createPriceFilter("min"),
+        createPriceFilter("max"),
+      ]),
     ]
       .filter(Boolean)
       .join(",");
     return `
       query {
-          products(sort: "id${order}" ${
+          products(sort: "${sortOption}${order}" ${
       filters ? `filters: {${filters}}` : ""
     }) {
               data {
@@ -99,6 +120,9 @@ const ProductList = () => {
   const ProductListQuery = createProductListQuery(searchParams);
   console.log(ProductListQuery);
   const { data, isLoading, error } = useSWR(ProductListQuery, fetcher);
+  if (error) {
+    console.error(error);
+  }
   if (isLoading) {
     return <div>Loading...</div>;
   }

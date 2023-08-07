@@ -78,6 +78,12 @@
       "type": "decimal",
       "max": 10,
       "min": 1
+    },
+    "product_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product-type.product-type",
+      "inversedBy": "products"
     }
   }
 }

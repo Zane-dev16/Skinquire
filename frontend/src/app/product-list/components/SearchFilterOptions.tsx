@@ -19,7 +19,7 @@ const SearchFilterOptions: React.FC<SearchFilterOptionsProps> = ({
   const pathname = usePathname();
 
   return (
-    <div>
+    <div className={styles.searchFilterOptions}>
       <h3 className={styles.dropdownTitle}>{title}</h3>
       <ul className={styles.dropdownList}>
         {options.map((item: string) => (

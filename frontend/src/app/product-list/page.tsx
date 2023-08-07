@@ -46,9 +46,11 @@ export default async function Page() {
 
   return (
     <main>
-      <FilterOptions></FilterOptions>
-      <div className={styles["product-list"]}>
-        <ProductList></ProductList>
+      <div className={styles.pageContainer}>
+        <FilterOptions></FilterOptions>
+        <div>
+          <ProductList></ProductList>
+        </div>
       </div>
     </main>
   );

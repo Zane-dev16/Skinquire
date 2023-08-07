@@ -6,7 +6,9 @@ import Link from "next/link";
 import fetcher from "@/app/api/graphql";
 import useSWR from "swr";
 import SearchFilterOptions from "./SearchFilterOptions";
+import SingleSelectDropdown from "./SingleSelectDropdown";
 import { getSelectedItems } from "@/utils/filterUtils";
+import PriceFilter from "./PriceFilter";
 
 interface Item {
   attributes: {
@@ -37,6 +39,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
   const brandQuery = createQuery("brands");
   const ingredientQuery = createQuery("ingredients");
   const skinConditionQuery = createQuery("skinConditions");
+  const skinTypeQuery = createQuery("skinTypes");
   const {
     data: brandData,
     isLoading: brandIsLoading,
@@ -52,6 +55,12 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
     isLoading: skinConditionIsLoading,
     error: skinConditionError,
   } = useSWR<{ skinConditions: { data: Item[] } }>(skinConditionQuery, fetcher);
+  const {
+    data: skinTypeData,
+    isLoading: skinTypeIsLoading,
+    error: skinTypeError,
+  } = useSWR<{ skinTypes: { data: Item[] } }>(skinTypeQuery, fetcher);
+
   const handleItemClick = useCallback(
     (item: string, selectedItems: string[], paramKey: string) => {
       const itemIsSelected = selectedItems.includes(item);
@@ -70,21 +79,30 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
   const createSearchQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+      if (!value || value == "[]") {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
 
       return params.toString();
     },
     [searchParams]
   );
 
-  if (brandError || ingredientError) {
+  if (brandError || ingredientError || skinConditionError || skinTypeError) {
     return <div>Error Fetching Data</div>;
   }
 
-  if (brandIsLoading || ingredientIsLoading || skinConditionIsLoading) {
+  if (
+    brandIsLoading ||
+    ingredientIsLoading ||
+    skinConditionIsLoading ||
+    skinTypeIsLoading
+  ) {
     return <div>Loading...</div>;
   }
-  console.log(skinConditionData);
+
   function generateFilterOptions(
     title: string,
     paramKey: string,
@@ -99,6 +117,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
         handleItemClick(item, selectedItems, paramKey),
     };
   }
+
   const filterOptions = [
     generateFilterOptions("Brand", "brands", brandData?.brands.data || []),
     generateFilterOptions(
@@ -113,42 +132,99 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
     ),
   ];
 
+  const skinTypeOptions: string[] =
+    skinTypeData?.skinTypes.data.map((item: Item) => item.attributes.name) ||
+    [];
+  const handleSingleOptionSelect = (
+    selectedOption: string,
+    paramKey: string
+  ) => {
+    router.push(
+      pathname + "?" + createSearchQueryString(paramKey, selectedOption)
+    );
+    // Perform any further actions with the selected option
+  };
+
+  const filterPrice = (paramKey: string, price: string) => {
+    router.push(pathname + "?" + createSearchQueryString(paramKey, price));
+  };
+
+  const sortOptions = ["Alphabetical", "Rating", "Price", "Newly Added"];
+
+  const sortOptionsDict = [
+    { label: "Alphabetical", value: "name" },
+    { label: "Rating", value: "rating" },
+    { label: "Price", value: "price" },
+    { label: "Newly Added", value: "createdAt" },
+  ];
+
+  // Function to get the corresponding GraphQL parameter for a given sort option
+  const handleSortSelect = (selectedOption: string) => {
+    const sortOption = sortOptionsDict.find(
+      (option) => option.label === selectedOption
+    );
+    const sortParam = sortOption ? sortOption.value : "";
+    router.push(pathname + "?" + createSearchQueryString("sort", sortParam));
+    // Perform any further actions with the selected option
+  };
+
+  const getSortLabel = (sortValue: string | null) => {
+    const sortOption = sortOptionsDict.find(
+      (option) => option.value === sortValue
+    );
+    return sortOption ? sortOption.label : "";
+  };
+
   return (
-    <>
-      <div className={styles.filterOptions}>
-        <h2>Filters</h2>
+    <div className={styles.filterOptions}>
+      <h2>Filters</h2>
 
-        <div>
-          <p>Sort By</p>
-          <Link
-            href={
-              // <pathname>?order=desc
-              pathname + "?" + createSearchQueryString("order", ":asc")
-            }
-          >
-            <div className={styles.button}>ASC</div>
-          </Link>
-          <Link
-            href={
-              // <pathname>?order=desc
-              pathname + "?" + createSearchQueryString("order", ":desc")
-            }
-          >
-            <div className={styles.button}>DESC</div>
-          </Link>
-        </div>
-
-        {filterOptions.map((filter) => (
-          <SearchFilterOptions
-            key={filter.title}
-            title={filter.title}
-            options={filter.options}
-            selectedItems={filter.selectedItems}
-            handleItemClick={filter.handleItemClick}
-          />
-        ))}
+      <div>
+        <SingleSelectDropdown
+          title="Sort By"
+          options={sortOptions}
+          selected={getSortLabel(searchParams.get("sort"))}
+          onSelect={(option) => handleSortSelect(option)}
+        />
+        <Link
+          href={
+            // <pathname>?order=desc
+            pathname + "?" + createSearchQueryString("order", ":asc")
+          }
+        >
+          <div className={styles.button}>ASC</div>
+        </Link>
+        <Link
+          href={
+            // <pathname>?order=desc
+            pathname + "?" + createSearchQueryString("order", ":desc")
+          }
+        >
+          <div className={styles.button}>DESC</div>
+        </Link>
       </div>
-    </>
+
+      <SingleSelectDropdown
+        title="Skin Type"
+        options={skinTypeOptions}
+        selected={searchParams.get("skinType")}
+        onSelect={(option) => handleSingleOptionSelect(option, "skinType")}
+      />
+      <PriceFilter
+        filterPrice={filterPrice}
+        currentMin={searchParams.get("min")}
+        currentMax={searchParams.get("max")}
+      ></PriceFilter>
+      {filterOptions.map((filter) => (
+        <SearchFilterOptions
+          key={filter.title}
+          title={filter.title}
+          options={filter.options}
+          selectedItems={filter.selectedItems}
+          handleItemClick={filter.handleItemClick}
+        />
+      ))}
+    </div>
   );
 };
 

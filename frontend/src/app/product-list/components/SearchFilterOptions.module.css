@@ -1,5 +1,10 @@
   
-  .option {
+.searchFilterOptions {
+  height: fit-content;
+  margin: 10px;
+}
+
+.option {
     cursor: pointer;
     padding: 8px;
     transition: background-color 0.2s ease;
@@ -22,12 +27,13 @@
   
   /* Additional styles to improve the appearance of the dropdown */
   .dropdownList {
+
     list-style: none;
-    padding: 0;
     margin: 0;
   }
   
   .dropdownTitle {
+    text-align: center;
     margin-bottom: 10px;
   }
   

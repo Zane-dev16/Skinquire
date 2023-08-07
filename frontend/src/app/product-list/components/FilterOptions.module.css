@@ -1,8 +1,14 @@
 /* FilterOptions.module.css */
 .filterOptions {
-    display: flex;
+  position: fixed;
+  overflow: scroll;
+  height: 94vh;
+  z-index: 100;
+  width: 20vw;
+  padding: 3vh;
+  background-color: #fffbed;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
