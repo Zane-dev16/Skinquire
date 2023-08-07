@@ -6,8 +6,9 @@ import Link from "next/link";
 import fetcher from "@/app/api/graphql";
 import useSWR from "swr";
 import SearchFilterOptions from "./SearchFilterOptions";
+import { getSelectedItems } from "@/utils/filterUtils";
 
-interface Brand {
+interface Item {
   attributes: {
     name: string;
   };
@@ -23,7 +24,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
   const createQuery = (entityRequestName: string) => {
     return `
       query {
-          ${entityRequestName} {
+          ${entityRequestName}(sort: "name") {
             data{
               attributes{
                 name
@@ -33,31 +34,35 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
         }
       `;
   };
-  const query = createQuery("brands");
-  const { data, isLoading, error } = useSWR(query, fetcher);
-
-  const getSelectedItems = (paramKey: string): string[] => {
-    const retrievedItemsParam = searchParams.get(paramKey);
-    if (retrievedItemsParam) {
-      const selectedItemsList = JSON.parse(retrievedItemsParam);
-      if (Array.isArray(selectedItemsList)) {
-        return selectedItemsList;
-      }
-    }
-    console.error("No items found");
-    return [];
-  };
-  const selectedBrands = getSelectedItems("brands");
-
+  const brandQuery = createQuery("brands");
+  const ingredientQuery = createQuery("ingredients");
+  const skinConditionQuery = createQuery("skinConditions");
+  const {
+    data: brandData,
+    isLoading: brandIsLoading,
+    error: brandError,
+  } = useSWR<{ brands: { data: Item[] } }>(brandQuery, fetcher);
+  const {
+    data: ingredientData,
+    isLoading: ingredientIsLoading,
+    error: ingredientError,
+  } = useSWR<{ ingredients: { data: Item[] } }>(ingredientQuery, fetcher);
+  const {
+    data: skinConditionData,
+    isLoading: skinConditionIsLoading,
+    error: skinConditionError,
+  } = useSWR<{ skinConditions: { data: Item[] } }>(skinConditionQuery, fetcher);
   const handleItemClick = useCallback(
     (item: string, selectedItems: string[], paramKey: string) => {
       const itemIsSelected = selectedItems.includes(item);
       const newSelectedItems = itemIsSelected
         ? selectedItems.filter((selected) => selected !== item)
         : [...selectedItems, item];
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(paramKey, JSON.stringify(newSelectedItems));
-      router.push(pathname + "?" + params.toString());
+      router.push(
+        pathname +
+          "?" +
+          createSearchQueryString(paramKey, JSON.stringify(newSelectedItems))
+      );
     },
     [searchParams, pathname, router]
   );
@@ -72,16 +77,42 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
     [searchParams]
   );
 
-  if (error) {
+  if (brandError || ingredientError) {
     return <div>Error Fetching Data</div>;
   }
 
-  if (isLoading) {
+  if (brandIsLoading || ingredientIsLoading || skinConditionIsLoading) {
     return <div>Loading...</div>;
   }
+  console.log(skinConditionData);
+  function generateFilterOptions(
+    title: string,
+    paramKey: string,
+    data: Item[]
+  ) {
+    const selectedItems = getSelectedItems(searchParams, paramKey);
+    return {
+      title: title,
+      options: data.map((item: Item) => item.attributes.name),
+      selectedItems: selectedItems,
+      handleItemClick: (item: string) =>
+        handleItemClick(item, selectedItems, paramKey),
+    };
+  }
+  const filterOptions = [
+    generateFilterOptions("Brand", "brands", brandData?.brands.data || []),
+    generateFilterOptions(
+      "Ingredient",
+      "ingredients",
+      ingredientData?.ingredients.data || []
+    ),
+    generateFilterOptions(
+      "Skin Condition",
+      "skinConditions",
+      skinConditionData?.skinConditions.data || []
+    ),
+  ];
 
-  const brandOptions =
-    data?.brands.data.map((brand: Brand) => brand.attributes.name) || [];
   return (
     <>
       <div className={styles.filterOptions}>
@@ -107,14 +138,15 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
           </Link>
         </div>
 
-        <SearchFilterOptions
-          options={brandOptions}
-          selectedItems={selectedBrands}
-          handleItemClick={(item) =>
-            handleItemClick(item, selectedBrands, "brands")
-          }
-          title="Brand"
-        />
+        {filterOptions.map((filter) => (
+          <SearchFilterOptions
+            key={filter.title}
+            title={filter.title}
+            options={filter.options}
+            selectedItems={filter.selectedItems}
+            handleItemClick={filter.handleItemClick}
+          />
+        ))}
       </div>
     </>
   );
