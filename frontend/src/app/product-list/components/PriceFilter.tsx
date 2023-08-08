@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 type PriceFilterProps = {
-  filterPrice: (paramKey: string, price: string) => void;
+  filterPrice: (price: string, paramKey: string) => void;
   currentMin: string | null;
   currentMax: string | null;
 };
@@ -22,7 +22,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
   ) => {
     if (e.repeat) return;
     if (e.key === "Enter") {
-      filterPrice(paramKey, paramKey === "min" ? minPrice : maxPrice);
+      filterPrice(paramKey === "min" ? minPrice : maxPrice, paramKey);
     }
   };
 
@@ -52,7 +52,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
           pattern="[0-9]*"
           placeholder="Min Price"
           value={minPrice}
-          onBlur={() => filterPrice("min", minPrice)}
+          onBlur={() => filterPrice(minPrice, "min")}
           onChange={handleMinPriceChange}
           onKeyDown={(e) => handleKeyDown(e, "min")}
         />
@@ -62,7 +62,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
           pattern="[0-9]*"
           placeholder="Max Price"
           value={maxPrice}
-          onBlur={() => filterPrice("max", maxPrice)}
+          onBlur={() => filterPrice(maxPrice, "max")}
           onChange={handleMaxPriceChange}
           onKeyDown={(e) => handleKeyDown(e, "max")}
         />

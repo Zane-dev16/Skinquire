@@ -7,7 +7,7 @@ import fetcher from "@/app/api/graphql";
 import useSWR from "swr";
 import SearchFilterOptions from "./SearchFilterOptions";
 import SingleSelectDropdown from "./SingleSelectDropdown";
-import { getSelectedItems } from "@/utils/filterUtils";
+import { getSelectedItems, generateQuery } from "@/utils/filterUtils";
 import PriceFilter from "./PriceFilter";
 
 interface Item {
@@ -23,43 +23,24 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
-  const createQuery = (entityRequestName: string) => {
-    return `
-      query {
-          ${entityRequestName}(sort: "name") {
-            data{
-              attributes{
-                name
-              }
-            }
-          }
-        }
-      `;
+  const useEntityData = (entityRequestName: string, sort: string) => {
+    const { data, isLoading, error } = useSWR<{
+      [key: string]: { data: Item[] };
+    }>(generateQuery(entityRequestName, sort), fetcher);
+
+    return {
+      data: data?.[entityRequestName]?.data || [],
+      isLoading,
+      error,
+    };
   };
-  const brandQuery = createQuery("brands");
-  const ingredientQuery = createQuery("ingredients");
-  const skinConditionQuery = createQuery("skinConditions");
-  const skinTypeQuery = createQuery("skinTypes");
-  const {
-    data: brandData,
-    isLoading: brandIsLoading,
-    error: brandError,
-  } = useSWR<{ brands: { data: Item[] } }>(brandQuery, fetcher);
-  const {
-    data: ingredientData,
-    isLoading: ingredientIsLoading,
-    error: ingredientError,
-  } = useSWR<{ ingredients: { data: Item[] } }>(ingredientQuery, fetcher);
-  const {
-    data: skinConditionData,
-    isLoading: skinConditionIsLoading,
-    error: skinConditionError,
-  } = useSWR<{ skinConditions: { data: Item[] } }>(skinConditionQuery, fetcher);
-  const {
-    data: skinTypeData,
-    isLoading: skinTypeIsLoading,
-    error: skinTypeError,
-  } = useSWR<{ skinTypes: { data: Item[] } }>(skinTypeQuery, fetcher);
+
+  const productTypeData = useEntityData("productTypes", "name");
+  const brandData = useEntityData("brands", "name");
+  const ingredientData = useEntityData("ingredients", "name");
+  const skinConditionData = useEntityData("skinConditions", "name");
+  const skinTypeData = useEntityData("skinTypes", "name");
+  console.log(productTypeData?.data);
 
   const handleItemClick = useCallback(
     (item: string, selectedItems: string[], paramKey: string) => {
@@ -68,37 +49,37 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
         ? selectedItems.filter((selected) => selected !== item)
         : [...selectedItems, item];
       router.push(
-        pathname +
-          "?" +
-          createSearchQueryString(paramKey, JSON.stringify(newSelectedItems))
+        createSearchQueryUrl(paramKey, JSON.stringify(newSelectedItems))
       );
     },
     [searchParams, pathname, router]
   );
 
-  const createSearchQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (!value || value == "[]") {
-        params.delete(name);
-      } else {
-        params.set(name, value);
-      }
+  const createSearchQueryUrl = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (!value || value == "[]") {
+      params.delete(name);
+    } else {
+      params.set(name, value);
+    }
 
-      return params.toString();
-    },
-    [searchParams]
-  );
+    return pathname + "?" + params.toString();
+  };
 
-  if (brandError || ingredientError || skinConditionError || skinTypeError) {
+  if (
+    brandData.error ||
+    ingredientData.error ||
+    skinConditionData.error ||
+    skinTypeData.error
+  ) {
     return <div>Error Fetching Data</div>;
   }
 
   if (
-    brandIsLoading ||
-    ingredientIsLoading ||
-    skinConditionIsLoading ||
-    skinTypeIsLoading
+    brandData.isLoading ||
+    ingredientData.isLoading ||
+    skinConditionData.isLoading ||
+    skinTypeData.isLoading
   ) {
     return <div>Loading...</div>;
   }
@@ -119,34 +100,29 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
   }
 
   const filterOptions = [
-    generateFilterOptions("Brand", "brands", brandData?.brands.data || []),
+    generateFilterOptions(
+      "Category",
+      "categories",
+      productTypeData?.data || []
+    ),
+    generateFilterOptions("Brand", "brands", brandData?.data || []),
     generateFilterOptions(
       "Ingredient",
       "ingredients",
-      ingredientData?.ingredients.data || []
+      ingredientData?.data || []
     ),
     generateFilterOptions(
       "Skin Condition",
       "skinConditions",
-      skinConditionData?.skinConditions.data || []
+      skinConditionData?.data || []
     ),
   ];
 
   const skinTypeOptions: string[] =
-    skinTypeData?.skinTypes.data.map((item: Item) => item.attributes.name) ||
-    [];
-  const handleSingleOptionSelect = (
-    selectedOption: string,
-    paramKey: string
-  ) => {
-    router.push(
-      pathname + "?" + createSearchQueryString(paramKey, selectedOption)
-    );
+    skinTypeData?.data.map((item: Item) => item.attributes.name) || [];
+  const handleSingleSelect = (selectedOption: string, paramKey: string) => {
+    router.push(createSearchQueryUrl(paramKey, selectedOption));
     // Perform any further actions with the selected option
-  };
-
-  const filterPrice = (paramKey: string, price: string) => {
-    router.push(pathname + "?" + createSearchQueryString(paramKey, price));
   };
 
   const sortOptions = ["Alphabetical", "Rating", "Price", "Newly Added"];
@@ -164,7 +140,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
       (option) => option.label === selectedOption
     );
     const sortParam = sortOption ? sortOption.value : "";
-    router.push(pathname + "?" + createSearchQueryString("sort", sortParam));
+    router.push(createSearchQueryUrl("sort", sortParam));
     // Perform any further actions with the selected option
   };
 
@@ -186,20 +162,10 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
           selected={getSortLabel(searchParams.get("sort"))}
           onSelect={(option) => handleSortSelect(option)}
         />
-        <Link
-          href={
-            // <pathname>?order=desc
-            pathname + "?" + createSearchQueryString("order", ":asc")
-          }
-        >
+        <Link href={createSearchQueryUrl("order", ":asc")}>
           <div className={styles.button}>ASC</div>
         </Link>
-        <Link
-          href={
-            // <pathname>?order=desc
-            pathname + "?" + createSearchQueryString("order", ":desc")
-          }
-        >
+        <Link href={createSearchQueryUrl("order", ":desc")}>
           <div className={styles.button}>DESC</div>
         </Link>
       </div>
@@ -208,10 +174,10 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
         title="Skin Type"
         options={skinTypeOptions}
         selected={searchParams.get("skinType")}
-        onSelect={(option) => handleSingleOptionSelect(option, "skinType")}
+        onSelect={(option) => handleSingleSelect(option, "skinType")}
       />
       <PriceFilter
-        filterPrice={filterPrice}
+        filterPrice={handleSingleSelect}
         currentMin={searchParams.get("min")}
         currentMax={searchParams.get("max")}
       ></PriceFilter>

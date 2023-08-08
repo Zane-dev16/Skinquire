@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product-type",
     "pluralName": "product-types",
-    "displayName": "Product Type"
+    "displayName": "Category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

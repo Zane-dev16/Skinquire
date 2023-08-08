@@ -118,7 +118,6 @@ const ProductList = () => {
       }`;
   };
   const ProductListQuery = createProductListQuery(searchParams);
-  console.log(ProductListQuery);
   const { data, isLoading, error } = useSWR(ProductListQuery, fetcher);
   if (error) {
     console.error(error);
