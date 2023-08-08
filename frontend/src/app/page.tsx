@@ -5,12 +5,7 @@ import styles from "./page.module.css";
 import ProductCategoryCard from "./components/HomeSections/ProductCategoryCard";
 import ProductCategorySection from "./components/HomeSections/productCategorySection";
 import HighlightsSection from "./components/HomeSections/HighlightsSection";
-import {
-  useViewportScroll,
-  motion,
-  useTransform,
-  Variants,
-} from "framer-motion";
+import { useScroll, motion, useTransform, Variants } from "framer-motion";
 
 const Home = () => {
   const ProductCategories = [
@@ -20,7 +15,7 @@ const Home = () => {
     "SUNSCREEN",
   ];
 
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 800], [0, 400]);
   return (
     <>
@@ -61,7 +56,7 @@ const letterAnimation = {
 };
 
 const AnimatedLetters: React.FC<AnimatedLettersProps> = ({ title }) => {
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   const y2 = useTransform(scrollY, [0, 800], [0, -200]);
 
