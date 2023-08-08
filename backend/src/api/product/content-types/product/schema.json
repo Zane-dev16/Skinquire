@@ -79,7 +79,7 @@
       "max": 10,
       "min": 1
     },
-    "product_types": {
+    "categories": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::product-type.product-type",

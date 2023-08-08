@@ -66,6 +66,7 @@ const ProductList = () => {
       "skinConditions"
     );
     const selectedIngredients = getSelectedItems(searchParams, "ingredients");
+    const selectedCategories = getSelectedItems(searchParams, "categories");
 
     const ingredientFilter = createContainSelectedFilter(
       selectedIngredients,
@@ -75,10 +76,15 @@ const ProductList = () => {
       selectedSkinConditions,
       "skin_conditions"
     );
+    const categoryFilter = createContainSelectedFilter(
+      selectedCategories,
+      "categories"
+    );
     const filters = [
       createBrandFilter(),
       createSkinTypeFilter(),
       groupFilters([
+        categoryFilter,
         ingredientFilter,
         skinConditionFilter,
         createPriceFilter("min"),

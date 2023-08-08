@@ -3,18 +3,32 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 type PriceFilterProps = {
-  filterPrice: (price: string, paramKey: string) => void;
+  handleSingleSelect: (price: string, paramKey: string) => void;
   currentMin: string | null;
   currentMax: string | null;
 };
 
 const PriceFilter: React.FC<PriceFilterProps> = ({
-  filterPrice,
+  handleSingleSelect,
   currentMin,
   currentMax,
 }) => {
   const [minPrice, setMinPrice] = useState(currentMin ? currentMin : "");
   const [maxPrice, setMaxPrice] = useState(currentMax ? currentMax : "");
+
+  const filterPrice = (paramKey: string) => {
+    if (paramKey === "min") {
+      if (maxPrice && minPrice > maxPrice && minPrice && maxPrice) {
+        setMinPrice(maxPrice);
+      }
+      handleSingleSelect(minPrice, paramKey);
+    } else {
+      if (minPrice && minPrice > maxPrice && minPrice && maxPrice) {
+        setMaxPrice(minPrice);
+      }
+      handleSingleSelect(maxPrice, paramKey);
+    }
+  };
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -22,7 +36,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
   ) => {
     if (e.repeat) return;
     if (e.key === "Enter") {
-      filterPrice(paramKey === "min" ? minPrice : maxPrice, paramKey);
+      filterPrice(paramKey);
     }
   };
 
@@ -52,7 +66,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
           pattern="[0-9]*"
           placeholder="Min Price"
           value={minPrice}
-          onBlur={() => filterPrice(minPrice, "min")}
+          onBlur={() => filterPrice("min")}
           onChange={handleMinPriceChange}
           onKeyDown={(e) => handleKeyDown(e, "min")}
         />
@@ -62,7 +76,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
           pattern="[0-9]*"
           placeholder="Max Price"
           value={maxPrice}
-          onBlur={() => filterPrice(maxPrice, "max")}
+          onBlur={() => filterPrice("max")}
           onChange={handleMaxPriceChange}
           onKeyDown={(e) => handleKeyDown(e, "max")}
         />

@@ -1,41 +1,48 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const ConnectProviderRedirect = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+
   useEffect(() => {
     const access_token = searchParams.get("access_token");
-    console.log(access_token);
+    if (!access_token) {
+      console.error("Access token not found.");
+      return;
+    }
 
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-    console.log(backendUrl);
-
-    // Check if the access_token and provider are present
-    if (access_token) {
-      // Make a POST request to the backend with the access_token as a query parameter
-      fetch(
-        `${backendUrl}/api/auth/google/callback?access_token=${access_token}`
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Handle the response data from the backend
-          console.log(data); // This will contain the "jwt" and "user" information
-        })
-        .catch((error) => {
-          // Handle any errors that occurred during the API request
-          console.error("Error connecting to the backend:", error);
-        });
+    if (!backendUrl) {
+      console.error("Backend URL not configured.");
+      return;
     }
-  }, []);
 
-  return <div>Redirecting..</div>;
+    fetch(`${backendUrl}/api/auth/google/callback?access_token=${access_token}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.jwt) {
+          Cookies.set("token", data.jwt, { secure: true, sameSite: "strict" });
+          router.back();
+          console.log("Logged in successfully:", data.user);
+        } else {
+          console.error("JWT token not received.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error connecting to the backend:", error);
+      });
+  }, [searchParams]);
+
+  return <div>Redirecting...</div>;
 };
 
 export default ConnectProviderRedirect;

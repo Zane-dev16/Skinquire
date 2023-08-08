@@ -177,7 +177,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
         onSelect={(option) => handleSingleSelect(option, "skinType")}
       />
       <PriceFilter
-        filterPrice={handleSingleSelect}
+        handleSingleSelect={handleSingleSelect}
         currentMin={searchParams.get("min")}
         currentMax={searchParams.get("max")}
       ></PriceFilter>
