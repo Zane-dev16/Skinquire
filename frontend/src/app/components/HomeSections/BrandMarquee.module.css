@@ -1,0 +1,32 @@
+/* BrandMarquee.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300&display=swap');
+
+.brandMarquee {
+  display: flex;
+  overflow: hidden; /* Hide overflowing brands */
+}
+
+.brandText {
+  font-family: 'Cormorant', serif;
+  font-size: 16px;
+  padding: 0 20px; /* Add spacing between brands */
+}
+
+/* Optional: Add animation for marquee effect */
+.brandMarquee {
+  animation: marquee 20s linear infinite; /* Adjust timing as needed */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Additional class for individual brand items */
+.brandItem {
+  /* Any additional styling you want to apply to individual brand items */
+}

@@ -8,7 +8,7 @@ import HighlightsSection from "./components/HomeSections/HighlightsSection";
 import { useScroll, motion, useTransform, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import BrandMarquee from "./components/HomeSections/BlandMarquee";
+import BrandMarquee from "./components/HomeSections/BrandMarquee";
 
 const Home = () => {
   const ProductCategories = [
