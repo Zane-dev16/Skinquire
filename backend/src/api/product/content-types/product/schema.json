@@ -23,10 +23,9 @@
     },
     "rating": {
       "type": "decimal",
-      "min": 0,
+      "min": 1,
       "max": 10,
-      "default": 0,
-      "required": true
+      "required": false
     },
     "brand": {
       "type": "relation",
