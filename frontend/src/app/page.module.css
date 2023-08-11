@@ -1,27 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Tiro+Gurmukhi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 @font-face {
   font-family: 'Alecko'; /* Provide a name for the font */
   src: url('/fonts/Alecko-HighContrast.otf')
 }
 
+@font-face {
+  font-family: 'Sinistre'; /* Provide a name for the font */
+  src: url('/fonts/Sinistre.otf')
+}
+
+@font-face {
+  font-family: 'Playfair Display'; /* Provide a name for the font */
+  src: url('/fonts/PlayfairDisplay.ttf')
+}
+
 
 .heroSection {
-    background: url("/hero-image.jpg");
-    background-size: cover;
-    background-position: center bottom;
+    margin: 12vh 0 0 0;
+    border-top: 3px black solid;
+    border-bottom: 3px black solid;
     width: 100vw;
-    height: 100vh;
+    height: 78vh;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .heroText {
+    width: 54vw;
+    padding: 8vh 0 0 8vw;
+  }
+
+  .heroCTA { 
+    font-family: "Playfair Display";
+    width: 200px;
+    font-size: 24px; /* Increase font size to make it larger */
+    padding: 15px; /* Add padding for rectangular shape */
+    border: 1px solid black; /* Add a black border */
+    border-radius: 40px; /* Add rounded corners */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: 50;
+  }
+
+  .heroImageContainer {
+    position: relative;
+    height: 100%;
+    width: 35vw;
+    overflow: hidden;
+    border-left: 3px black solid;
   }
 
 .heroTitle {
-  height: 10vw;
-  overflow: hidden;
+  padding-top: 50px;
+  font-family: 'Tiro Gurmukhi', serif;
+  color: #9a6345;
+  font-weight: normal;
+  font-size: 3em;
+  width: 100%;
+  margin: 0;
+}
+
+.heroSubheader {
+  font-family: "Playfair Display";
+  font-weight:lighter;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  width: 80%;
+  margin: 20px 0 20px 0;
+}
+
+.ultimateText {
+  color: #50443a;
 }
 
 .titleLetter {
