@@ -10,7 +10,7 @@ module.exports = () => ({
       "api::product.product",
       productId,
       {
-        fields: ["id"],
+        fields: ["id", "base_rating"],
         populate: {
           ratings: {
             fields: ["rating"],
@@ -18,23 +18,32 @@ module.exports = () => ({
         },
       }
     );
-    if (!product || !product.ratings) {
+    if (!product || !product.ratings || !product.base_rating) {
       console.log("Error: not found");
       return;
     }
+
     const totalRatings = product.ratings.length;
     const totalRatingValue = product.ratings.reduce(
       (acc, rating) => acc + rating.rating,
       0
     );
-    console.log(totalRatingValue);
-    const averageRating = totalRatingValue / totalRatings;
-    console.log(averageRating);
+
+    const averageUserRating = totalRatingValue / totalRatings;
+
+    const baseRating = product.base_rating;
+    const normalizedWeight = Math.min(totalRatings / 100, 1);
+
+    const adjustedRating =
+      (1 - normalizedWeight) * baseRating +
+      normalizedWeight * averageUserRating;
+
+    console.log(adjustedRating);
 
     const entry = await strapi.entityService.update(
       "api::product.product",
       productId,
-      { data: { overall_rating: averageRating } }
+      { data: { rating: adjustedRating } }
     );
   },
 });

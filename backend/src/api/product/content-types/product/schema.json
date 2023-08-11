@@ -74,7 +74,7 @@
       "target": "api::rating.rating",
       "mappedBy": "product"
     },
-    "overall_rating": {
+    "base_rating": {
       "type": "decimal",
       "max": 10,
       "min": 1
