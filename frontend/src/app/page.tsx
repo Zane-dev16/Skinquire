@@ -19,10 +19,10 @@ const Home = () => {
   ];
 
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 800], [0, 400]);
+  const y = useTransform(scrollY, [0, 800], [0, 400]);
   return (
     <>
-      <div className={styles.heroSection}>
+      <motion.div style={{ y }} className={styles.heroSection}>
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>
             FIND THE BEST PRODUCTS IN THE
@@ -51,7 +51,7 @@ const Home = () => {
             }}
           />
         </div>
-      </div>
+      </motion.div>
       <BrandMarquee></BrandMarquee>
       <ProductCategorySection></ProductCategorySection>
       <section className={styles.issue}></section>

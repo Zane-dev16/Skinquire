@@ -11,6 +11,7 @@ import {
   useVelocity,
   useAnimationFrame,
 } from "framer-motion";
+import Image from "next/image";
 
 const BrandMarquee = () => {
   const baseVelocity = -5;
@@ -79,9 +80,18 @@ const BrandMarquee = () => {
         className={styles.brandMarquee}
       >
         {doubledBrandList.map((brand, index) => (
-          <div key={index} className={`${styles.brandText}`}>
-            {brand}
-          </div>
+          <>
+            <Image
+              src="/brandMarqueeStar1.svg"
+              alt="star separator between brands on marquee"
+              width={50}
+              height={50}
+              className={styles.marqueeIcon}
+            ></Image>
+            <div key={index} className={`${styles.brandText}`}>
+              {brand}
+            </div>
+          </>
         ))}
       </motion.div>
     </div>

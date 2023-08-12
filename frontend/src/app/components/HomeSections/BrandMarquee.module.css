@@ -1,19 +1,29 @@
 /* BrandMarquee.module.css */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300&display=swap');
+@font-face {
+  font-family: "Cormorant"; /* Provide a name for the font */
+  src: url("/fonts/Cormorant-Light.ttf");
+}
 
 .marqueeContainer {
-    overflow: hidden;
+    position: relative;
+    background-color: #fffbed;
+  overflow: hidden;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  padding: 10px 0 10px 0;
 }
 
 .brandMarquee {
   display: flex;
-    justify-content: space-evenly;
-    width:max-content;
+  justify-content: space-evenly;
+  width: max-content;
+  align-items: center;
+  gap: 20px;
 }
 
 .brandText {
-  font-family: 'Cormorant', serif;
-  font-size: 16px;
-  width: 250px;
-text-align: center;
+  font-family: "Cormorant";
+  font-size: 2em;
+  width: fit-content;
+  text-align: center;
 }
