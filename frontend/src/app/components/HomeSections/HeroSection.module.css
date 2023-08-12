@@ -10,7 +10,8 @@
 
   .heroText {
     width: 54vw;
-    padding: 8vh 0 0 8vw;
+    padding: 8vh 4vw 0 8vw;
+    border-right: 1.5px black solid;
   }
 
   .CTAwrapper {
@@ -19,6 +20,7 @@
   }
 
   .heroCTA { 
+    position: relative;
     font-family: "Playfair Display";
     width: 200px;
     font-size: 24px; /* Increase font size to make it larger */
@@ -30,6 +32,19 @@
     justify-content: center;
     font-weight: 50;
     margin: 0;
+    overflow: hidden;
+
+  }
+
+  .CTAHoverBackground {
+    display: block;
+
+    position: absolute;
+    background-color: black;
+    border-radius: 40px;
+    width: 150%;
+    height: 150%;
+    z-index: -1;
   }
 
   .heroImageContainer {
@@ -37,7 +52,7 @@
     height: 100%;
     width: 35vw;
     overflow: hidden;
-    border-left: 3px black solid;
+    border-left: 1.5px black solid;
   }
 
 .heroTitle {

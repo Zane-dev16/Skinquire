@@ -1,3 +1,8 @@
+import styles from "./loading.module.css";
 export default function Loader() {
-  return <span>Loading...</span>;
+  return (
+    <main>
+      <div className={styles.heroLoader}></div>
+    </main>
+  );
 }

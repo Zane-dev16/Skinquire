@@ -6,9 +6,33 @@ import Link from "next/link";
 const HeroSection = () => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 800], [0, 400]);
+  const CTABackground = {
+    initial: {
+      rotate: "20deg",
+      x: "-100%",
+    },
+    hover: {
+      rotate: "0",
+
+      x: 0,
+      y: 0,
+    },
+  };
+  const CTA = {
+    hover: {
+      color: "#fff",
+      scale: 1.1,
+      transition: { type: "spring", color: { delay: 0.1 } },
+    },
+  };
   return (
     <motion.div style={{ y }} className={styles.heroSection}>
-      <div className={styles.heroText}>
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1 }}
+        className={styles.heroText}
+      >
         <h1 className={styles.heroTitle}>
           FIND THE BEST PRODUCTS IN THE
           <span className={styles.ultimateText}> ULTIMATE</span> SKINCARE
@@ -23,21 +47,39 @@ const HeroSection = () => {
         </h2>
         <div className={styles.CTAwrapper}>
           <Link href="/product-list">
-            <div className={styles.heroCTA}>EXPLORE</div>
+            <motion.div
+              initial="initial"
+              whileHover="hover"
+              variants={CTA}
+              className={styles.heroCTA}
+            >
+              <motion.div
+                className={styles.CTAHoverBackground}
+                transition={{ duration: 0.4 }}
+                variants={CTABackground}
+              ></motion.div>
+              <span>EXPLORE</span>
+            </motion.div>
           </Link>
         </div>
-      </div>
-      <div className={styles.heroImageContainer}>
+      </motion.div>
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        transition={{ duration: 1 }}
+        className={styles.heroImageContainer}
+      >
         <Image
           src="/hero-image3.jpg"
           alt="Dropping serum onto hand image for the hero of the home page"
           sizes="100vh"
           fill={true}
+          quality={100}
           style={{
             objectFit: "cover",
           }}
         />
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
