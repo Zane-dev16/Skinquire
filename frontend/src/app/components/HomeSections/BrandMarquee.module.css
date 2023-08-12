@@ -1,7 +1,7 @@
 /* BrandMarquee.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300&display=swap');
 
-.brandMarqueeContainer {
+.marqueeContainer {
     overflow: hidden;
 }
 

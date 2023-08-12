@@ -25,7 +25,7 @@ const Home = () => {
       <div className={styles.heroSection}>
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>
-            FIND THE BEST PRODDUCTS IN THE
+            FIND THE BEST PRODUCTS IN THE
             <span className={styles.ultimateText}> ULTIMATE</span> SKINCARE
             CATALOGUE
           </h1>
