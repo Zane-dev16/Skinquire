@@ -24,6 +24,9 @@ const HeroSection = () => {
       scale: 1.1,
       transition: { type: "spring", color: { delay: 0.1 } },
     },
+    onTap: {
+      scale: 1,
+    },
   };
   return (
     <motion.div style={{ y }} className={styles.heroSection}>
@@ -52,6 +55,7 @@ const HeroSection = () => {
               whileHover="hover"
               variants={CTA}
               className={styles.heroCTA}
+              whileTap="onTap"
             >
               <motion.div
                 className={styles.CTAHoverBackground}
