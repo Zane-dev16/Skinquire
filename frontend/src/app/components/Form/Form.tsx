@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import styles from "./Form.module.css"; // Import the CSS module
+import Image from "next/image";
 
 interface FormData {
   email: string;
@@ -66,6 +67,12 @@ const Form: React.FC<FormProps> = ({
           </button>
         </form>
       </div>
+      <a href="http://127.0.0.1:1337/api/connect/google">
+        <div className={styles.googleButton}>
+          <Image src="/google-icon.svg" alt="" width={20} height={20} />
+          <span className={styles.googleText}>Continue with Google</span>
+        </div>
+      </a>
     </section>
   );
 };

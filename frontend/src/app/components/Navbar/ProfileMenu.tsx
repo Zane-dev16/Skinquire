@@ -3,13 +3,12 @@
 import styles from "./ProfileMenu.module.css";
 
 import { gql } from "@apollo/client";
-import { useMutation } from "@apollo/client";
-import { ApolloError } from "@apollo/client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import Form from "../Form/Form";
 
 import Cookies from "js-cookie";
 
@@ -94,7 +93,15 @@ export default function ProfileMenu() {
       {isOpen && (
         <div className={styles.profileMenu}>
           {!isAuthenticated && (
-            <>
+            <Form
+              title="Log In"
+              buttonText="Log In"
+              formData={formData}
+              setFormData={setFormData}
+              callback={handleLogin}
+              error={error}
+            ></Form>
+            /*                         <div>
               <form onSubmit={handleLogin}>
                 <input
                   id="email"
@@ -138,7 +145,7 @@ export default function ProfileMenu() {
                   Sign Up!
                 </Link>
               </div>
-            </>
+            </div> */
           )}
 
           {isAuthenticated && (

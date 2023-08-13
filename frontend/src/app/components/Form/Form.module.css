@@ -2,33 +2,37 @@
 
   
   .form {
-    width: 300px;
-    padding: 20px;
-    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    /* border: 1px solid #ccc; */
     border-radius: 4px;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
   }
   
   .formGroup {
+    width: 80%;
     margin-bottom: 20px;
   }
   
   .label {
     display: block;
+    text-align: center;
     font-weight: bold;
     margin-bottom: 5px;
   }
   
   .input {
-    width: 92.5%;
-    padding: 10px;
+    width: 90%;
+    padding: 5%;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
   .button {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     font-size: 16px;
     color: #fff;
@@ -42,4 +46,32 @@
     color: #f00;
     margin-top: 10px;
   }
+   
+.googleButton {
+  margin: auto;
+  width: 70%;
+  height: 3vh;
+  margin-top: 1.5vh;
+  display: flex;
+  justify-content: center;
+  padding: 5%;
+  gap: 1vh;
+  border: 2px black solid;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.googleText {
+  color: rgb(139, 139, 139); /* Change link color to a desired color, here it's blue (#007bff) */
+  font-family: 'Roboto', sans-serif; /* Apply Roboto font and fallback to a system sans-serif font */
+  font-size: 1em; /* Set the desired font size */
+    transition: color 0.2s ease-out;
+}
+
+/* Optional: Add styles for link hover state */
+.googleText:hover {
+  color: black; /* Change link color on hover */
+  /* Add any other hover styles as needed */
+}
   

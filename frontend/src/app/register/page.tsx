@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { gql, useMutation } from "@apollo/client";
 import { useSWRConfig } from "swr";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import Image from "next/image";
 
 import Cookies from "js-cookie";
 import Form from "../components/Form/Form";
@@ -85,8 +84,8 @@ export default function RegisterRoute() {
   };
 
   return (
-    <div className={styles.signUpPage}>
-      <div>
+    <main className={styles.signUpPage}>
+      <div className={styles.signUpFormContainer}>
         <Form
           title="Sign Up"
           buttonText="Sign Up"
@@ -95,13 +94,7 @@ export default function RegisterRoute() {
           callback={handleRegister}
           error={error}
         />
-        <a href="http://127.0.0.1:1337/api/connect/google">
-          <div className={styles.googleSignIn}>
-            <Image src="/google-icon.svg" alt="" width={20} height={20} />
-            <span className={styles.googleText}>Continue with Google</span>
-          </div>
-        </a>
       </div>
-    </div>
+    </main>
   );
 }

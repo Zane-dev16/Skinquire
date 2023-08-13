@@ -3,6 +3,7 @@ import styles from "./RatingModal.module.css";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 const createRating = async ({
   access_token,
@@ -149,12 +150,35 @@ const RatingModal: FC<RatingModalProps> = ({
       }
     }
   };
+  const modalHeight = isLoginModalOpen ? 400 : 150;
 
   return (
     <div onClick={handleClose} className={styles.backdrop}>
-      <div onClick={(e) => e.stopPropagation()} className={styles.modal}>
+      <motion.div
+        initial={{ height: 0 }}
+        animate={{ height: modalHeight }}
+        onClick={(e) => e.stopPropagation()}
+        className={styles.modal}
+      >
         {isLoginModalOpen ? (
-          <div>login</div>
+          <form>
+            <h1>login</h1>
+            <input
+              id="email"
+              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              type="email"
+              name="email"
+              placeholder="Email"
+            />
+            <input
+              id="password"
+              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <button type="submit">LOG IN</button>
+          </form>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className={styles.ratingMeter}>
@@ -187,7 +211,7 @@ const RatingModal: FC<RatingModalProps> = ({
             <button type="submit">RATE</button>
           </form>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
