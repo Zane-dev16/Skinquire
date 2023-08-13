@@ -1,41 +1,24 @@
-import { getClient } from "@/lib/client";
-import { gql } from "@apollo/client";
 import Head from "next/head";
 import RatingButton from "./components/rating/RatingButton";
-import Link from "next/link";
-import Cookies from "js-cookie";
+import { asyncFetcher } from "@/app/api/graphql";
 
-interface Ingredient {
+interface Relation {
   attributes: {
     name: string;
   };
 }
 
-interface SkinCondition {
-  attributes: {
-    condition: string;
-  };
+export async function generateStaticParams() {
+  const data = await asyncFetcher("query {products {data {id }}}");
+  return data.products.data.map((product: { id: number }) => ({
+    id: product.id.toString(),
+  }));
 }
 
-interface SkinType {
-  attributes: {
-    type: string;
-  };
-}
-
-const QUERY_PRODUCTS = gql`
+export default async function Page({ params }: { params: { id: number } }) {
+  const QUERY_PRODUCT_BY_ID = `
   query {
-    products {
-      data {
-        id
-      }
-    }
-  }
-`;
-
-const QUERY_PRODUCT_BY_ID = gql`
-  query GetProductById($id: ID!) {
-    product(id: $id) {
+    product(id: ${params.id}) {
       data {
         id
         attributes {
@@ -43,6 +26,13 @@ const QUERY_PRODUCT_BY_ID = gql`
           description
           rating
           price
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
           brand {
             data {
               attributes {
@@ -60,14 +50,14 @@ const QUERY_PRODUCT_BY_ID = gql`
           skin_conditions {
             data {
               attributes {
-                condition
+                  name
               }
             }
           }
           skin_types {
             data {
               attributes {
-                type
+                    name
               }
             }
           }
@@ -82,30 +72,8 @@ const QUERY_PRODUCT_BY_ID = gql`
       }
     }
   }
-`;
-
-export async function generateStaticParams() {
-  const client = getClient();
-  const { data, error } = await client.query({ query: QUERY_PRODUCTS });
-
-  if (error) {
-    console.error("failed to get product (static params)");
-  }
-  return data.products.data.map((product: { id: number }) => ({
-    id: product.id.toString(),
-  }));
-}
-
-export default async function Page({ params }: { params: { id: number } }) {
-  const client = getClient();
-  const { data, error } = await client.query({
-    query: QUERY_PRODUCT_BY_ID,
-    variables: { id: params.id },
-  });
-  if (error || !data?.product.data) {
-    console.error("failed to get product by id");
-    return <div>error: product not found</div>;
-  }
+  `;
+  const data = await asyncFetcher(QUERY_PRODUCT_BY_ID);
 
   const product = data.product.data.attributes;
   const imageUrl = product.image?.data?.attributes.formats.thumbnail.url;
@@ -133,21 +101,26 @@ export default async function Page({ params }: { params: { id: number } }) {
         <p>
           Ingredients:{" "}
           {product.ingredients.data
-            .map((ingredient: Ingredient) => ingredient.attributes.name)
+            .map((ingredient: Relation) => ingredient.attributes.name)
             .join(", ")}
         </p>
-        <p>Type: {product.productType}</p>
+        <p>
+          Categories:{" "}
+          {product.categories.data
+            .map((category: Relation) => category.attributes.name)
+            .join(", ")}
+        </p>
         <p>Price: {product.price}</p>
         <p>
-          Skin Condition:{" "}
+          Skin Condition:
           {product.skin_conditions.data
-            .map((condition: SkinCondition) => condition.attributes.condition)
+            .map((condition: Relation) => condition.attributes.name)
             .join(", ")}
         </p>
         <p>
           Skin Type:{" "}
           {product.skin_types.data
-            .map((type: SkinType) => type.attributes.type)
+            .map((type: Relation) => type.attributes.name)
             .join(", ")}
         </p>
       </div>

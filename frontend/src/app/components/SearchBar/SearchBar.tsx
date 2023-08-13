@@ -1,9 +1,9 @@
 "use client";
 
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import { gql } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import useSWR from "swr";
+import fetcher from "@/app/api/graphql";
 
 interface Product {
   id: number;
@@ -18,29 +18,25 @@ interface ResponseData {
   };
 }
 
-export const revalidate = 5;
-
-const QUERY_PRODUCTS = gql`
-  query SearchProducts($searchQuery: String!) {
-    products(filters: { name: { containsi: $searchQuery } }) {
-      data {
-        id
-        attributes {
-          name
+export default function SearchBar() {
+  const [query, setQuery] = useState<string>("");
+  const { data, error } = useSWR<ResponseData>(
+    `
+    query {
+      products(filters: { name: { containsi:"${query}"} }) {
+        data {
+          id
+          attributes {
+            name
+          }
         }
       }
     }
-  }
-`;
-
-export default function SearchBar() {
-  const [query, setQuery] = useState("");
-  const { data, error } = useSuspenseQuery<ResponseData>(QUERY_PRODUCTS, {
-    variables: { searchQuery: query },
-  });
-
+  `,
+    fetcher
+  );
   if (error) {
-    console.error("Error fetching products:", error);
+    console.error("Error searching products:", error);
   }
 
   return (
@@ -51,9 +47,9 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      {query && (
+      {query && data && (
         <div>
-          {data.products.data.map((product: any) => (
+          {data.products.data.map((product: Product) => (
             <div key={product.id}>
               <Link
                 onClick={() => setQuery("")}

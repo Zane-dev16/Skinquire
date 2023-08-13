@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { ApolloError } from "@apollo/client";
 import styles from "./Form.module.css"; // Import the CSS module
 
 interface FormData {
@@ -13,7 +12,7 @@ interface FormProps {
   formData: FormData;
   setFormData: Dispatch<SetStateAction<FormData>>;
   callback: (event: React.FormEvent<HTMLFormElement>) => Promise<void>; // Define the type for the async callback
-  error: ApolloError | undefined;
+  error: string | null;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -61,7 +60,7 @@ const Form: React.FC<FormProps> = ({
               className={styles.input}
             />
           </div>
-          {error && <div className={styles.error}>Error: {error.message}</div>}
+          {error && <div className={styles.error}>Error: {error}</div>}
           <button type="submit" className={styles.button}>
             {buttonText}
           </button>

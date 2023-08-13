@@ -104,8 +104,7 @@ const RatingModal: FC<RatingModalProps> = ({
   const [displayRating, setDisplayRating] = useState<number | null>(null);
   const router = useRouter();
   const access_token = Cookies.get("token");
-
-  useEffect(() => console.log(Cookies.get("token")), []);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
   const handleNumberClick = (num: number) => {
     setRating(num);
@@ -120,11 +119,13 @@ const RatingModal: FC<RatingModalProps> = ({
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    if (rating === null) {
+    event.preventDefault();
+    if (!userId) {
+      console.log("Please login first.");
+      setIsLoginModalOpen(true);
+    } else if (rating === null) {
       // If the rating is null, display an error message to the user
       console.log("Please select a rating before submitting.");
-    } else if (!userId) {
-      console.log("Please login first.");
     } else {
       try {
         const userID = userId;
@@ -152,36 +153,40 @@ const RatingModal: FC<RatingModalProps> = ({
   return (
     <div onClick={handleClose} className={styles.backdrop}>
       <div onClick={(e) => e.stopPropagation()} className={styles.modal}>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.ratingMeter}>
-            {[...Array(10).keys()].map((count) => (
-              <span
-                key={count + 1}
-                onClick={() => handleNumberClick(count + 1)}
-                onMouseEnter={() => handleNumberHover(count + 1)}
-                onMouseLeave={handleNumberHoverEnd}
-                className={styles.ratingNumber}
-              >
-                {count + 1}
-              </span>
-            ))}
-          </div>
-          <div className={styles.currentRating}>
-            <>
-              <Image
-                src="/rating-star.svg"
-                alt="rating:"
-                width={20}
-                height={20}
-                className={styles.ratingIcon}
-              />
-              <span className={styles.currentRatingNumber}>
-                {displayRating}
-              </span>
-            </>
-          </div>
-          <button type="submit">RATE</button>
-        </form>
+        {isLoginModalOpen ? (
+          <div>login</div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className={styles.ratingMeter}>
+              {[...Array(10).keys()].map((count) => (
+                <span
+                  key={count + 1}
+                  onClick={() => handleNumberClick(count + 1)}
+                  onMouseEnter={() => handleNumberHover(count + 1)}
+                  onMouseLeave={handleNumberHoverEnd}
+                  className={styles.ratingNumber}
+                >
+                  {count + 1}
+                </span>
+              ))}
+            </div>
+            <div className={styles.currentRating}>
+              <>
+                <Image
+                  src="/rating-star.svg"
+                  alt="rating:"
+                  width={20}
+                  height={20}
+                  className={styles.ratingIcon}
+                />
+                <span className={styles.currentRatingNumber}>
+                  {displayRating}
+                </span>
+              </>
+            </div>
+            <button type="submit">RATE</button>
+          </form>
+        )}
       </div>
     </div>
   );

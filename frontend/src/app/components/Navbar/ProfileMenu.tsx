@@ -27,8 +27,8 @@ const LOGIN_MUTATION = gql`
 
 export default function ProfileMenu() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [loginMutation, { loading, error }] = useMutation(LOGIN_MUTATION);
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null); // Add error state
 
   const router = useRouter();
 
@@ -36,17 +36,40 @@ export default function ProfileMenu() {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { email, password } = formData;
-    try {
-      const { data } = await loginMutation({
-        variables: { identifier: email, password },
-      });
-
-      if (data?.login.user) {
-        Cookies.set("token", data.login.jwt);
-        router.push("/");
-        router.refresh();
+    const query = `mutation  {
+      login(input: { identifier: "${email}", password: "${password}" }) {
+        jwt
+        user {
+          username
+          email
+        }
       }
-    } catch (error: ApolloError | any) {}
+    }`;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            query,
+          }),
+        }
+      );
+      const json = await res.json();
+      if (res.ok) {
+        const data = json.data;
+        Cookies.set("token", data.login.jwt);
+        router.refresh();
+      } else {
+        setError(json.errors[0].message || "Registration failed"); // Set error state
+      }
+    } catch (error) {
+      setError(`Error: ${error}`);
+    }
   };
 
   function handleLogout() {
@@ -54,8 +77,6 @@ export default function ProfileMenu() {
     router.refresh();
     router.push("/");
   }
-
-  if (loading) return <div>Login Loading...</div>;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -126,7 +147,7 @@ export default function ProfileMenu() {
             </div>
           )}
 
-          {error && <div className={styles.error}>Error: {error.message}</div>}
+          {error && <div className={styles.error}>Error: {error}</div>}
         </div>
       )}
     </>

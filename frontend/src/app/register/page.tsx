@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // import { useAppContext } from "@/context/AppContext";
 import { gql, useMutation } from "@apollo/client";
+import { useSWRConfig } from "swr";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import Image from "next/image";
 
@@ -40,19 +41,46 @@ export default function RegisterRoute() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [registerMutation, { loading, error }] = useMutation(REGISTER_MUTATION);
-  /* const [error, setError] = useState<ApolloError | undefined>(undefined); */
-
+  const [error, setError] = useState<string | null>(null); // Add error state
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { email, password } = formData;
-    const { data } = await registerMutation({
-      variables: { username: email, email: email, password },
-    });
-    if (data?.register.user) {
-      // setUser(data.register.user);
-      router.push("/product-list");
-      Cookies.set("token", data.register.jwt);
+    const query = `mutation {
+      register(
+        input: { username: "${email}", email: "${email}", password: "${password}" }
+      ) {
+        jwt
+        user {
+          username
+          email
+        }
+      }
+    }`;
+    console.log(query);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            query,
+          }),
+        }
+      );
+      if (res.ok) {
+        const data = await res.json().then((json) => json.data);
+        Cookies.set("token", data.register.jwt);
+        router.push("/product-list");
+      } else {
+        const json = await res.json();
+        setError(json.errors[0].message || "Registration failed"); // Set error state
+      }
+    } catch (error) {
+      setError("Registration failed"); // Set error state on catch
+      console.error("Registration Failed", error);
     }
   };
 
