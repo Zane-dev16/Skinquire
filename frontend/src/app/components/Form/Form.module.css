@@ -12,7 +12,7 @@
 
 .formGroup {
   width: 80%;
-  margin-bottom: 20px;
+  margin: 10px 0 10px 0;
 }
 
 .label {
@@ -31,29 +31,34 @@
 }
 
 .button {
-  width: 80%;
-  padding: 10px;
+  margin: 10px 0 10px 0;
+  width: 70%;
+  padding: 1vh 5% 1vh 5%;
+
   font-size: 16px;
   color: #fff;
   background-color: #007bff;
-  border: none;
+  border: 2px rgb(26, 6, 93) solid;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .error {
+  margin: 0;
   color: #f00;
-  margin-top: 10px;
+}
+
+.googleLink {
+  width: 80%;
 }
 
 .googleButton {
   margin: auto;
   width: 70%;
-  height: 3vh;
+  padding: 1vh 5% 1vh 5%;
   margin-top: 1.5vh;
   display: flex;
   justify-content: center;
-  padding: 1vh 5% 1vh 5%;
   gap: 1vh;
   border: 2px black solid;
   border-radius: 4px;
@@ -66,8 +71,8 @@
     139,
     139
   ); /* Change link color to a desired color, here it's blue (#007bff) */
+  font-size: 1.2em;
   font-family: "Roboto", sans-serif; /* Apply Roboto font and fallback to a system sans-serif font */
-  font-size: 1em; /* Set the desired font size */
   transition: color 0.2s ease-out;
 }
 

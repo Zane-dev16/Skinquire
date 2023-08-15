@@ -7,6 +7,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useSWRConfig } from "swr";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { motion } from "framer-motion";
 
 import Cookies from "js-cookie";
 import Form from "../components/Form/Form";
@@ -87,14 +88,14 @@ export default function RegisterRoute() {
 
   return (
     <main className={styles.signUpPage}>
-      <div className={styles.signUpFormContainer}>
+      <motion.div layout className={styles.signUpFormContainer}>
         <Form
           title="Sign Up"
           buttonText="Sign Up"
           callback={registerUser}
           error={error}
         />
-      </div>
+      </motion.div>
     </main>
   );
 }
