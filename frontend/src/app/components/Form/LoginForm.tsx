@@ -10,14 +10,17 @@ type LoginFormProps = {
   closeForm: () => void;
 };
 
+type FormData = {
+  email: string;
+  password: string;
+};
+
 const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null); // Add error state
   const router = useRouter();
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const { email, password } = formData;
+  const handleLogin = async (data: FormData) => {
+    const { email, password } = data;
     const query = `mutation  {
       login(input: { identifier: "${email}", password: "${password}" }) {
         jwt
@@ -59,8 +62,6 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
       <Form
         title="Log In"
         buttonText="Log In"
-        formData={formData}
-        setFormData={setFormData}
         callback={handleLogin}
         error={error}
       ></Form>
