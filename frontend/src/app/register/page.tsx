@@ -22,6 +22,11 @@ interface ResponseData {
   };
 }
 
+interface FormData {
+  email: string;
+  password: string;
+}
+
 const REGISTER_MUTATION = gql`
   mutation Register($username: String!, $email: String!, $password: String!) {
     register(
@@ -39,12 +44,9 @@ const REGISTER_MUTATION = gql`
 export default function RegisterRoute() {
   // const { setUser } = useAppContext();
   const router = useRouter();
-
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null); // Add error state
-  const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const { email, password } = formData;
+  const registerUser = async (data: FormData) => {
+    const { email, password } = data;
     const query = `mutation {
       register(
         input: { username: "${email}", email: "${email}", password: "${password}" }
@@ -56,7 +58,6 @@ export default function RegisterRoute() {
         }
       }
     }`;
-    console.log(query);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
@@ -70,13 +71,13 @@ export default function RegisterRoute() {
           }),
         }
       );
+      const jsonRes = await res.json();
       if (res.ok) {
-        const data = await res.json().then((json) => json.data);
+        const data = jsonRes.data;
         Cookies.set("token", data.register.jwt);
         router.push("/product-list");
       } else {
-        const json = await res.json();
-        setError(json.errors[0].message || "Registration failed"); // Set error state
+        setError(jsonRes.errors[0].message || "Registration failed"); // Set error state
       }
     } catch (error) {
       setError("Registration failed"); // Set error state on catch
@@ -90,9 +91,7 @@ export default function RegisterRoute() {
         <Form
           title="Sign Up"
           buttonText="Sign Up"
-          formData={formData}
-          setFormData={setFormData}
-          callback={handleRegister}
+          callback={registerUser}
           error={error}
         />
       </div>

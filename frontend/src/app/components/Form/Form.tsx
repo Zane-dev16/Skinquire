@@ -16,22 +16,13 @@ interface FormData {
 interface FormProps {
   title: string;
   buttonText: string;
-  formData: FormData;
-  setFormData: Dispatch<SetStateAction<FormData>>;
-  callback: (event: React.FormEvent<HTMLFormElement>) => Promise<void>; // Define the type for the async callback
+  callback: (data: FormData) => void;
   error: string | null;
 }
 
-const Form: React.FC<FormProps> = ({
-  title,
-  buttonText,
-  formData,
-  setFormData,
-  callback,
-  error,
-}) => {
+const Form: React.FC<FormProps> = ({ title, buttonText, callback, error }) => {
   const { register, handleSubmit } = useForm<FormData>();
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data) => callback(data);
 
   return (
     <section>
@@ -48,10 +39,6 @@ const Form: React.FC<FormProps> = ({
               type="email"
               name="email"
               placeholder="Enter your email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
               className={styles.input}
             />
           </div>
@@ -65,10 +52,6 @@ const Form: React.FC<FormProps> = ({
               type="password"
               name="password"
               placeholder="************"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
               className={styles.input}
             />
           </div>

@@ -40,7 +40,6 @@ const FilterOptions: React.FC<FilterOptionsProps> = () => {
   const ingredientData = useEntityData("ingredients", "name");
   const skinConditionData = useEntityData("skinConditions", "name");
   const skinTypeData = useEntityData("skinTypes", "name");
-  console.log(productTypeData?.data);
 
   const handleItemClick = useCallback(
     (item: string, selectedItems: string[], paramKey: string) => {
