@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from "./ProductCard.module.css";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
   image: {
@@ -32,7 +33,7 @@ const ProductCard: FC<ProductCardProps> = ({
   const imageUrl = image?.data?.attributes.url ?? "";
 
   return (
-    <div className={styles["product-card"]}>
+    <motion.div whileHover={{ scale: 1.05 }} className={styles["product-card"]}>
       <div className={styles["image-container"]}>
         <img
           src={`http://localhost:1337${imageUrl}`}
@@ -52,7 +53,7 @@ const ProductCard: FC<ProductCardProps> = ({
           <div className={styles["rating"]}>{rating} </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

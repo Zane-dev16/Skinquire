@@ -5,6 +5,7 @@ import { FC, useState } from "react";
 import RatingModal from "./RatingModal";
 import Cookies from "js-cookie";
 import useSWR from "swr";
+import { AnimatePresence } from "framer-motion";
 
 interface RatingButtonProps {
   product: number;
@@ -108,15 +109,17 @@ const RatingButton: FC<RatingButtonProps> = ({ product }) => {
           ? `Rating: ${userRatingData[0].attributes.rating}      Change Rating`
           : "Rate This Product"}
       </div>
-      {isOpen && (
-        <RatingModal
-          product={product}
-          handleClose={() => setIsOpen(false)}
-          hasUserRating={hasUserRating}
-          userRatingId={userRatingId}
-          userId={userIdData}
-        ></RatingModal>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <RatingModal
+            product={product}
+            handleClose={() => setIsOpen(false)}
+            hasUserRating={hasUserRating}
+            userRatingId={userRatingId}
+            userId={userIdData}
+          ></RatingModal>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

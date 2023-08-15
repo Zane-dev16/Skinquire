@@ -1,0 +1,28 @@
+.formContainer {
+  width: 100%;
+}
+
+
+.error {
+    position: absolute;
+    color: #f00;
+    bottom: 0;
+    transform: translateY(3vh);
+    text-align: center;
+  }
+
+    .signUp {
+      width: 100%;
+      margin: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  .newHereText {
+    font-size: 3vh; /* Use vh for responsive font size */
+  }
+
+  
+  .signUpLink {
+    font-size: 3vh
+  }

@@ -15,104 +15,24 @@
     padding-top: 50px;
     background-color: rgba(70, 70, 70);
     border: 1px solid #50443a;
-    width: 20vw; /* Use vh for responsive width */
-    height: 45vh; /* Use vh for responsive height */
+    width: 30vw; /* Use vh for responsive width */
+    height: 55vh; /* Use vh for responsive height */
     z-index: 998;
     animation: slideInBackground 1s ease forwards; 
   }
   
-  .profileMenu input {
-    padding: 2vh; /* Use vh for responsive padding */
-    font-size: 2vh; /* Use vh for responsive font size */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .profileMenu button {
-    width: 20vh; /* Use vh for responsive width */
-    padding: 1vh 2vh; /* Use vh for responsive padding */
-    font-size: 2vh; /* Use vh for responsive font size */
-    align-self: center;
-    background-color: palegoldenrod;
-    border: 1px black solid;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Adjust the positioning for the SignUp div */
-  .signUp {
-    width: 100%;
-    position: absolute;
-    bottom: 2vh; /* Use vh for responsive distance from the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .newHereText {
-    font-size: 4vh; /* Use vh for responsive font size */
-  }
 
-  .signUpLink {
-    font-size: 2vh
-  }
+  
+
   
 .open {
     transform: translateX(-16vh);
-}
- 
-/* Target the <a> tag and override default link styles */
-.googleText {
-color: rgb(139, 139, 139); /* Change link color to a desired color, here it's blue (#007bff) */
-font-family: 'Roboto', sans-serif; /* Apply Roboto font and fallback to a system sans-serif font */
-font-size: 2.2vh; /* Set the desired font size */
-  transition: color 0.2s ease-out;
-}
-
-/* Optional: Add styles for link hover state */
-.googleText:hover {
-color: black; /* Change link color on hover */
-/* Add any other hover styles as needed */
 }
 
 .logout {
   display: flex;
   justify-content: center;
 }
-
-.error {
-  position: absolute;
-  color: #f00;
-  bottom: 0;
-  transform: translateY(3vh);
-  text-align: center;
-}
-  /* Responsive styles for smaller screens */
-  @media screen and (max-width: 768px) {
-    .profileAvatar {
-      margin-right: 3vh;
-    }
-  
-    .profileMenu {
-      top: 3vh;
-      right: 3vh;
-      padding: 2vh;
-      padding-top: 6vh;
-      max-width: 250px;
-    }
-  
-    .profileMenu input,
-    .profileMenu button {
-      padding: 2vh;
-      font-size: 3vh;
-    }
-  
-    .newHereText {
-      font-size: 6vh;
-    }
-  }
   
   @keyframes slideInBackground {
     0% {

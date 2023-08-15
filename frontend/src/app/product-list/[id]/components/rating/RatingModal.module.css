@@ -13,12 +13,14 @@
 }
 
 .modal {
-    width: 60vw;
+    width: fit-content;
+    height: fit-content;
     background-color: #fffbed;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    border-radius: 20px;
 }
 
 .ratingMeter {
@@ -30,7 +32,7 @@
 }
 
 .ratingNumber {
-    padding: 15px;
+    padding: 0 15px 0 15px;
 }
 
 .currentRating {
@@ -41,5 +43,11 @@
 .ratingIcon {
     padding: 0 5px 3px 0;
 }
-.currentRatingNumber {
+
+.loginFormContainer {
+    width: 30vw;
+}
+
+.ratingFormContainer {
+    padding: 10px;
 }

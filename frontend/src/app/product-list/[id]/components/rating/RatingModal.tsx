@@ -4,6 +4,7 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import LoginForm from "@/app/components/Form/LoginForm";
 
 const createRating = async ({
   access_token,
@@ -150,66 +151,63 @@ const RatingModal: FC<RatingModalProps> = ({
       }
     }
   };
-  const modalHeight = isLoginModalOpen ? 400 : 150;
+  const modalHeight = isLoginModalOpen ? "60%" : "20%";
+  const modalWidth = isLoginModalOpen ? "30%" : "45%";
 
   return (
     <div onClick={handleClose} className={styles.backdrop}>
       <motion.div
-        initial={{ height: 0 }}
-        animate={{ height: modalHeight }}
+        layout
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: 1 }}
+        exit={{ y: "100%", opacity: 0, transition: { duration: 0.2 } }}
+        transition={{ type: "spring", damping: 15 }}
         onClick={(e) => e.stopPropagation()}
         className={styles.modal}
       >
         {isLoginModalOpen ? (
-          <form>
-            <h1>login</h1>
-            <input
-              id="email"
-              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-            <input
-              id="password"
-              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            <button type="submit">LOG IN</button>
-          </form>
+          <motion.div className={styles.loginFormContainer}>
+            <LoginForm closeForm={() => setIsLoginModalOpen(false)}></LoginForm>
+          </motion.div>
         ) : (
-          <form onSubmit={handleSubmit}>
-            <div className={styles.ratingMeter}>
-              {[...Array(10).keys()].map((count) => (
-                <span
-                  key={count + 1}
-                  onClick={() => handleNumberClick(count + 1)}
-                  onMouseEnter={() => handleNumberHover(count + 1)}
-                  onMouseLeave={handleNumberHoverEnd}
-                  className={styles.ratingNumber}
-                >
-                  {count + 1}
-                </span>
-              ))}
-            </div>
-            <div className={styles.currentRating}>
-              <>
-                <Image
-                  src="/rating-star.svg"
-                  alt="rating:"
-                  width={20}
-                  height={20}
-                  className={styles.ratingIcon}
-                />
-                <span className={styles.currentRatingNumber}>
-                  {displayRating}
-                </span>
-              </>
-            </div>
-            <button type="submit">RATE</button>
-          </form>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className={styles.ratingFormContainer}
+            layout
+          >
+            <form onSubmit={handleSubmit}>
+              <div className={styles.ratingMeter}>
+                {[...Array(10).keys()].map((count) => (
+                  <span
+                    key={count + 1}
+                    onClick={() => handleNumberClick(count + 1)}
+                    onMouseEnter={() => handleNumberHover(count + 1)}
+                    onMouseLeave={handleNumberHoverEnd}
+                    className={styles.ratingNumber}
+                  >
+                    {count + 1}
+                  </span>
+                ))}
+              </div>
+              <div className={styles.currentRating}>
+                <>
+                  <Image
+                    src="/rating-star.svg"
+                    alt="rating:"
+                    width={20}
+                    height={20}
+                    className={styles.ratingIcon}
+                  />
+                  <span className={styles.currentRatingNumber}>
+                    {displayRating}
+                  </span>
+                </>
+              </div>
+              <button type="submit">RATE</button>
+            </form>
+          </motion.div>
         )}
       </motion.div>
     </div>

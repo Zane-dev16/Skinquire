@@ -2,74 +2,17 @@
 
 import styles from "./ProfileMenu.module.css";
 
-import { gql } from "@apollo/client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import Form from "../Form/Form";
-
+import LoginForm from "../Form/LoginForm";
 import Cookies from "js-cookie";
 
-const LOGIN_MUTATION = gql`
-  mutation Login($identifier: String!, $password: String!) {
-    login(input: { identifier: $identifier, password: $password }) {
-      jwt
-      user {
-        username
-        email
-      }
-    }
-  }
-`;
-
 export default function ProfileMenu() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null); // Add error state
-
   const router = useRouter();
-
   const isAuthenticated = !!Cookies.get("token");
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const { email, password } = formData;
-    const query = `mutation  {
-      login(input: { identifier: "${email}", password: "${password}" }) {
-        jwt
-        user {
-          username
-          email
-        }
-      }
-    }`;
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            query,
-          }),
-        }
-      );
-      const json = await res.json();
-      if (res.ok) {
-        const data = json.data;
-        Cookies.set("token", data.login.jwt);
-        router.refresh();
-      } else {
-        setError(json.errors[0].message || "Registration failed"); // Set error state
-      }
-    } catch (error) {
-      setError(`Error: ${error}`);
-    }
-  };
 
   function handleLogout() {
     Cookies.remove("token");
@@ -92,15 +35,11 @@ export default function ProfileMenu() {
       ></Image>
       {isOpen && (
         <div className={styles.profileMenu}>
-          {!isAuthenticated && (
-            <Form
-              title="Log In"
-              buttonText="Log In"
-              formData={formData}
-              setFormData={setFormData}
-              callback={handleLogin}
-              error={error}
-            ></Form>
+          {
+            !isAuthenticated && (
+              <LoginForm closeForm={() => setIsOpen(false)}></LoginForm>
+            )
+
             /*                         <div>
               <form onSubmit={handleLogin}>
                 <input
@@ -146,15 +85,13 @@ export default function ProfileMenu() {
                 </Link>
               </div>
             </div> */
-          )}
+          }
 
           {isAuthenticated && (
             <div className={styles.logout}>
               <button onClick={handleLogout}>LOG OUT</button>
             </div>
           )}
-
-          {error && <div className={styles.error}>Error: {error}</div>}
         </div>
       )}
     </>
