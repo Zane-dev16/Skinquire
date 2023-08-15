@@ -21,6 +21,13 @@
   gap: 20px;
 }
 
+.brandContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
 .brandText {
   font-family: "Cormorant";
   font-size: 2em;

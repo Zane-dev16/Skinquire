@@ -65,6 +65,7 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
           <Image
             src={imageLink}
             alt={`Picture of ${category}`}
+            sizes="(max-width: 270px) 100vw"
             fill={true}
             quality={100}
             style={{
