@@ -1,6 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react";
 import styles from "./Form.module.css"; // Import the CSS module
 import Image from "next/image";
+import {
+  UseFormRegister,
+  FieldValues,
+  useForm,
+  SubmitHandler,
+} from "react-hook-form";
 
 interface FormData {
   email: string;
@@ -24,16 +30,20 @@ const Form: React.FC<FormProps> = ({
   callback,
   error,
 }) => {
+  const { register, handleSubmit } = useForm<FormData>();
+  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+
   return (
     <section>
       <div className={styles.formContainer}>
-        <form onSubmit={callback} className={styles.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <h3>{title}</h3>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.label}>
               Email
             </label>
             <input
+              {...register("email")}
               id="email"
               type="email"
               name="email"
@@ -50,6 +60,7 @@ const Form: React.FC<FormProps> = ({
               Password
             </label>
             <input
+              {...register("password")}
               id="password"
               type="password"
               name="password"
