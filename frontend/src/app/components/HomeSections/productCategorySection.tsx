@@ -3,6 +3,8 @@ import Head from "next/head";
 import styles from "./ProductCategorySection.module.css";
 import ProductCategoryCard from "./ProductCategoryCard";
 import { motion } from "framer-motion";
+import { createSearchQueryUrl } from "@/utils/filterUtils";
+import { usePathname, useSearchParams } from "next/navigation";
 
 type CategoryData = {
   name: string;
@@ -11,26 +13,28 @@ type CategoryData = {
 };
 
 const ProductCategorySection = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const ProductCategories = [
     {
       name: "CLEANSER",
       imageLink: "/cleanser.jpg",
-      link: "/product-list",
+      link: "Cleanser",
     },
     {
-      name: "EXFOLIATOR",
+      name: "EXFOLIANT",
       imageLink: "/serum.jpg",
-      link: "/product-list",
+      link: "Exfoliant",
     },
     {
-      name: "MOISTURISER",
+      name: "MOISTURIZER",
       imageLink: "/moisturizer.jpg",
-      link: "/product-list",
+      link: "Moisturizer",
     },
     {
       name: "SUNSCREEN",
       imageLink: "/sunscreen.jpg",
-      link: "/product-list",
+      link: "Sunscreen",
     },
   ];
   return (
@@ -49,7 +53,12 @@ const ProductCategorySection = () => {
             key={index}
             category={category.name}
             imageLink={category.imageLink}
-            link={category.link}
+            link={createSearchQueryUrl(
+              "/product-list",
+              searchParams,
+              "categories",
+              JSON.stringify([category.link])
+            )}
           ></ProductCategoryCard>
         ))}
       </div>

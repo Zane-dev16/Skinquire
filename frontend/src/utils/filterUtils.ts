@@ -1,7 +1,7 @@
 import { parsedUrlQueryToParams } from "next/dist/server/future/route-matches/route-match";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
-export function getSelectedItems(searchParams: any, paramKey: string): string[] {
+export function getSelectedItems(searchParams: ReadonlyURLSearchParams, paramKey: string): string[] {
     const retrievedItemsParam = searchParams.get(paramKey);
     if (retrievedItemsParam) {
       const selectedItemsList = JSON.parse(retrievedItemsParam);
@@ -44,3 +44,14 @@ query {
   }
 }
 `;
+
+export const createSearchQueryUrl = (pathname: string, searchParams: ReadonlyURLSearchParams, name: string, value: string) => {
+  const params = new URLSearchParams(searchParams.toString());
+  if (!value || value == "[]") {
+    params.delete(name);
+  } else {
+    params.set(name, value);
+  }
+
+  return pathname + "?" + params.toString();
+};
