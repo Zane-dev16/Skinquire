@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
 import styles from "./Form.module.css"; // Import the CSS module
-import { ErrorMessage } from "@hookform/error-message";
 import Image from "next/image";
 import {
   UseFormRegister,
@@ -19,9 +18,16 @@ interface FormProps {
   buttonText: string;
   callback: (data: FormData) => void;
   error: string | null;
+  isLoginForm: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ title, buttonText, callback, error }) => {
+const Form: React.FC<FormProps> = ({
+  title,
+  buttonText,
+  callback,
+  error,
+  isLoginForm,
+}) => {
   const {
     register,
     formState: { errors },
@@ -35,7 +41,11 @@ const Form: React.FC<FormProps> = ({ title, buttonText, callback, error }) => {
   return (
     <section>
       <div className={styles.formContainer}>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className={styles.form}
+        >
           <h3>{title}</h3>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.label}>
@@ -46,7 +56,7 @@ const Form: React.FC<FormProps> = ({ title, buttonText, callback, error }) => {
                 required: "required",
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: "Entered value does not match email format",
+                  message: "Please enter a valid email",
                 },
               })}
               id="email"
@@ -56,30 +66,13 @@ const Form: React.FC<FormProps> = ({ title, buttonText, callback, error }) => {
               className={styles.input}
             />
           </div>
-          {errors.email && (
-            <p className={styles.error} role="alert">
-              {errors.email?.message}
-            </p>
-          )}
 
           <div className={styles.formGroup}>
             <label htmlFor="password" className={styles.label}>
               Password
             </label>
             <input
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters long",
-                },
-                pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message:
-                    "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character",
-                },
-              })}
+              {...register("password")}
               id="password"
               type="password"
               name="password"
@@ -87,10 +80,14 @@ const Form: React.FC<FormProps> = ({ title, buttonText, callback, error }) => {
               className={styles.input}
             />
           </div>
-          {error && <div className={styles.error}>Error: {error}</div>}
-          {errors.password && (
+          {error && (
             <p className={styles.error} role="alert">
-              {errors.password?.message}
+              {error}
+            </p>
+          )}
+          {errors.email && !isLoginForm && (
+            <p className={styles.error} role="alert">
+              {errors.email?.message}
             </p>
           )}
 

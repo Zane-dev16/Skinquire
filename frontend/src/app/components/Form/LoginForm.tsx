@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Form from "./Form";
 import styles from "./LoginForm.module.css";
 import Link from "next/link";
+import { userExists } from "@/utils/usersAndPermissionsUtils";
 
 type LoginFormProps = {
   closeForm: () => void;
@@ -21,7 +22,11 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
 
   const handleLogin = async (data: FormData) => {
     const { email, password } = data;
-    const query = `mutation  {
+    const userDoesExist = await userExists(email);
+    if (!userDoesExist) {
+      setError("Email not registered. Please use a different email or log in");
+    } else {
+      const query = `mutation  {
       login(input: { identifier: "${email}", password: "${password}" }) {
         jwt
         user {
@@ -30,30 +35,36 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
         }
       }
     }`;
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            query,
-          }),
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+          {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              query,
+            }),
+          }
+        );
+        const jsonRes = await res.json();
+        if (res.ok && jsonRes?.data) {
+          const data = jsonRes.data;
+          Cookies.set("token", data.login.jwt);
+          router.refresh();
+          closeForm();
+        } else {
+          const errorMessage = jsonRes.errors[0].message;
+          if (errorMessage == "Invalid identifier or password") {
+            setError("Incorrect Email or Password");
+          } else {
+            setError(errorMessage || "Log In Failed");
+          }
         }
-      );
-      const json = await res.json();
-      if (res.ok) {
-        const data = json.data;
-        Cookies.set("token", data.login.jwt);
-        router.refresh();
-        closeForm();
-      } else {
-        setError(json.errors[0].message || "Registration failed"); // Set error state
+      } catch (error) {
+        setError(`Error: ${error}`);
       }
-    } catch (error) {
-      setError(`Error: ${error}`);
     }
   };
 
@@ -64,8 +75,8 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
         buttonText="Log In"
         callback={handleLogin}
         error={error}
+        isLoginForm
       ></Form>
-      {error && <div className={styles.error}>Error: {error}</div>}
       <div className={styles.signUp}>
         <span className={styles.newHereText}>New Here?</span>
         <Link

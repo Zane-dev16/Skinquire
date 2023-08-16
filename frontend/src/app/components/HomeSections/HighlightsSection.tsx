@@ -23,14 +23,17 @@ const HighlightsSection = () => {
   return (
     <section className={styles.highlightsSection}>
       <div className={styles.titleContainer}>
-        <motion.div
+        <motion.h2
           initial={{ y: "100%" }}
           whileInView={{ y: 0 }}
-          transition={{ type: "spring", duration: 2 }}
+          transition={{
+            ease: [0.18, 1.26, 0.78, 1.02],
+            duration: 1.5,
+          }}
           className={styles.title}
         >
           THIS WEEKS HIGHLIGHTS
-        </motion.div>
+        </motion.h2>
       </div>
       <motion.div
         initial={{ scale: 0 }}
