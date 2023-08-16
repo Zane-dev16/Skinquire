@@ -17,6 +17,8 @@
     "@strapi/provider-email-sendgrid": "^4.12.4",
     "@strapi/strapi": "4.12.4",
     "better-sqlite3": "8.0.1",
+    "pg": "^8.11.2",
+    "pg-connection-string": "^2.6.2",
     "strapi-plugin-passwordless": "^4.0.12"
   },
   "author": {
