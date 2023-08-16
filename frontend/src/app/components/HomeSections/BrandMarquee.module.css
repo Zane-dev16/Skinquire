@@ -18,14 +18,12 @@
   justify-content: space-evenly;
   width: max-content;
   align-items: center;
-  gap: 20px;
 }
 
 .brandContainer {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  gap: 20px;
 }
 
 .brandText {
@@ -33,4 +31,5 @@
   font-size: 2em;
   width: fit-content;
   text-align: center;
+  margin: 0 20px 0 20px;
 }

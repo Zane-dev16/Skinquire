@@ -24,13 +24,15 @@ const ConnectProviderRedirect = () => {
     fetch(`${backendUrl}/api/auth/google/callback?access_token=${access_token}`)
       .then((response) => {
         if (!response.ok) {
+          const json = response.json();
+          console.log(json);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
         if (data.jwt) {
-          Cookies.set("token", data.jwt, { secure: true, sameSite: "strict" });
+          Cookies.set("token", data.jwt);
           router.back();
           console.log("Logged in successfully:", data.user);
         } else {

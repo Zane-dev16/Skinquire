@@ -97,7 +97,7 @@ const Form: React.FC<FormProps> = ({
         </form>
         <a
           className={styles.googleLink}
-          href="http://127.0.0.1:1337/api/connect/google"
+          href="http://localhost:1337/api/connect/google"
         >
           <button className={styles.googleButton}>
             <Image src="/google-icon.svg" alt="" width={20} height={20} />
