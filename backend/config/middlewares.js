@@ -32,6 +32,7 @@ module.exports = [
         "http://127.0.0.1:3000",
         "http://127.0.0.1:1337",
         "http://localhost:1337",
+        process.env.APP_URL,
       ],
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
