@@ -1,5 +1,5 @@
 module.exports = ({ env }) => ({
-  host: env("APP_HOST", "localhost"),
+  host: env("HOST", "localhost"),
   port: env.int("PORT", 1337),
   url: env("APP_URL", "http://localhost:1337"),
   app: {
