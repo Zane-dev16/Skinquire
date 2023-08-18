@@ -157,26 +157,24 @@ const RatingModal: FC<RatingModalProps> = ({
   return (
     <div onClick={handleClose} className={styles.backdrop}>
       <motion.div
-        layout
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
+        initial={{ y: "100%", opacity: 0 }}
+        animate={{
+          height: modalHeight,
+          width: modalWidth,
+          y: 0,
+          opacity: 1,
+          transition: { y: { duration: 0.2 } },
+        }}
         exit={{ y: "100%", opacity: 0, transition: { duration: 0.2 } }}
-        transition={{ type: "spring", damping: 15 }}
         onClick={(e) => e.stopPropagation()}
         className={styles.modal}
       >
         {isLoginModalOpen ? (
-          <motion.div className={styles.loginFormContainer}>
+          <div className={styles.loginFormContainer}>
             <LoginForm closeForm={() => setIsLoginModalOpen(false)}></LoginForm>
-          </motion.div>
+          </div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className={styles.ratingFormContainer}
-            layout
-          >
+          <div className={styles.ratingFormContainer}>
             <form onSubmit={handleSubmit}>
               <div className={styles.ratingMeter}>
                 {[...Array(10).keys()].map((count) => (
@@ -207,7 +205,7 @@ const RatingModal: FC<RatingModalProps> = ({
               </div>
               <button type="submit">RATE</button>
             </form>
-          </motion.div>
+          </div>
         )}
       </motion.div>
     </div>

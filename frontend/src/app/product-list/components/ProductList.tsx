@@ -127,6 +127,7 @@ const ProductList = () => {
   const { data, isLoading, error } = useSWR(ProductListQuery, fetcher);
   if (error) {
     console.error(error);
+    return <h1>Error: failed to connect to database</h1>;
   }
   if (isLoading) {
     return <div>Loading...</div>;

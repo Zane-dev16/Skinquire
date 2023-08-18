@@ -34,7 +34,6 @@ const ConnectProviderRedirect = () => {
         if (data.jwt) {
           Cookies.set("token", data.jwt);
           router.back();
-          console.log("Logged in successfully:", data.user);
         } else {
           console.error("JWT token not received.");
         }
