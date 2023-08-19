@@ -1,6 +1,8 @@
+.productListContainer {
+    width: 75vw;
+    margin-left: 25vw;
+}
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    width: 75vw;
-    margin-left: 25vw;
 }

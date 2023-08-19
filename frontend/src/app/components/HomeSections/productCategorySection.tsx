@@ -3,7 +3,7 @@ import Head from "next/head";
 import styles from "./ProductCategorySection.module.css";
 import ProductCategoryCard from "./ProductCategoryCard";
 import { motion } from "framer-motion";
-import { createSearchQueryUrl } from "@/utils/filterUtils";
+import { createSearchQueryWithTitleUrl } from "@/utils/filterUtils";
 import { usePathname, useSearchParams } from "next/navigation";
 
 type CategoryData = {
@@ -53,11 +53,12 @@ const ProductCategorySection = () => {
             key={index}
             category={category.name}
             imageLink={category.imageLink}
-            link={createSearchQueryUrl(
+            link={createSearchQueryWithTitleUrl(
               "/product-list",
               searchParams,
               "categories",
-              JSON.stringify([category.link])
+              JSON.stringify([category.link]),
+              category.name
             )}
           ></ProductCategoryCard>
         ))}

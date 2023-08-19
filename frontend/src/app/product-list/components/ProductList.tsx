@@ -10,6 +10,7 @@ import { getSelectedItems } from "@/utils/filterUtils";
 
 const ProductList = () => {
   const searchParams = useSearchParams();
+  const title = searchParams.get("title");
 
   const createContainSelectedFilter = (
     selectedList: string[],
@@ -41,6 +42,13 @@ const ProductList = () => {
     }
 
     return `brand: { name: { in: ${JSON.stringify(selectedBrands)} } }`;
+  };
+  const createSearchFilter = () => {
+    const searchQuery = searchParams.get("query");
+    if (searchQuery) {
+      return `{ name: { containsi:"${searchQuery}"} }`;
+    }
+    return "";
   };
   const createSkinTypeFilter = () => {
     const selectedSkinType = searchParams.get("skinType");
@@ -84,6 +92,7 @@ const ProductList = () => {
       createBrandFilter(),
       createSkinTypeFilter(),
       groupFilters([
+        createSearchFilter(),
         categoryFilter,
         ingredientFilter,
         skinConditionFilter,
@@ -134,13 +143,16 @@ const ProductList = () => {
   }
 
   return (
-    <div className={styles["product-list"]}>
-      {data.products.data.map((product: any) => (
-        <Link key={product.id} href={`/product-list/${product.id}`}>
-          <ProductCard {...product.attributes} />
-        </Link>
-      ))}
-    </div>
+    <section className={styles.productListContainer}>
+      {title && <h1>{title.toUpperCase()}</h1>}
+      <div className={styles["product-list"]}>
+        {data.products.data.map((product: any) => (
+          <Link key={product.id} href={`/product-list/${product.id}`}>
+            <ProductCard {...product.attributes} />
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 };
 
