@@ -61,7 +61,8 @@ const Form: React.FC<FormProps> = ({
           className={styles.form}
         >
           <h3 className={styles.title}>{title}</h3>
-          <input
+          <motion.input
+            whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
             {...register("email", {
               required: "required",
               pattern: {
@@ -75,7 +76,8 @@ const Form: React.FC<FormProps> = ({
             placeholder="EMAIL"
             className={styles.input}
           />
-          <input
+          <motion.input
+            whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
             {...register("password")}
             id="password"
             type="password"
@@ -86,13 +88,9 @@ const Form: React.FC<FormProps> = ({
           <motion.button
             whileHover={{
               scale: 1.05,
-              backgroundColor: "#fffbed",
-              color: "#50443A",
             }}
             transition={{
               type: "spring",
-              backgroundColor: { ease: "linear" },
-              color: { ease: "linear" },
             }}
             type="submit"
             className={styles.button}

@@ -36,16 +36,19 @@
   margin: 5px 0 5px 0;
   padding:25px 25px 25px 25px;
   font-family: "Cormorant";
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 50px;
   border: none;
   background-color:#fffbed;
+  color: #50443A;
   outline: 0 none;
 }
 
 .input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-size: 15px;
   color: #D2BAA9;
   opacity: 1; /* Firefox */
+
 }
 
 .button {
@@ -65,9 +68,6 @@
   width: 100%;
   position: absolute;
   top: 0;
-  background-color: #fffbed;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .error {

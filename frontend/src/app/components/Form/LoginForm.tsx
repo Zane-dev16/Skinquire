@@ -25,7 +25,7 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
     const { email, password } = data;
     const userDoesExist = await userExists(email);
     if (!userDoesExist) {
-      setError("Email not registered. Please use a different email or log in");
+      setError("Email not registered. Please use a different email or sign up");
     } else {
       const query = `mutation  {
       login(input: { identifier: "${email}", password: "${password}" }) {
@@ -88,13 +88,9 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
           <motion.button
             whileHover={{
               scale: 1.05,
-              backgroundColor: "#fffbed",
-              color: "#50443A",
             }}
             transition={{
               type: "spring",
-              backgroundColor: { ease: "linear" },
-              color: { ease: "linear" },
             }}
             className={styles.signUpButton}
           >
