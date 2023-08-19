@@ -6,41 +6,33 @@
     transition: transform 1s ease;
     cursor: pointer;
   }
+
+  .backdrop {
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: right;
+    z-index: 100;
+}
+
   
   .profileMenu {
-    position: fixed;
-    top: 2vh; /* Use vh for responsive distance from the top */
-    right: 5vh; /* Use vh for responsive distance from the right */
-    padding: 2vh; /* Use vh for responsive padding around the form */
-    padding-top: 50px;
-    background-color: rgba(70, 70, 70);
-    border: 1px solid #50443a;
+    margin-top: 12vh; /* Use vh for responsive distance from the top */
+    padding: 0 2vh 0 2vh; /* Use vh for responsive padding around the form */
+    background-color: #D2BAA9;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom: 3px black solid;
+    border-top: 3px black solid;
     width: 30vw; /* Use vh for responsive width */
     height: 55vh; /* Use vh for responsive height */
     z-index: 998;
-    animation: slideInBackground 1s ease forwards; 
+    overflow: hidden;
   }
-  
-
-  
-
-  
-.open {
-    transform: translateX(-16vh);
-}
 
 .logout {
   display: flex;
   justify-content: center;
 }
-  
-  @keyframes slideInBackground {
-    0% {
-      opacity: 0;
-      transform: translateX(16vh);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }

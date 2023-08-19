@@ -46,11 +46,8 @@ const Form: React.FC<FormProps> = ({
           noValidate
           className={styles.form}
         >
-          <h3>{title}</h3>
+          <h3 className={styles.title}>{title}</h3>
           <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.label}>
-              Email
-            </label>
             <input
               {...register("email", {
                 required: "required",
@@ -62,21 +59,18 @@ const Form: React.FC<FormProps> = ({
               id="email"
               type="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder="EMAIL"
               className={styles.input}
             />
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.label}>
-              Password
-            </label>
             <input
               {...register("password")}
               id="password"
               type="password"
               name="password"
-              placeholder="************"
+              placeholder="PASSWORD"
               className={styles.input}
             />
           </div>
