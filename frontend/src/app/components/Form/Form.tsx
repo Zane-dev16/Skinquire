@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import styles from "./Form.module.css"; // Import the CSS module
+import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   UseFormRegister,
@@ -40,6 +41,19 @@ const Form: React.FC<FormProps> = ({
 
   return (
     <section>
+      <div className={styles.errorContainer}>
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
+        {errors.email && (
+          <p className={styles.error} role="alert">
+            Please enter a valid email
+          </p>
+        )}
+      </div>
+
       <div className={styles.formContainer}>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -47,56 +61,57 @@ const Form: React.FC<FormProps> = ({
           className={styles.form}
         >
           <h3 className={styles.title}>{title}</h3>
-          <div className={styles.formGroup}>
-            <input
-              {...register("email", {
-                required: "required",
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: "Please enter a valid email",
-                },
-              })}
-              id="email"
-              type="email"
-              name="email"
-              placeholder="EMAIL"
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <input
-              {...register("password")}
-              id="password"
-              type="password"
-              name="password"
-              placeholder="PASSWORD"
-              className={styles.input}
-            />
-          </div>
-          {error && (
-            <p className={styles.error} role="alert">
-              {error}
-            </p>
-          )}
-          {errors.email && !isLoginForm && (
-            <p className={styles.error} role="alert">
-              {errors.email?.message}
-            </p>
-          )}
-
-          <button type="submit" className={styles.button}>
+          <input
+            {...register("email", {
+              required: "required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Please enter a valid email",
+              },
+            })}
+            id="email"
+            type="email"
+            name="email"
+            placeholder="EMAIL"
+            className={styles.input}
+          />
+          <input
+            {...register("password")}
+            id="password"
+            type="password"
+            name="password"
+            placeholder="PASSWORD"
+            className={styles.input}
+          />
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              backgroundColor: "#fffbed",
+              color: "#50443A",
+            }}
+            transition={{
+              type: "spring",
+              backgroundColor: { ease: "linear" },
+              color: { ease: "linear" },
+            }}
+            type="submit"
+            className={styles.button}
+          >
             {buttonText}
-          </button>
+          </motion.button>
         </form>
         <a
           className={styles.googleLink}
           href="http://localhost:1337/api/connect/google"
         >
-          <button className={styles.googleButton}>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring" }}
+            className={`${styles.button} ${styles.googleButton}`}
+          >
             <Image src="/google-icon.svg" alt="" width={20} height={20} />
-            <span className={styles.googleText}>Continue with Google</span>
-          </button>
+            <span className={styles.googleText}>CONTINUE WITH GOOGLE</span>
+          </motion.button>
         </a>
       </div>
     </section>

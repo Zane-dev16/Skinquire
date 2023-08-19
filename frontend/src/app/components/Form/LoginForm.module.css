@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Cormorant"; /* Provide a name for the font */
+  src: url("/fonts/Cormorant-Light.ttf");
+}
+
 .formContainer {
   width: 100%;
 }
@@ -12,17 +17,35 @@
   }
 
     .signUp {
-      width: 100%;
-      margin: 15px;
+      width: 450px;
+      margin: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
   .newHereText {
+    margin-top: 20px;
+    font-family: "Cormorant";
+    color: #fffbed;
     font-size: 3vh; /* Use vh for responsive font size */
   }
 
   
   .signUpLink {
+    width: fit-content;
+    font-family: "Cormorant";
     font-size: 3vh
   }
+
+.signUpButton {
+  width: 180px;
+  margin: 5px 0 5px 0;
+  background-color:#50443A;
+  color: #fffbed;
+font-size: 0.8em;
+  padding: 8px 5px 8px 5px;
+  font-family: "Cormorant";
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}

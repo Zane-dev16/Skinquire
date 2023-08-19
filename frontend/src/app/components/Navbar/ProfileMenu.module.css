@@ -17,17 +17,23 @@
     z-index: 100;
 }
 
+.profileMenuContainer {
+  margin-top: 12vh; /* Use vh for responsive distance from the top */
+
+  height: 520px; /* Use vh for responsive height */
+
+  overflow: hidden;
+}
   
   .profileMenu {
-    margin-top: 12vh; /* Use vh for responsive distance from the top */
     padding: 0 2vh 0 2vh; /* Use vh for responsive padding around the form */
     background-color: #D2BAA9;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom: 3px black solid;
     border-top: 3px black solid;
-    width: 30vw; /* Use vh for responsive width */
-    height: 55vh; /* Use vh for responsive height */
+    width: 480px; /* Use vh for responsive width */
+    height: 500px; /* Use vh for responsive height */
     z-index: 998;
     overflow: hidden;
   }

@@ -49,26 +49,37 @@ const AuthModal: FC<AuthModalProps> = ({ handleClose }) => {
   }
   return (
     <div onClick={handleClose} className={styles.backdrop}>
-      <motion.div
-        initial={{ height: 0 }}
-        animate={{ height: "60%" }}
-        exit={{ height: 0, scaleY: 0 }}
-        transition={{
-          duration: 0.8,
-          type: "spring",
-          scaleY: { delay: 0.3, duration: 0.1 },
-          y: { delay: 0.1, duration: 0.8, ease: "linear" },
-        }}
-        onClick={(e) => e.stopPropagation()}
-        className={styles.profileMenu}
-      >
-        {!isAuthenticated && <LoginForm closeForm={handleClose}></LoginForm>}
-        {isAuthenticated && (
-          <div className={styles.logout}>
-            <button onClick={handleLogout}>LOG OUT</button>
-          </div>
-        )}
-      </motion.div>
+      <div className={styles.profileMenuContainer}>
+        <motion.div
+          initial={{ y: "-100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "-100%" }}
+          transition={{
+            duration: 0.3,
+          }}
+          onClick={(e) => e.stopPropagation()}
+          className={styles.profileMenu}
+        >
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{
+              duration: 0.3,
+            }}
+            className={styles.formContainer}
+          >
+            {!isAuthenticated && (
+              <LoginForm closeForm={handleClose}></LoginForm>
+            )}
+            {isAuthenticated && (
+              <div className={styles.logout}>
+                <button onClick={handleLogout}>LOG OUT</button>
+              </div>
+            )}
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Form from "./Form";
 import styles from "./LoginForm.module.css";
 import Link from "next/link";
 import { userExists } from "@/utils/usersAndPermissionsUtils";
+import { motion } from "framer-motion";
 
 type LoginFormProps = {
   closeForm: () => void;
@@ -71,8 +72,8 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
   return (
     <div className={styles.formContainer}>
       <Form
-        title="Log In"
-        buttonText="Log In"
+        title="LOG INTO SKINQUIRE"
+        buttonText="LOGIN"
         callback={handleLogin}
         error={error}
         isLoginForm
@@ -84,7 +85,21 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
           onClick={closeForm}
           href="/register"
         >
-          Sign Up!
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              backgroundColor: "#fffbed",
+              color: "#50443A",
+            }}
+            transition={{
+              type: "spring",
+              backgroundColor: { ease: "linear" },
+              color: { ease: "linear" },
+            }}
+            className={styles.signUpButton}
+          >
+            SIGN UP!
+          </motion.button>
         </Link>
       </div>
     </div>

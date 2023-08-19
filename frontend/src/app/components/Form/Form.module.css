@@ -9,6 +9,10 @@
   src: url("/fonts/Cormorant-Light.ttf");
 }
 .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   /* border: 1px solid #ccc; */
   border-radius: 4px;
@@ -16,27 +20,25 @@
 }
 
 .formGroup {
-  width: 80%;
-  margin: 10px 0 10px 0;
+  width: 100%;
 }
 
 .title {
-  position: relative;
-  display: block;
-  margin: auto;
-  margin: 30px 0 10px 0 ;
+  margin: 40px 0 20px 0 ;
   font-weight: lighter;
   font-family: "Shamery";
+  color: #50443A;
   font-size: 2em;
 }
 
 .input {
-  width: 90%;
-  padding: 5%;
+  width: 75%;
+  margin: 5px 0 5px 0;
+  padding:25px 25px 25px 25px;
   font-family: "Cormorant";
   font-size: 16px;
-  border: 1px solid #ccc;
   border-radius: 50px;
+  border: none;
   background-color:#fffbed;
   outline: 0 none;
 }
@@ -47,22 +49,32 @@
 }
 
 .button {
-  margin: 10px 0 10px 0;
-  width: 70%;
-  padding: 1vh 5% 1vh 5%;
-
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: 2px rgb(26, 6, 93) solid;
-  border-radius: 4px;
+  margin: 5px 0 5px 0;
+  width: 50%;
+  background-color:#50443A;
+  color: #fffbed;
+  font-size: 1.5em;
+  padding: 12px 5% 12px 5%;
+  font-family: "Cormorant";
+  border-radius: 50px;
+  border: none;
   cursor: pointer;
+}
+
+.errorContainer {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: #fffbed;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .error {
   margin: 0;
   text-align: center;
   color: #f00;
+  opacity: 1;
 }
 
 .googleLink {
@@ -71,30 +83,13 @@
 
 .googleButton {
   margin: auto;
-  width: 70%;
-  padding: 1vh 5% 1vh 5%;
-  margin-top: 1.5vh;
+  font-size: 14px;
+  padding: 12px 0 12px 15px;
+  margin-top: 5px;
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: 1vh;
-  border: 2px black solid;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.googleText {
-  color: rgb(
-    139,
-    139,
-    139
-  ); /* Change link color to a desired color, here it's blue (#007bff) */
-  font-size: 1.2em;
-  font-family: "Roboto", sans-serif; /* Apply Roboto font and fallback to a system sans-serif font */
-  transition: color 0.2s ease-out;
-}
-
-/* Optional: Add styles for link hover state */
-.googleText:hover {
-  color: black; /* Change link color on hover */
-  /* Add any other hover styles as needed */
+  color:#50443A;
+  background-color: #fffbed;
+  border: 1px #50443A solid
 }
