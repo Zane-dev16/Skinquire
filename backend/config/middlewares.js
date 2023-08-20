@@ -33,6 +33,7 @@ module.exports = [
         "http://127.0.0.1:1337",
         "http://localhost:1337",
         process.env.APP_URL,
+        process.env.STRAPI_PUBLIC_FRONTEND_URL,
       ],
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
