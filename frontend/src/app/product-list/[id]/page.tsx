@@ -8,7 +8,7 @@ interface Relation {
   };
 }
 
-export async function generateStaticParams() {
+/* export async function generateStaticParams() {
   const data = await asyncFetcher("query {products {data {id }}}");
   if (data?.product.data.map) {
     return data.products.data.map((product: { id: number }) => ({
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
   } else {
     return [];
   }
-}
+} */
 
 export default async function Page({ params }: { params: { id: number } }) {
   const QUERY_PRODUCT_BY_ID = `
