@@ -42,9 +42,9 @@ const HeroSection = () => {
           CATALOGUE
         </h1>
         <h2 className={styles.heroSubheader}>
-          Whether you're looking for that perfect moisturizer to combat dryness
-          or a serum to tackle those pesky skin concerns, Skinquire has you
-          covered. With our comprehensive database, insightful reviews, and
+          Whether you&apos;re looking for that perfect moisturizer to combat
+          dryness or a serum to tackle those pesky skin concerns, Skinquire has
+          you covered. With our comprehensive database, insightful reviews, and
           vibrant community, achieving your skincare goals has never been
           easier.
         </h2>
