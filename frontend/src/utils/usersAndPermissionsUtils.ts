@@ -1,4 +1,4 @@
-import { asyncFetcher } from "@/app/api/graphql";
+import { asyncFetcher } from "@/utils/graphql";
 
 export const userExists = async (email: string) => {
     const findUser = `query {

@@ -20,7 +20,8 @@ export const asyncFetcher = async (query: string) =>
     body: JSON.stringify({
       query,
     }),
-  })
+    next: {revalidate: 60}
+  },)
     .then((res) => res.json())
     .then((json) => json.data);
 

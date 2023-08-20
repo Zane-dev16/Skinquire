@@ -52,7 +52,11 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
         const jsonRes = await res.json();
         if (res.ok && jsonRes?.data) {
           const data = jsonRes.data;
-          Cookies.set("token", data.login.jwt);
+          Cookies.set("token", data.login.jwt, {
+            expires: 7, // Expires in 7 days
+            secure: true,
+            sameSite: "strict",
+          });
           router.refresh();
           closeForm();
         } else {

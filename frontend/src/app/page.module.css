@@ -3,10 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Tiro+Gurmukhi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-@font-face {
-  font-family: 'Alecko'; /* Provide a name for the font */
-  src: url('/fonts/Alecko-HighContrast.otf')
-}
+
 
 @font-face {
   font-family: 'Sinistre'; /* Provide a name for the font */

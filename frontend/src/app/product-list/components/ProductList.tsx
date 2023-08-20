@@ -5,7 +5,7 @@ import ProductCard from "@/app/components/ProductCard/ProductCard";
 import Link from "next/link";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
-import fetcher from "@/app/api/graphql";
+import fetcher from "@/utils/graphql";
 import { getSelectedItems } from "@/utils/filterUtils";
 
 const ProductList = () => {

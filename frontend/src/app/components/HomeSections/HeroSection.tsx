@@ -74,7 +74,7 @@ const HeroSection = () => {
         className={styles.heroImageContainer}
       >
         <Image
-          src="/hero-image3.jpg"
+          src="/hero-image.jpg"
           alt="Dropping serum onto hand image for the hero of the home page"
           sizes="100vh"
           fill={true}

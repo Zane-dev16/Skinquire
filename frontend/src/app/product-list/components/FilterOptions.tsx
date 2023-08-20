@@ -3,7 +3,7 @@ import styles from "./FilterOptions.module.css";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useCallback } from "react";
 import Link from "next/link";
-import fetcher from "@/app/api/graphql";
+import fetcher from "@/utils/graphql";
 import useSWR from "swr";
 import SearchFilterOptions from "./SearchFilterOptions";
 import SingleSelectDropdown from "./SingleSelectDropdown";

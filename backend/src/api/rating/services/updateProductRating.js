@@ -19,7 +19,7 @@ module.exports = () => ({
       }
     );
     if (!product || !product.ratings || !product.base_rating) {
-      console.log("Error: not found");
+      console.error("Error: product/rating not found");
       return;
     }
 
@@ -37,8 +37,6 @@ module.exports = () => ({
     const adjustedRating =
       (1 - normalizedWeight) * baseRating +
       normalizedWeight * averageUserRating;
-
-    console.log(adjustedRating);
 
     const entry = await strapi.entityService.update(
       "api::product.product",

@@ -4,7 +4,7 @@ import Modal from "@/app/components/Modal/Modal";
 import { FC, useState } from "react";
 import RatingModal from "./RatingModal";
 import Cookies from "js-cookie";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { AnimatePresence } from "framer-motion";
 
 interface RatingButtonProps {
@@ -81,13 +81,14 @@ const RatingButton: FC<RatingButtonProps> = ({ product }) => {
     data: userIdData,
     error: userIdError,
     isLoading: userIdLoading,
+    mutate: revalidateOverallRating,
   } = useSWR<number>(access_token ? { access_token } : null, getUserID);
-  console.log(userIdData);
 
   const {
     data: userRatingData,
     error: userRatingError,
     isLoading: userRatingLoading,
+    mutate: revalidateUserRating,
   } = useSWR<UserRatingData>(
     access_token ? { access_token, id: userIdData } : null, // Assuming `userIdData` contains the user ID
     getUserRating
@@ -95,12 +96,17 @@ const RatingButton: FC<RatingButtonProps> = ({ product }) => {
   if (userRatingError) {
     console.error(userRatingError);
   }
-  console.log(userRatingData);
 
   const hasUserRating =
     Array.isArray(userRatingData) && userRatingData.length > 0;
 
   const userRatingId = hasUserRating ? userRatingData[0].id : null;
+
+  const handleClose = () => {
+    revalidateOverallRating();
+    revalidateUserRating();
+    setIsOpen(false);
+  };
 
   return (
     <div>
@@ -113,7 +119,7 @@ const RatingButton: FC<RatingButtonProps> = ({ product }) => {
         {isOpen && (
           <RatingModal
             product={product}
-            handleClose={() => setIsOpen(false)}
+            handleClose={handleClose}
             hasUserRating={hasUserRating}
             userRatingId={userRatingId}
             userId={userIdData}

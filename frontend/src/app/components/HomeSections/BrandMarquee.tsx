@@ -82,7 +82,7 @@ const BrandMarquee = () => {
         {doubledBrandList.map((brand, index) => (
           <div key={index} className={styles.brandContainer}>
             <Image
-              src="/brandMarqueeStar1.svg"
+              src="/brandMarqueeStar.svg"
               alt="star separator between brands on marquee"
               width={50}
               height={50}

@@ -34,13 +34,16 @@ const ConnectProviderRedirect = () => {
           if (errorMessage == "Email is already taken.") {
             setError("Error: account exists but is not registered with google");
           }
-          console.log(json);
           throw new Error("Network response was not ok");
         }
 
         const data = await response.json();
         if (data.jwt) {
-          Cookies.set("token", data.jwt);
+          Cookies.set("token", data.jwt, {
+            expires: 7, // Expires in 7 days
+            secure: true,
+            sameSite: "strict",
+          });
           router.back();
         } else {
           console.error("JWT token not received.");

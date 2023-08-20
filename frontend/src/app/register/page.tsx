@@ -79,8 +79,11 @@ export default function RegisterRoute() {
         );
         const jsonRes = await res.json();
         if (res.ok && jsonRes?.data != null) {
-          console.log(jsonRes.data);
-          Cookies.set("token", jsonRes.data.register.jwt);
+          Cookies.set("token", jsonRes.data.register.jwt, {
+            expires: 7, // Expires in 7 days
+            secure: true,
+            sameSite: "strict",
+          });
           router.push("/product-list");
         } else {
           const errorMessage = jsonRes.errors[0].message;
@@ -92,7 +95,7 @@ export default function RegisterRoute() {
         }
       } catch (error) {
         setError("Registration failed"); // Set error state on catch
-        console.log(error);
+        console.error("Error:", error);
       }
     }
   };

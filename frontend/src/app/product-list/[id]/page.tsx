@@ -1,6 +1,6 @@
 import Head from "next/head";
 import RatingButton from "./components/rating/RatingButton";
-import { asyncFetcher } from "@/app/api/graphql";
+import { asyncFetcher } from "@/utils/graphql";
 
 interface Relation {
   attributes: {

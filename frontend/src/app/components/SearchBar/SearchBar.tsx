@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import useSWR from "swr";
-import fetcher from "@/app/api/graphql";
+import fetcher from "@/utils/graphql";
 import { createSearchQueryWithTitleUrl } from "@/utils/filterUtils";
 
 interface Product {

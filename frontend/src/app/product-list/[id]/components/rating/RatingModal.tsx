@@ -84,11 +84,11 @@ const updateRating = async ({
   );
 
   const data = await response.json();
-  return data.data.createRating.data;
+  return data.data.updateRating.data;
 };
 
 interface RatingModalProps {
-  handleClose: MouseEventHandler<HTMLDivElement>;
+  handleClose: () => void;
   product: number;
   hasUserRating: boolean;
   userRatingId: number | null;
@@ -138,13 +138,20 @@ const RatingModal: FC<RatingModalProps> = ({
             user: userID,
             rating: rating,
           });
-          console.log("Rating created:", data);
+          if (data) {
+            router.refresh();
+            handleClose();
+          }
         } else {
           const data = await updateRating({
             access_token,
             userRatingId,
             rating,
           });
+          if (data) {
+            router.refresh();
+            handleClose();
+          }
         }
       } catch (error) {
         console.error(error);

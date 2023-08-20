@@ -36,10 +36,8 @@ module.exports = {
                 }
               );
               if (entries.length === 0 && user == context.state.user.id) {
-                console.log("trusted");
                 return true;
               }
-
               return false;
             },
           ],

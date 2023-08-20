@@ -35,7 +35,6 @@ const Form: React.FC<FormProps> = ({
     handleSubmit,
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
     callback(data);
   };
 
