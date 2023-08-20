@@ -10,9 +10,13 @@ interface Relation {
 
 export async function generateStaticParams() {
   const data = await asyncFetcher("query {products {data {id }}}");
-  return data.products.data.map((product: { id: number }) => ({
-    id: product.id.toString(),
-  }));
+  if (data) {
+    return data.products.data.map((product: { id: number }) => ({
+      id: product.id.toString(),
+    }));
+  } else {
+    return [];
+  }
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
