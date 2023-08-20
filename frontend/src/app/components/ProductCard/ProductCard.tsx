@@ -36,7 +36,7 @@ const ProductCard: FC<ProductCardProps> = ({
     <motion.div whileHover={{ scale: 1.05 }} className={styles["product-card"]}>
       <div className={styles["image-container"]}>
         <img
-          src={`http://localhost:1337${imageUrl}`}
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${imageUrl}`}
           alt={`${name} product image`}
           className={styles["product-image"]}
         />

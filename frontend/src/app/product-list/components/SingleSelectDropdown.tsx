@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./SingleSelectDropdown.module.css"; // Update with your CSS module
+import styles from "./SingleSelectDropDown.module.css";
 
 interface SingleSelectDropdownProps {
   title: string;

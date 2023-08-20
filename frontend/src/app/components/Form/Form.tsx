@@ -99,7 +99,7 @@ const Form: React.FC<FormProps> = ({
         </form>
         <a
           className={styles.googleLink}
-          href="http://localhost:1337/api/connect/google"
+          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google`}
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
