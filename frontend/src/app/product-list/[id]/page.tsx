@@ -81,7 +81,7 @@ export default async function Page({ params }: { params: { id: number } }) {
 
   const product = data.product.data.attributes;
   const imageUrl = product.image?.data?.attributes.formats.thumbnail.url;
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const mediaUrl = process.env.NEXT_PUBLIC_MEDIA_URL;
 
   return (
     <div>
@@ -93,7 +93,7 @@ export default async function Page({ params }: { params: { id: number } }) {
 
       <h1>{product.name}</h1>
       <img
-        src={`${backendUrl}${imageUrl}`}
+        src={`${mediaUrl}${imageUrl}`}
         alt={`${product.name} product image`}
       />
       <p>{product.description}</p>

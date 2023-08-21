@@ -158,8 +158,8 @@ const RatingModal: FC<RatingModalProps> = ({
       }
     }
   };
-  const modalHeight = isLoginModalOpen ? "60%" : "20%";
-  const modalWidth = isLoginModalOpen ? "30%" : "45%";
+  const modalHeight = isLoginModalOpen ? "500px" : "20%";
+  const modalWidth = isLoginModalOpen ? "460px" : "45%";
 
   return (
     <div onClick={handleClose} className={styles.backdrop}>
