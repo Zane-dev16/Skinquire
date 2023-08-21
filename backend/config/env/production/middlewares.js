@@ -8,8 +8,19 @@ module.exports = [
         useDefaults: true, // Keep this if applicable
         directives: {
           "connect-src": ["'self'", "https:"], // Allow connections to the same origin and HTTPS
-          "img-src": ["'self'", "data:"],
-          "media-src": ["'self'", "data:"],
+          "img-src": [
+            "skinquire-bucket.s3.amazonaws.com",
+            "'self'",
+            "data:",
+            "blob:",
+          ],
+          "media-src": [
+            "skinquire-bucket.s3.amazonaws.com",
+            "'self'",
+            "data:",
+            "blob:",
+          ],
+          upgradeInsecureRequests: null,
           "frame-src": "'self'", // Allow framing from the same origin
         },
       },

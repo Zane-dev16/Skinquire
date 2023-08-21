@@ -8,8 +8,18 @@ module.exports = [
         useDefaults: true, // Keep this if applicable
         directives: {
           "connect-src": ["'self'", "https:"], // Allow connections to the same origin and HTTPS
-          "img-src": ["'self'", "data:"],
-          "media-src": ["'self'", "data:"],
+          "img-src": [
+            "'self'",
+            "skinquire-bucket.s3.amazonaws.com",
+            "data:",
+            "blob:",
+          ],
+          "media-src": [
+            "'self'",
+            "skinquire-bucket.s3.amazonaws.com",
+            "data:",
+            "blob:",
+          ],
           "frame-src": "'self'", // Allow framing from the same origin
         },
       },
@@ -34,6 +44,7 @@ module.exports = [
         "http://localhost:1337",
         process.env.APP_URL,
         process.env.STRAPI_PUBLIC_FRONTEND_URL,
+        "skinquire-bucket.s3.amazonaws.com",
       ],
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
