@@ -1,30 +1,30 @@
 
 .heroSection {
-    margin: 12vh 0 0 0;
+    margin: 95px 0 0 0;
     border-top: 3px black solid;
     width: 100vw;
-    height: 78vh;
+    height: 43vw;
     display: flex;
     justify-content: space-between;
   }
 
   .heroText {
     width: 54vw;
-    padding: 8vh 4vw 0 8vw;
+    padding: 3vw 4vw 0 8vw;
     border-right: 1.5px black solid;
   }
 
   .CTAwrapper {
     width: 230px;
-    margin-top: 20px;
+    margin-top: 1.5vw;
   }
 
   .heroCTA { 
     position: relative;
     font-family: "Playfair Display";
-    width: 200px;
-    font-size: 24px; /* Increase font size to make it larger */
-    padding: 15px; /* Add padding for rectangular shape */
+    width: 15vw;
+    font-size: 2vw; /* Increase font size to make it larger */
+    padding: 1vw; /* Add padding for rectangular shape */
     border: 1px solid black; /* Add a black border */
     border-radius: 40px; /* Add rounded corners */
     display: flex;
@@ -56,11 +56,11 @@
   }
 
 .heroTitle {
-  padding-top: 50px;
+  padding-top: 3vw;
   font-family: 'Tiro Gurmukhi', serif;
   color: #9a6345;
   font-weight: normal;
-  font-size: 3.3em;
+  font-size: 3.6vw;
   width: 100%;
   margin: 0;
 }
@@ -69,23 +69,12 @@
   font-family: "Playfair Display";
   font-weight:lighter;
   font-size: 1.2em;
+  font-size: 1.4vw;
   line-height: 1.5em;
   width: 80%;
-  margin: 20px 0 0 0;
+  margin: 1.5vw 0 0 0;
 }
 
 .ultimateText {
   color: #50443a;
-}
-
-.titleLetter {
-  margin: 0;
-  font-size: 10vw;
-  color: #fffbed;
-  display: inline-block;
-}
-
-.issue {
-  height: 100vh;
-  background-color: #a0ab9d;
 }

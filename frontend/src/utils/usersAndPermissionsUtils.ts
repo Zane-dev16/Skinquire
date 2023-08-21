@@ -13,10 +13,12 @@ export const userExists = async (email: string) => {
       if (data?.usersPermissionsUsers.data.length == 0) {
         return false;
       } else {
+        console.log(data?.usersPermissionsUsers.data)
         return true;
       }
     } catch (error) {
       console.error(error);
+      console.log("hi")
       return true;
     }
   };
