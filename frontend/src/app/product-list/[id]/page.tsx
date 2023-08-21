@@ -92,10 +92,7 @@ export default async function Page({ params }: { params: { id: number } }) {
       </Head>
 
       <h1>{product.name}</h1>
-      <img
-        src={`${mediaUrl}${imageUrl}`}
-        alt={`${product.name} product image`}
-      />
+      <img src={`${imageUrl}`} alt={`${product.name} product image`} />
       <p>{product.description}</p>
 
       {/* Product details */}
