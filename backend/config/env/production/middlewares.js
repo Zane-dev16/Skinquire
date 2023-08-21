@@ -9,21 +9,16 @@ module.exports = [
         directives: {
           "connect-src": ["'self'", "https:"], // Allow connections to the same origin and HTTPS
           "img-src": [
-            "https://skinquire-bucket.s3.amazonaws.com",
-
+            "skinquire-bucket.s3.amazonaws.com",
             "'self'",
             "data:",
-            "skinquire-bucket.s3.us-east-1.amazonaws.com",
             "blob:",
-            "dl.airtable.com",
           ],
           "media-src": [
-            "skinquire-bucket.s3.us-east-1.amazonaws.com",
-            "https://skinquire-bucket.s3.amazonaws.com/",
+            "skinquire-bucket.s3.amazonaws.com",
             "'self'",
             "data:",
             "blob:",
-            "dl.airtable.com",
           ],
           upgradeInsecureRequests: null,
           "frame-src": "'self'", // Allow framing from the same origin
