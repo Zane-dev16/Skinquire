@@ -2,7 +2,7 @@
 
 import styles from "./ProfileMenu.module.css";
 
-import { useState, FC } from "react";
+import { useState, useEffect, FC } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,6 +41,11 @@ const AuthModal: FC<AuthModalProps> = ({ handleClose }) => {
   const router = useRouter();
   const isAuthenticated = !!Cookies.get("token");
 
+  useEffect(() => {
+    return () => {
+      handleClose(); // Clean up isOpen state when component unmounts
+    };
+  }, []);
   function handleLogout() {
     Cookies.remove("token");
     handleClose();
