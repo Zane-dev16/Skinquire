@@ -18,6 +18,7 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
   link,
 }) => {
   const curvedTextRef = useRef(null);
+
   const buttonBackgroundVariants = {
     initial: { scale: 0, x: "-50%", y: "-50%" },
     whileHover: { scale: 3 },
@@ -33,6 +34,13 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
     whileHover: { scale: 1.05 },
   };
 
+  const imageVariants = {
+    whileInView: { opacity: 1, y: 0 },
+  };
+  const textVariants = {
+    whileInView: { y: 0, opacity: 1 },
+  };
+
   useEffect(() => {
     if (curvedTextRef.current) {
       const circleType = new CircleType(curvedTextRef.current);
@@ -44,13 +52,14 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
       <motion.div
         initial="initial"
         whileHover="whileHover"
+        whileInView="whileInView"
         variants={cardVariants}
         className={styles.card}
       >
         <motion.p
-          initial={{ y: 0, opacity: 0 }}
-          whileInView={{ y: -100, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          initial={{ y: "500%", opacity: 0 }}
+          variants={textVariants}
+          transition={{ duration: 0.8, delay: 0.3, opacity: { delay: 0.7 } }}
           ref={curvedTextRef}
           className={styles.curvedText}
         >
@@ -58,7 +67,7 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={imageVariants}
           transition={{ type: "spring" }}
           className={styles.tallRectangle}
         >
