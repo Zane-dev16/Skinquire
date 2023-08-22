@@ -13,7 +13,7 @@ const Home = () => {
     <main>
       <Head>
         {/* Add the meta tag for site verification */}
-        <meta name="ir-site-verification-token" content="-442249946" />
+        <meta name="ir-site-verification-token" value="-442249946" />
       </Head>
       <HeroSection></HeroSection>
       <BrandMarquee></BrandMarquee>
