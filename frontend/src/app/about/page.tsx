@@ -5,9 +5,7 @@ import Link from "next/link";
 const About = () => {
   return (
     <div className={styles.aboutContainer}>
-      <h1 className={styles.aboutHeading}>
-        About Skinquire.net: Your Trusted Skincare Ratings Platform
-      </h1>
+      <h1 className={styles.aboutHeading}>About</h1>
       <p className={styles.aboutText}>
         Welcome to Skinquire.net, your ultimate destination for skincare product
         ratings and reviews! Are you tired of sifting through conflicting

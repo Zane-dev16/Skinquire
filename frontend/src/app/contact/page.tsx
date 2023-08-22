@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 const Contact = () => {
   return (
     <div className={styles.contactContainer}>
-      <h1 className={styles.contactHeading}>Get in Touch with Skinquire</h1>
+      <h1 className={styles.contactHeading}>Contact Us</h1>
       <p className={styles.contactDescription}>
         We&apos;re here to listen and engage with you. Whether you have
         questions, feedback, suggestions, or just want to say hello, we&apos;d
