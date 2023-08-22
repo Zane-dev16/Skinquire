@@ -108,6 +108,7 @@ export default function RegisterRoute() {
             title="Sign Up"
             buttonText="Sign Up"
             callback={registerUser}
+            closeForm={() => {}}
             error={error}
             isLoginForm={false}
           />

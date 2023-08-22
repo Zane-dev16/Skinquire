@@ -18,6 +18,7 @@ interface FormProps {
   title: string;
   buttonText: string;
   callback: (data: FormData) => void;
+  closeForm: () => void;
   error: string | null;
   isLoginForm: boolean;
 }
@@ -26,6 +27,7 @@ const Form: React.FC<FormProps> = ({
   title,
   buttonText,
   callback,
+  closeForm,
   error,
   isLoginForm,
 }) => {
@@ -102,6 +104,7 @@ const Form: React.FC<FormProps> = ({
           href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google`}
         >
           <motion.button
+            onClick={closeForm}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring" }}
             className={`${styles.button} ${styles.googleButton}`}

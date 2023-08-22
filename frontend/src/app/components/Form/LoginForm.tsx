@@ -80,6 +80,7 @@ const LoginForm: FC<LoginFormProps> = ({ closeForm }) => {
         buttonText="LOGIN"
         callback={handleLogin}
         error={error}
+        closeForm={closeForm}
         isLoginForm
       ></Form>
       <div className={styles.signUp}>
