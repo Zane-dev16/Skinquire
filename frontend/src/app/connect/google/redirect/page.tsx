@@ -44,7 +44,7 @@ const ConnectProviderRedirect = () => {
             secure: true,
             sameSite: "strict",
           });
-          router.back();
+          console.log("success");
         } else {
           console.error("JWT token not received.");
         }
