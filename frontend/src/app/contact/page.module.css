@@ -1,0 +1,77 @@
+/* Contact.module.css */
+
+.contactContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contactHeading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.contactDescription {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.contactMethods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.contactMethod {
+    width: 48%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.methodHeading {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.methodDescription {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.methodLink {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.methodLink:hover {
+    color: #0056b3;
+}
+
+.socialLinks {
+    list-style: none;
+    padding-left: 0;
+}
+
+.socialLink {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.1rem;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.socialLink:hover {
+    color: #0056b3;
+}
+
+.contactClosing {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
