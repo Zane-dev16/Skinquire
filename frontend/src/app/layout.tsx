@@ -16,6 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt USD-442249946 ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+          laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
         <Navbar></Navbar>
         {children}
       </body>
