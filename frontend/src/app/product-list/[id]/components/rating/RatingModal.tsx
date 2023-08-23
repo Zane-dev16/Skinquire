@@ -19,33 +19,40 @@ const createRating = async ({
 }) => {
   console.log(user);
   console.log(rating);
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
-        mutation {
-          createRating(data: { product: ${product}, user: ${user}, rating: ${rating} }) {
-            data {
-              attributes {
-                rating
-
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: `
+          mutation {
+            createRating(data: { product: ${product}, user: ${user}, rating: ${rating} }) {
+              data {
+                attributes {
+                  rating
+  
+                }
               }
             }
           }
-        }
-      `,
-      }),
+        `,
+        }),
+      }
+    );
+    const data = await response.json();
+    return data.data.createRating.data;
+    if (response.status !== 200) {
+      throw new Error("Error creating rating status 200");
     }
-  );
-
-  const data = await response.json();
-  return data.data.createRating.data;
+  } catch (error) {
+    console.error("Error creating rating:", error);
+    throw new Error("Failed to create rating. Please try again later.");
+  }
 };
 
 const updateRating = async ({
