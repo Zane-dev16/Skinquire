@@ -1,6 +1,7 @@
 // pages/index.js
+"use client";
+
 import styles from "./HighlightsSection.module.css";
-import ProductCategoryCard from "./ProductCategoryCard";
 import { motion, easeIn, Variants } from "framer-motion";
 import Link from "next/link";
 

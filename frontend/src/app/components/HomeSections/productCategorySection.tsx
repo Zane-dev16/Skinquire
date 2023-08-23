@@ -1,5 +1,5 @@
-// pages/index.js
-import Head from "next/head";
+"use client";
+
 import styles from "./ProductCategorySection.module.css";
 import ProductCategoryCard from "./ProductCategoryCard";
 import { motion } from "framer-motion";

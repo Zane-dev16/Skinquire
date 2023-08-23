@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./HeroSection.module.css";
 import { useScroll, motion, useTransform, Variants } from "framer-motion";
 import Image from "next/image";

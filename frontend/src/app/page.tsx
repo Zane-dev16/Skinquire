@@ -1,22 +1,20 @@
 // pages/index.js
-"use client";
-import Head from "next/head";
+import { Metadata } from "next";
 import styles from "./page.module.css";
 import ProductCategorySection from "./components/HomeSections/productCategorySection";
 import HighlightsSection from "./components/HomeSections/HighlightsSection";
 import HeroSection from "./components/HomeSections/HeroSection";
-
 import BrandMarquee from "./components/HomeSections/BrandMarquee";
 
 const Home = () => {
   return (
-    <main>
+    <div>
       <HeroSection></HeroSection>
       <BrandMarquee></BrandMarquee>
       <ProductCategorySection></ProductCategorySection>
       <section className={styles.issue}></section>
       <HighlightsSection></HighlightsSection>
-    </main>
+    </div>
   );
 };
 export default Home;
