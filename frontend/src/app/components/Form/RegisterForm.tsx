@@ -17,22 +17,12 @@ interface FormData {
 }
 
 interface FormProps {
-  title: string;
-  buttonText: string;
   callback: (data: FormData) => void;
   closeForm: () => void;
   error: string | null;
-  isLoginForm: boolean;
 }
 
-const RegisterForm: React.FC<FormProps> = ({
-  title,
-  buttonText,
-  callback,
-  closeForm,
-  error,
-  isLoginForm,
-}) => {
+const RegisterForm: React.FC<FormProps> = ({ callback, closeForm, error }) => {
   const {
     register,
     formState: { errors },
@@ -44,21 +34,20 @@ const RegisterForm: React.FC<FormProps> = ({
 
   return (
     <section>
-      <div className={styles.errorContainer}>
-        {error && (
-          <p className={styles.error} role="alert">
-            {error}
-          </p>
-        )}
-      </div>
-
       <div className={styles.formContainer}>
+        {error && (
+          <div className={styles.errorContainer}>
+            <p className={styles.error} role="alert">
+              {error}
+            </p>
+          </div>
+        )}
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           className={styles.form}
         >
-          <h3 className={styles.title}>{title}</h3>
+          <h3 className={styles.title}>SIGN UP</h3>
           <motion.input
             whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
             {...register("username", {
@@ -84,7 +73,7 @@ const RegisterForm: React.FC<FormProps> = ({
             className={styles.input}
           />
           {errors.username && (
-            <p className="error">{errors.username.message}</p>
+            <p className={styles.error}>{errors.username.message}</p>
           )}
           <motion.input
             whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
@@ -135,7 +124,7 @@ const RegisterForm: React.FC<FormProps> = ({
             type="submit"
             className={styles.button}
           >
-            {buttonText}
+            Sign Up
           </motion.button>
         </form>
         <a

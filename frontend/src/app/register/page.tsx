@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 
-import { userExists } from "@/utils/usersAndPermissionsUtils";
+import { SetStateAction } from "react";
+import { userExists, getPasswordError } from "@/utils/usersAndPermissionsUtils";
 import RegisterForm from "../components/Form/RegisterForm";
 import styles from "./page.module.css";
+import { Passero_One } from "next/font/google";
 
 interface ResponseData {
   register: {
@@ -29,34 +31,19 @@ export default function RegisterRoute() {
   // const { setUser } = useAppContext();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null); // Add error state
-  const validatePassword = (password: string, confirmPassword: string) => {
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters long");
-      return false;
-    } else if (
-      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-        password
-      )
-    ) {
-      setError(
-        "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
-      );
-      return false;
-    } else if (password != confirmPassword) {
-      setError("Passwords do not match");
-    }
-    return true;
-  };
 
   const registerUser = async (data: FormData) => {
     const { username, email, password, confirmPassword } = data;
 
     const userDoesExist = await userExists(email);
+    const passwordError = getPasswordError(password, confirmPassword);
     if (userDoesExist) {
       setError(
         "Email already registered. Please use a different email or log in"
       );
-    } else if (validatePassword(password, confirmPassword)) {
+    } else if (passwordError) {
+      setError(passwordError);
+    } else {
       const query = `mutation {
       register(
         input: { username: "${username}", email: "${email}", password: "${password}" }
@@ -109,12 +96,9 @@ export default function RegisterRoute() {
       <motion.div layout className={styles.signUpFormContainer}>
         <motion.div>
           <RegisterForm
-            title="Sign Up"
-            buttonText="Sign Up"
             callback={registerUser}
             closeForm={() => {}}
             error={error}
-            isLoginForm={false}
           />
         </motion.div>
       </motion.div>
