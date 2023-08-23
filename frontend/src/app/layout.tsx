@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Irell Zane" }, { name: "Márcia Dias" }],
   creator: "Irell Zane & Márcia Dias",
-  metadataBase: new URL("https://acme.com"),
+  metadataBase: new URL("https://www.skinquire.net"),
 
   openGraph: {
     title:
       "Skinquire - Skin Care Product Ratings and Reviews, Find the Best Skin Care Products",
     description:
       "The Platform for Skin Care Product Ratings and Reviews. Find the best Skin Care Products with Community Driven Ratings and Reviews, Guiding You to Discover and Elevate Your Skin Care Routine",
-    url: "https://skinquire.net",
+    url: "https://www.skinquire.net",
     siteName: "Skinquire",
     images: [
       {
@@ -43,19 +43,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-
     title:
       "Skinquire - Skin Care Product Ratings and Reviews, Find the Best Skin Care Products",
     description:
       "The Platform for Skin Care Product Ratings and Reviews. Find the best Skin Care Products with Community Driven Ratings and Reviews, Guiding You to Discover and Elevate Your Skin Care Routine",
-    images: [
-      {
-        url: "https://skinquire-bucket.s3.amazonaws.com/Skinquire_Logo_8a2b219732.png",
-        width: 800,
-        height: 600,
-        alt: "Skinquire Logo",
-      },
-    ],
+    images: {
+      url: "https://skinquire-bucket.s3.amazonaws.com/Skinquire_Logo_8a2b219732.png",
+      width: 800,
+      height: 600,
+      alt: "Skinquire Logo",
+    },
   },
 };
 
