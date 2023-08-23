@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Irell Zane" }, { name: "Márcia Dias" }],
   creator: "Irell Zane & Márcia Dias",
   metadataBase: new URL("https://www.skinquire.net"),
+  other: { "ir-site-verification-token": "-442249946" },
 
   openGraph: {
     title:
