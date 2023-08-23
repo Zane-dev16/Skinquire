@@ -17,8 +17,6 @@ const createRating = async ({
   user: number;
   rating: number;
 }) => {
-  console.log(user);
-  console.log(rating);
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
