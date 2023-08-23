@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, use, useState } from "react";
 import styles from "./Form.module.css"; // Import the CSS module
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -31,6 +31,7 @@ const Form: React.FC<FormProps> = ({
   error,
   isLoginForm,
 }) => {
+  const [showPassword, setShowConfirmPassword] = useState<boolean>(false);
   const {
     register,
     formState: { errors },
@@ -38,6 +39,10 @@ const Form: React.FC<FormProps> = ({
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
     callback(data);
+  };
+
+  const togglePass = () => {
+    setShowConfirmPassword(!showPassword);
   };
 
   return (
@@ -77,15 +82,34 @@ const Form: React.FC<FormProps> = ({
             placeholder="EMAIL"
             className={styles.input}
           />
-          <motion.input
-            whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
-            {...register("password")}
-            id="password"
-            type="password"
-            name="password"
-            placeholder="PASSWORD"
-            className={styles.input}
-          />
+          <div className={styles.inputContainer}>
+            <motion.input
+              whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
+              {...register("password")}
+              id="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="PASSWORD"
+              className={styles.input}
+            />
+            <div className={styles.eyeIcon} onClick={togglePass}>
+              {showPassword ? (
+                <Image
+                  src="/openEye.svg"
+                  alt="Open Eye Icon"
+                  width={30}
+                  height={30}
+                />
+              ) : (
+                <Image
+                  src="/closedEye.svg"
+                  alt="Open Eye Icon"
+                  width={30}
+                  height={30}
+                />
+              )}
+            </div>
+          </div>
           <motion.button
             whileHover={{
               scale: 1.05,

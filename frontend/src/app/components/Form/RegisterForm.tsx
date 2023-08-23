@@ -132,34 +132,15 @@ const RegisterForm: React.FC<FormProps> = ({ callback, closeForm, error }) => {
               )}
             </div>
           </div>
-          <div className={styles.inputContainer}>
-            <motion.input
-              whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
-              {...register("confirmPassword")}
-              id="confirmPassword"
-              type={showConfirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              placeholder="CONFIRM PASSWORD"
-              className={styles.input}
-            />
-            <div className={styles.eyeIcon} onClick={toggleConfirmPass}>
-              {showConfirmPassword ? (
-                <Image
-                  src="/openEye.svg"
-                  alt="Open Eye Icon"
-                  width={30}
-                  height={30}
-                />
-              ) : (
-                <Image
-                  src="/closedEye.svg"
-                  alt="Open Eye Icon"
-                  width={30}
-                  height={30}
-                />
-              )}
-            </div>
-          </div>
+          <motion.input
+            whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
+            {...register("confirmPassword")}
+            id="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="CONFIRM PASSWORD"
+            className={styles.input}
+          />
           <motion.button
             whileHover={{
               scale: 1.05,
