@@ -45,10 +45,11 @@ const createRating = async ({
       }
     );
     const data = await response.json();
-    return data.data.createRating.data;
     if (response.status !== 200) {
+      console.log(data);
       throw new Error("Error creating rating status 200");
     }
+    return data.data.createRating.data;
   } catch (error) {
     console.error("Error creating rating:", error);
     throw new Error("Failed to create rating. Please try again later.");
