@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 
 import { userExists } from "@/utils/usersAndPermissionsUtils";
-import Form from "../components/Form/Form";
+import RegisterForm from "../components/Form/RegisterForm";
 import styles from "./page.module.css";
 
 interface ResponseData {
@@ -20,14 +20,16 @@ interface ResponseData {
 }
 
 interface FormData {
+  username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 export default function RegisterRoute() {
   // const { setUser } = useAppContext();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null); // Add error state
-  const validatePassword = (password: string) => {
+  const validatePassword = (password: string, confirmPassword: string) => {
     if (password.length < 8) {
       setError("Password must be at least 8 characters long");
       return false;
@@ -40,22 +42,24 @@ export default function RegisterRoute() {
         "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
       );
       return false;
+    } else if (password != confirmPassword) {
+      setError("Passwords do not match");
     }
     return true;
   };
 
   const registerUser = async (data: FormData) => {
-    const { email, password } = data;
+    const { username, email, password, confirmPassword } = data;
 
     const userDoesExist = await userExists(email);
     if (userDoesExist) {
       setError(
         "Email already registered. Please use a different email or log in"
       );
-    } else if (validatePassword(password)) {
+    } else if (validatePassword(password, confirmPassword)) {
       const query = `mutation {
       register(
-        input: { username: "${email}", email: "${email}", password: "${password}" }
+        input: { username: "${username}", email: "${email}", password: "${password}" }
       ) {
         jwt
         user {
@@ -104,7 +108,7 @@ export default function RegisterRoute() {
     <main className={styles.signUpPage}>
       <motion.div layout className={styles.signUpFormContainer}>
         <motion.div>
-          <Form
+          <RegisterForm
             title="Sign Up"
             buttonText="Sign Up"
             callback={registerUser}

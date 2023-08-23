@@ -8,10 +8,9 @@
 }
 
 .signUpFormContainer {
-  width: 480px;
+  width: 550px;
   padding: 0 0 30px 0 ;
     background-color: #D2BAA9;
-  border-radius: 40px;
 }
 
 /* Target the <a> tag and override default link styles */
