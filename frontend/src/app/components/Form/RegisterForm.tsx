@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Form.module.css"; // Import the CSS module
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -23,6 +23,9 @@ interface FormProps {
 }
 
 const RegisterForm: React.FC<FormProps> = ({ callback, closeForm, error }) => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const {
     register,
     formState: { errors },
@@ -30,6 +33,12 @@ const RegisterForm: React.FC<FormProps> = ({ callback, closeForm, error }) => {
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
     callback(data);
+  };
+  const togglePass = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPass = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -95,25 +104,62 @@ const RegisterForm: React.FC<FormProps> = ({ callback, closeForm, error }) => {
               Please enter a valid email
             </p>
           )}
-
-          <motion.input
-            whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
-            {...register("password")}
-            id="password"
-            type="password"
-            name="password"
-            placeholder="PASSWORD"
-            className={styles.input}
-          />
-          <motion.input
-            whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
-            {...register("confirmPassword")}
-            id="confirmPassword"
-            type="password"
-            name="confirmPassword"
-            placeholder="CONFIRM PASSWORD"
-            className={styles.input}
-          />
+          <div className={styles.inputContainer}>
+            <motion.input
+              whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
+              {...register("password")}
+              id="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="PASSWORD"
+              className={styles.input}
+            />
+            <div className={styles.eyeIcon} onClick={togglePass}>
+              {showPassword ? (
+                <Image
+                  src="/openEye.svg"
+                  alt="Open Eye Icon"
+                  width={30}
+                  height={30}
+                />
+              ) : (
+                <Image
+                  src="/closedEye.svg"
+                  alt="Open Eye Icon"
+                  width={30}
+                  height={30}
+                />
+              )}
+            </div>
+          </div>
+          <div className={styles.inputContainer}>
+            <motion.input
+              whileFocus={{ backgroundColor: "#50443A", color: "#fffbed" }}
+              {...register("confirmPassword")}
+              id="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="CONFIRM PASSWORD"
+              className={styles.input}
+            />
+            <div className={styles.eyeIcon} onClick={toggleConfirmPass}>
+              {showConfirmPassword ? (
+                <Image
+                  src="/openEye.svg"
+                  alt="Open Eye Icon"
+                  width={30}
+                  height={30}
+                />
+              ) : (
+                <Image
+                  src="/closedEye.svg"
+                  alt="Open Eye Icon"
+                  width={30}
+                  height={30}
+                />
+              )}
+            </div>
+          </div>
           <motion.button
             whileHover={{
               scale: 1.05,
