@@ -8,6 +8,11 @@ import { userExists, getPasswordError } from "@/utils/usersAndPermissionsUtils";
 import RegisterForm from "../components/Form/RegisterForm";
 import styles from "./page.module.css";
 import { asyncFetcher } from "@/utils/graphql";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign Up for Your Skinquire Account - Skinquire",
+};
 
 interface ResponseData {
   register: {

@@ -11,18 +11,6 @@ export const metadata: Metadata = {
     "Skinquire - Skin Care Product Ratings and Reviews, Find the Best Skin Care Products",
   description:
     "The Platform for Skin Care Product Ratings and Reviews. Find the best Skin Care Products with Community Driven Ratings and Reviews, Guiding You to Discover and Elevate Your Skin Care Routine",
-  keywords: [
-    "skin care",
-    "skincare products",
-    "product ratings",
-    "reviews",
-    "skin issues",
-    "community reviews",
-  ],
-  authors: [{ name: "Irell Zane" }, { name: "Márcia Dias" }],
-  creator: "Irell Zane & Márcia Dias",
-  other: { "ir-site-verification-token": "-442249946" },
-
   openGraph: {
     title:
       "Skinquire - Skin Care Product Ratings and Reviews, Find the Best Skin Care Products",

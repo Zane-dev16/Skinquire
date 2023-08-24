@@ -1,6 +1,13 @@
 import React from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Skinquire - Skinquire",
+  description:
+    "At Skinquire, we believe in the power of collective wisdom. Explore our journey and mission to provide you with the most reliable skincare advice, fueled by skin care community.",
+};
 
 const About = () => {
   return (
