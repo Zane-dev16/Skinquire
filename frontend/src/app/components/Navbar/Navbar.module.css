@@ -1,9 +1,30 @@
+@font-face {
+    font-family: "Cormorant"; /* Provide a name for the font */
+    src: url("/fonts/Cormorant-Light.ttf");
+}
+
+.pageTitle {
+    background-color: #9a6345;
+    font-family: "Cormorant"; /* Provide a name for the font */
+    color: #fffbed;
+    text-align: center;
+    margin: 0;
+    padding: 4px 0 6px 0;
+}
+
 .navbar {
-    position: fixed;
+    position: sticky;
+    background-color: #fffbed;
+    border-bottom: 3px solid black;
+    padding: 15px 20px 15px 20px;
+    top: 0px;
+    z-index: 999;
+}
+
+.navItems {
     display: flex;
-    top: 0;
-    width: 100%;
     justify-content: space-between;
     align-items: center;
-    z-index: 999;
+
+    position: relative;
 }

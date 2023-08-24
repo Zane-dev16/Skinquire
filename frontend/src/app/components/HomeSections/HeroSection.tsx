@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const HeroSection = () => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 800], [0, 400]);
+  const y = useTransform(scrollY, [50, 800], [0, 400]);
   const CTABackground = {
     initial: {
       rotate: "20deg",

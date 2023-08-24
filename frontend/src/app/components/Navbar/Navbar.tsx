@@ -5,10 +5,17 @@ import ProfileMenu from "./ProfileMenu";
 
 export default async function Navbar() {
   return (
-    <div className={styles.navbar}>
-      <BurgerMenu></BurgerMenu>
-      <SearchBar></SearchBar>
-      <ProfileMenu></ProfileMenu>
-    </div>
+    <>
+      <div className={styles.titleBar}>
+        <h1 className={styles.pageTitle}>SKINQUIRE</h1>
+      </div>
+      <div className={styles.navbar}>
+        <div className={styles.navItems}>
+          <BurgerMenu></BurgerMenu>
+          <SearchBar></SearchBar>
+          <ProfileMenu></ProfileMenu>
+        </div>
+      </div>
+    </>
   );
 }

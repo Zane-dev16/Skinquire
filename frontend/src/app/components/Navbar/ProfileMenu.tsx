@@ -47,7 +47,8 @@ const AuthModal: FC<AuthModalProps> = ({ handleClose }) => {
     router.push("/");
   }
   return (
-    <div onClick={handleClose} className={styles.backdrop}>
+    <>
+      <div onClick={handleClose} className={styles.backdrop}></div>
       <div className={styles.profileMenuContainer}>
         <motion.div
           initial={{ y: "-100%" }}
@@ -79,6 +80,6 @@ const AuthModal: FC<AuthModalProps> = ({ handleClose }) => {
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </>
   );
 };
