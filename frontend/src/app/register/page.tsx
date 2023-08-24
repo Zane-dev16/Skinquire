@@ -8,7 +8,6 @@ import { userExists, getPasswordError } from "@/utils/usersAndPermissionsUtils";
 import RegisterForm from "../components/Form/RegisterForm";
 import styles from "./page.module.css";
 import { asyncFetcher } from "@/utils/graphql";
-import { Metadata } from "next";
 interface ResponseData {
   register: {
     jwt: string;
