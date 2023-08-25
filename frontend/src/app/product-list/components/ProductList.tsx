@@ -7,7 +7,6 @@ import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 import fetcher from "@/utils/graphql";
 import { getSelectedItems } from "@/utils/filterUtils";
-import { Metadata } from "next";
 
 const ProductList = () => {
   const searchParams = useSearchParams();

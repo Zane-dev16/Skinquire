@@ -23,8 +23,8 @@ export default function ProfileMenu() {
         onClick={toggleMenu}
         src="/profile-user.svg"
         alt="profile-avatar"
-        width={30}
-        height={30}
+        width={33}
+        height={33}
       ></Image>
       <AnimatePresence>
         {isOpen && <AuthModal handleClose={toggleMenu}></AuthModal>}

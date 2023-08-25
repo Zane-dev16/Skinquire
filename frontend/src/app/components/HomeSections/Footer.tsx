@@ -4,6 +4,8 @@ const Footer = () => {
     <div>
       <h1>FOOTER</h1>
       <Link href="/terms-and-conditions">TERMS AND CONDITIONS</Link>
+      <br />
+      <Link href="/privacy-policy">PRIVACY POLICY</Link>
     </div>
   );
 };

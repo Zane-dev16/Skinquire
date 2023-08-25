@@ -1,7 +1,7 @@
 /* HamburgerMenu.module.css */
 
 .hamburgerMenu {
-    left: 20px;
+  padding-left: 20px;
     z-index: 100;
   }
   
@@ -16,7 +16,7 @@
   }
   
   .hamburgerIcon span {
-    display: block;
+  display: block;
     height: 3px;
     background-color: #000;
     transition: opacity 0.2s ease, transform 0.3s ease;

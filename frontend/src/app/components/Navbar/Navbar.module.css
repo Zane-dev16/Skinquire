@@ -16,7 +16,6 @@
     position: sticky;
     background-color: #fffbed;
     border-bottom: 3px solid black;
-    padding: 15px 20px 15px 20px;
     top: 0px;
     z-index: 999;
 }
@@ -27,4 +26,10 @@
     align-items: center;
 
     position: relative;
+}
+
+.navGroup {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }

@@ -2,6 +2,7 @@ import styles from "./Navbar.module.css";
 import BurgerMenu from "./BurgerMenu";
 import SearchBar from "../SearchBar/SearchBar";
 import ProfileMenu from "./ProfileMenu";
+import Logo from "./Logo";
 
 export default async function Navbar() {
   return (
@@ -13,7 +14,10 @@ export default async function Navbar() {
         <div className={styles.navItems}>
           <BurgerMenu></BurgerMenu>
           <SearchBar></SearchBar>
-          <ProfileMenu></ProfileMenu>
+          <div className={styles.navGroup}>
+            <ProfileMenu></ProfileMenu>
+            <Logo></Logo>
+          </div>
         </div>
       </div>
     </>
