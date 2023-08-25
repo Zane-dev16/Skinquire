@@ -1,4 +1,4 @@
-import styles from "../about/page.module.css";
+import styles from "../info.module.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div className={styles.aboutContainer}>
-      <h1 className={styles.aboutHeading}>Terms and Conditions</h1>
-      <p className={styles.aboutText}>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Terms and Conditions</h1>
+      <p className={styles.text}>
         Welcome to Skinquire&apos;s Terms and Conditions. These terms outline
         the rules, guidelines, and responsibilities that govern your use of our
         platform. By accessing and using skinquire.net, you agree to abide by
@@ -19,9 +19,9 @@ const page = () => {
         engaging community for skincare enthusiasts. Please read these terms
         carefully before using our website.
       </p>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>Copyright Notice</h2>
-        <p className={styles.aboutText}>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>Copyright Notice</h2>
+        <p className={styles.text}>
           All content, including text, graphics, images, and other materials on
           skinquire.net, is protected by copyright laws. Users are prohibited
           from reproducing, distributing, or using any content from the website
@@ -35,12 +35,12 @@ const page = () => {
           </a>
         </p>
       </div>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>
           Website Functionality and User Interaction
         </h2>
         <h3>Purpose of the Website</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           Welcome to skinquire, a dynamic platform designed to empower skincare
           enthusiasts with a centralized space for sharing, discovering, and
           learning about skincare products. Our primary goal is to foster a
@@ -49,7 +49,7 @@ const page = () => {
           when incorporating skincare products into their routines.
         </p>
         <h3>Product Ratings and Reviews</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           At skinquire.net, we emphasize user engagement through a
           straightforward and interactive system. On individual product pages,
           users are encouraged to evaluate skincare products using a scale
@@ -64,17 +64,17 @@ const page = () => {
           discourse and community.
         </p>
         <h3>User Account Creation</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           Creating an account on skinquire.net is easy and inclusive. Click on
           the profile icon in the navigation bar to access a comprehensive
           profile menu. Existing users can conveniently log in using their
           credentials. Newcomers can navigate to the registration page through
           the prompts within the profile menu.
         </p>
-        <p className={styles.aboutText}></p>
+        <p className={styles.text}></p>
 
         <h3>Engage and Contribute</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           Upon logging in, users can actively rate and review products,
           fostering a sense of ownership within the skincare community. For
           those who prefer not to contribute content, public users can still
@@ -82,18 +82,16 @@ const page = () => {
           diverse preferences.
         </p>
       </div>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>
-          User Conduct and Responsibility
-        </h2>
-        <p className={styles.aboutText}>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>User Conduct and Responsibility</h2>
+        <p className={styles.text}>
           At skinquire.net, we believe in fostering a respectful, informative,
           and collaborative environment for all users. By accessing and using
           our platform, you agree to adhere to the following user conduct and
           responsibilities:
         </p>
         <h3>Honest and Respectful Engagement</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           When participating in discussions, providing ratings, and submitting
           reviews, users are expected to communicate honestly and respectfully.
           Users must comply with all applicable laws, regulations, and these
@@ -107,7 +105,7 @@ const page = () => {
           guidelines may be subject to removal.
         </p>
         <h3>Authentic User Input</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           All product ratings are based on the genuine experiences and opinions
           of users. Ratings should reflect individual perceptions and outcomes
           without influence from external entities or sponsoring companies. When
@@ -115,11 +113,11 @@ const page = () => {
           personal experiences
         </p>
       </div>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>
           Ownership of User-Generated Content
         </h2>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           Users retain ownership of the content (reviews, ratings) they submit
           to skinquire.net. However, by submitting content, users grant the
           website a non-exclusive, perpetual, and irrevocable license to use,
@@ -127,29 +125,29 @@ const page = () => {
           website&apos;s services.
         </p>
       </div>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>Data Handling and Privacy</h2>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>Data Handling and Privacy</h2>
 
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           User data, including usernames and reviews, is collected and stored in
           accordance with our Privacy Policy. This data is used to provide and
           improve the website&apos;s services and to support the skincare
           community.
         </p>
         <h3>Third-Party Affiliate Programs</h3>
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           The website participates in affiliate programs, and products may be
           marketed through affiliate links. Users should refer to the Privacy
           Policy for information on how user data may be shared with affiliate
           partners.
         </p>
       </div>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>
           Content Moderation and Account Termination
         </h2>
 
-        <p className={styles.aboutText}>
+        <p className={styles.text}>
           All content submitted by users is subject to moderation. The website
           reserves the right to remove or modify any content that violates the
           content guidelines, terms of service, or community standards. The
@@ -158,11 +156,9 @@ const page = () => {
           reason deemed necessary by the website administrators.
         </p>
       </div>
-      <div className={styles.aboutSection}>
-        <h2 className={styles.aboutSubheading}>
-          Changes to Terms and Conditions
-        </h2>
-        <p className={styles.aboutText}>
+      <div className={styles.sections}>
+        <h2 className={styles.subheading}>Changes to Terms and Conditions</h2>
+        <p className={styles.text}>
           As skinquire.net continues to grow and evolve, the terms and
           conditions may be updated from time to time. Users are encouraged to
           regularly review the terms and conditions to stay informed about any

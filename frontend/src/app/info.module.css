@@ -1,42 +1,42 @@
-/* About.module.css */
+/* common.module.css */
 
-.aboutContainer {
+.container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.aboutHeading {
+.heading {
     font-size: 2rem;
     margin-bottom: 20px;
 }
 
-.aboutText {
+.text {
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
-.aboutSection {
+.section {
     margin-bottom: 40px;
 }
 
-.aboutSubheading {
+.subheading {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
-.aboutList {
+.list {
     list-style: disc;
     margin-left: 20px;
 }
 
-.aboutLink {
+.link {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
 
-.aboutLink:hover {
+.link:hover {
     color: #0056b3;
 }

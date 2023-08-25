@@ -52,7 +52,6 @@ const Home = () => {
       <ProductCategorySection></ProductCategorySection>
       <section className={styles.issue}></section>
       <HighlightsSection></HighlightsSection>
-      <Footer />
     </div>
   );
 };

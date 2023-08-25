@@ -2,7 +2,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
-import Head from "next/head";
+import Footer from "./components/HomeSections/Footer";
 
 export const metadata: Metadata = {
   keywords: [
@@ -37,6 +37,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Navbar></Navbar>
           {children}
+          <Footer></Footer>
         </body>
       </html>
     </>
