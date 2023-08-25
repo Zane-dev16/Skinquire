@@ -9,13 +9,6 @@ import fetcher from "@/utils/graphql";
 import { getSelectedItems } from "@/utils/filterUtils";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title:
-    "Explore Top-Rated Skincare Products - Search, Rate and Review | Skinquire",
-  description:
-    "Discover a wide range of skincare products on Skinquire's product list. Our platform offers advanced search filters, sorting options, and ratings analysis, empowering you to make informed choices.",
-};
-
 const ProductList = () => {
   const searchParams = useSearchParams();
   const title = searchParams.get("title");
