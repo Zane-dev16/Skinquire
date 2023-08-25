@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms and Conditions - Skinquire",
   description:
-    "Skinquire's Terms and Conditions. Understand the guidelines that shape our platform, promoting a respectful and collaborative space for sharing insights and experiences related to skincare products.",
+    "Skinquire&apos;s Terms and Conditions. Understand the guidelines that shape our platform, promoting a respectful and collaborative space for sharing insights and experiences related to skincare products.",
 };
 
 const page = () => {
@@ -12,8 +12,8 @@ const page = () => {
     <div className={styles.aboutContainer}>
       <h1 className={styles.aboutHeading}>Terms and Conditions</h1>
       <p className={styles.aboutText}>
-        Welcome to Skinquire's Terms and Conditions. These terms outline the
-        rules, guidelines, and responsibilities that govern your use of our
+        Welcome to Skinquire&apos;s Terms and Conditions. These terms outline
+        the rules, guidelines, and responsibilities that govern your use of our
         platform. By accessing and using skinquire.net, you agree to abide by
         these terms. They are designed to promote a safe, respectful, and
         engaging community for skincare enthusiasts. Please read these terms
@@ -103,7 +103,7 @@ const page = () => {
           language. Use respectful and inclusive language.Content should not be
           promotional or commercial in nature. Avoid overt self-promotion,
           advertising, or endorsements.Contributions must align with
-          skinquire.net's community guidelines. Content that violates these
+          skinquire.net&apos;s community guidelines. Content that violates these
           guidelines may be subject to removal.
         </p>
         <h3>Authentic User Input</h3>
@@ -123,8 +123,8 @@ const page = () => {
           Users retain ownership of the content (reviews, ratings) they submit
           to skinquire.net. However, by submitting content, users grant the
           website a non-exclusive, perpetual, and irrevocable license to use,
-          display, and distribute the content in connection with the website's
-          services.
+          display, and distribute the content in connection with the
+          website&apos;s services.
         </p>
       </div>
       <div className={styles.aboutSection}>
@@ -133,7 +133,8 @@ const page = () => {
         <p className={styles.aboutText}>
           User data, including usernames and reviews, is collected and stored in
           accordance with our Privacy Policy. This data is used to provide and
-          improve the website's services and to support the skincare community.
+          improve the website&apos;s services and to support the skincare
+          community.
         </p>
         <h3>Third-Party Affiliate Programs</h3>
         <p className={styles.aboutText}>
