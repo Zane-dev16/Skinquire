@@ -13,7 +13,7 @@ export default async function Navbar() {
       <div className={styles.navbar}>
         <BurgerMenu></BurgerMenu>
         <SearchBar></SearchBar>
-        <div className={styles.navItems}>
+        <div className={styles.navGroup}>
           <ProfileMenu></ProfileMenu>
           <Logo></Logo>
         </div>

@@ -23,14 +23,8 @@
     z-index: 999;
 }
 
-.navItems {
-    display: flex;
-    align-items: center;
-
-    position: relative;
-}
-
 .navGroup {
+    justify-self: end;
     display: flex;
     align-items: center;
     gap: 18px;
