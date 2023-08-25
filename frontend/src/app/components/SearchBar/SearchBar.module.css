@@ -1,5 +1,10 @@
 /* SearchBar.module.css */
 
+@font-face {
+    font-family: "Cormorant"; 
+    src: url("/fonts/Cormorant-Light.ttf");
+  }
+
 .searchBarContainer {
     position: relative;
     justify-self: center;
@@ -16,6 +21,7 @@
     background-color: #F5EFDD;
     transition: border-color 0.3s ease-in-out;
     text-align: center;
+    font-family: "Cormorant"; 
   }
 
   .searchInput::placeholder {

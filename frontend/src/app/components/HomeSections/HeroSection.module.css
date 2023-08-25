@@ -9,7 +9,8 @@
   .heroText {
     width: 54vw;
     padding: 3vw 4vw 0 8vw;
-    border-right: 1.5px black solid;
+    border-right: 1.5px #BF9778 solid;
+
   }
 
   .CTAwrapper {
@@ -50,7 +51,7 @@
     height: 100%;
     width: 35vw;
     overflow: hidden;
-    border-left: 1.5px black solid;
+    border-left: 1.5px #BF9778 solid;
   }
 
 .heroTitle {

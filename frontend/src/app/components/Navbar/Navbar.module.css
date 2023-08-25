@@ -18,7 +18,7 @@
     align-items: center; /* Vertically center the items */
     position: sticky;
     background-color: #fffbed;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #BF9778;
     top: 0px;
     z-index: 999;
 }

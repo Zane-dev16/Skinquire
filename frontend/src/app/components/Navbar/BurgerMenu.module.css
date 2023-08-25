@@ -18,7 +18,7 @@
   .hamburgerIcon span {
   display: block;
     height: 3px;
-    background-color: #000;
+    background-color: #9a6345;
     transition: opacity 0.2s ease, transform 0.3s ease;
     border-radius: 3px;
   }
