@@ -13,6 +13,9 @@
 }
 
 .navbar {
+    display: grid;
+    grid-template-columns: 2fr 5fr 2fr; /* Left - Middle - Right */
+    align-items: center; /* Vertically center the items */
     position: sticky;
     background-color: #fffbed;
     border-bottom: 3px solid black;
@@ -22,7 +25,6 @@
 
 .navItems {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
     position: relative;

@@ -11,13 +11,11 @@ export default async function Navbar() {
         <h1 className={styles.pageTitle}>SKINQUIRE</h1>
       </div>
       <div className={styles.navbar}>
+        <BurgerMenu></BurgerMenu>
+        <SearchBar></SearchBar>
         <div className={styles.navItems}>
-          <BurgerMenu></BurgerMenu>
-          <SearchBar></SearchBar>
-          <div className={styles.navGroup}>
-            <ProfileMenu></ProfileMenu>
-            <Logo></Logo>
-          </div>
+          <ProfileMenu></ProfileMenu>
+          <Logo></Logo>
         </div>
       </div>
     </>

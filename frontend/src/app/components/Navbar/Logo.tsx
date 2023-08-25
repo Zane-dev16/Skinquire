@@ -9,8 +9,8 @@ const Logo = () => {
         <Image
           src="/skinquireLogo.png"
           alt="skinquire logo"
-          width={48}
-          height={36}
+          width={64}
+          height={50}
         ></Image>
       </div>
     </Link>

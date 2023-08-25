@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import useSWR from "swr";
 import fetcher from "@/utils/graphql";
+import styles from "./SearchBar.module.css"; // Update the path to your CSS module
 import { createSearchQueryWithTitleUrl } from "@/utils/filterUtils";
 
 interface Product {
@@ -47,21 +48,7 @@ export default function SearchBar() {
   `,
     fetcher
   );
-  /* 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.repeat) return;
-    if (e.key === "Enter") {
-      router.push(
-        createSearchQueryWithTitleUrl(
-          "/product-list",
-          params,
-          "query",
-          query,
-          `Search Results for: ${query}`
-        )
-      );
-    }
-  }; */
+
   const onSubmit: SubmitHandler<FormData> = (data) => {
     router.push(
       createSearchQueryWithTitleUrl(
@@ -79,27 +66,28 @@ export default function SearchBar() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.searchBarContainer}>
+      <form className={styles.searchForm} onSubmit={handleSubmit(onSubmit)}>
         <input
+          className={styles.searchInput}
           {...register("query")}
-          type="search"
+          type="text"
           placeholder="Search for products..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setInputFocused(true)}
           onBlur={() => setInputFocused(false)}
-          // onKeyDown={(e) => handleKeyDown(e)}
         />
       </form>
 
       {query && data && inputFocused && (
-        <div>
+        <div className={styles.resultsContainer}>
           {data.products.data.map((product: Product) => (
-            <div key={product.id}>
+            <div key={product.id} className={styles.resultItem}>
               <Link
                 onClick={() => setQuery("")}
                 href={`/product-list/${product.id}`}
+                className={styles.resultLink}
               >
                 {product.attributes.name}
               </Link>

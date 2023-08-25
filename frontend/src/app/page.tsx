@@ -5,7 +5,6 @@ import ProductCategorySection from "./components/HomeSections/productCategorySec
 import HighlightsSection from "./components/HomeSections/HighlightsSection";
 import HeroSection from "./components/HomeSections/HeroSection";
 import BrandMarquee from "./components/HomeSections/BrandMarquee";
-import Footer from "./components/HomeSections/Footer";
 
 export const metadata: Metadata = {
   title:
@@ -50,7 +49,6 @@ const Home = () => {
       <HeroSection></HeroSection>
       <BrandMarquee></BrandMarquee>
       <ProductCategorySection></ProductCategorySection>
-      <section className={styles.issue}></section>
       <HighlightsSection></HighlightsSection>
     </div>
   );
