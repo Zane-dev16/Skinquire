@@ -18,14 +18,19 @@ export default function ProfileMenu() {
   };
   return (
     <>
-      <Image
-        className={`${styles.profileAvatar} ${isOpen ? styles.open : ""}`}
-        onClick={toggleMenu}
-        src="/profile-user.svg"
-        alt="profile-avatar"
-        width={40}
-        height={40}
-      ></Image>
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", duration: 2, stiffness: 100 }}
+      >
+        <Image
+          onClick={toggleMenu}
+          src="/profile-user.svg"
+          alt="profile-avatar"
+          width={40}
+          height={40}
+        ></Image>
+      </motion.div>
+
       <AnimatePresence>
         {isOpen && <AuthModal handleClose={toggleMenu}></AuthModal>}
       </AnimatePresence>

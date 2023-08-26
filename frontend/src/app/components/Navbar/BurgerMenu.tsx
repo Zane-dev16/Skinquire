@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./BurgerMenu.module.css";
+import { motion } from "framer-motion";
 
 interface MenuLink {
   label: string;
@@ -27,6 +28,12 @@ const BurgerMenu = () => {
     { label: "Contact", href: "/contact" },
   ];
 
+  const burgerIconVariants = {
+    initial: { scale: 1 },
+    animate: { scale: 1 },
+    whileHover: { scale: 1.1 },
+  };
+
   return (
     <div className={styles.hamburgerMenu}>
       {isOpen && (
@@ -36,14 +43,26 @@ const BurgerMenu = () => {
           }`}
         ></div>
       )}
-      <div
+      <motion.div
+        initial="initial"
+        animate="animate"
+        whileHover="whileHover"
+        variants={burgerIconVariants}
+        transition={{ type: "spring", duration: 2, stiffness: 100 }}
         className={`${styles.hamburgerIcon} ${isOpen ? styles.open : ""}`}
         onClick={toggleMenu}
       >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        <motion.span
+          animate={isOpen ? { rotate: "-45deg", y: "13.5px" } : {}}
+          transition={{ duration: 0.1 }}
+        ></motion.span>
+
+        <motion.span animate={{ opacity: isOpen ? 0 : 1 }}></motion.span>
+        <motion.span
+          transition={{ duration: 0.1 }}
+          animate={isOpen ? { rotate: "45deg", y: "-13.5px" } : {}}
+        ></motion.span>
+      </motion.div>
       {isOpen && (
         <ul className={styles.menuLinks}>
           {menuLinks.map((link, index) => (
