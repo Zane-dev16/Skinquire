@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/HomeSections/Footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   keywords: [
@@ -35,14 +36,16 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body className={inter.className}>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-53MKF5GRFY"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-53MKF5GRFY');
-          </script>
+          <Script src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
+          <Script id="google-analytics">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'GA_MEASUREMENT_ID');
+        `}
+          </Script>
           <Navbar></Navbar>
           {children}
           <Footer></Footer>
