@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import useSWR from "swr";
 import fetcher from "@/utils/graphql";
 import styles from "./SearchBar.module.css"; // Update the path to your CSS module
 import { createSearchQueryWithTitleUrl } from "@/utils/filterUtils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 interface Product {
@@ -54,9 +54,7 @@ export default function SearchBar() {
   );
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(query);
-
-    if (query) {
+    if (isOpen && query) {
       router.push(
         createSearchQueryWithTitleUrl(
           "/product-list",
@@ -66,10 +64,14 @@ export default function SearchBar() {
           `Search Results for: ${query}`
         )
       );
+      setIsOpen(true);
     } else {
       setInputFocused(true);
-
+      setIsOpen(true);
       return;
+    }
+    if (inputRef.current && isOpen) {
+      inputRef.current.focus();
     }
   };
 
@@ -84,37 +86,48 @@ export default function SearchBar() {
       scale: isOpen ? 1.2 : 1.9,
     },
   };
-
+  useEffect(() => {
+    if (inputRef.current && isOpen) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
   if (error) {
     console.error("Error searching products:", error);
   }
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    // Check if the related target is the search button
+    setInputFocused(false);
+    if (
+      !event.relatedTarget ||
+      !event.relatedTarget.classList.contains(styles.searchButton)
+    ) {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <motion.div className={styles.searchBarContainer}>
       <form className={styles.searchForm} onSubmit={handleSubmit(onSubmit)}>
-        {isOpen && (
-          <motion.input
-            ref={inputRef}
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            transition={{ x: { duration: 1 } }}
-            className={styles.searchInput}
-            type="text"
-            placeholder="Search for products..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => setInputFocused(true)}
-            onBlur={() => setInputFocused(false)}
-          />
-        )}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.input
+              ref={inputRef}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ ease: "easeInOut" }}
+              className={styles.searchInput}
+              type="text"
+              placeholder="Search for products..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setInputFocused(true)}
+              onBlur={handleBlur}
+            />
+          )}
+        </AnimatePresence>
 
         <motion.button
-          onClick={() => {
-            if (inputRef.current) {
-              inputRef.current.focus();
-            }
-            setIsOpen(true);
-          }}
           initial="initial"
           animate={isOpen ? "open" : "initial"}
           whileHover="hover"
