@@ -6,6 +6,7 @@ import Footer from "./components/HomeSections/Footer";
 import Script from "next/script";
 
 export const metadata: Metadata = {
+  other: { "ir-site-verification-token": "-442249946" },
   keywords: [
     "skin care",
     "skincare products",
