@@ -96,6 +96,9 @@ export default async function Page({ params }: { params: { id: number } }) {
         src={`${mediaUrl}${imageUrl}`}
         alt={`${product.name} product image`}
       />
+      <img src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B018A0BO92&Format=_SL900_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=skinquire-20&language=en_US" />
+      <img src="https://ir-na.amazon-adsystem.com/e/ir?t=skinquire-20&language=en_US&l=li2&o=1&a=B018A0BO92" />
+      <img src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B018A0BO92&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=skinquire-20&language=en_US" />
       <p>{product.description}</p>
 
       {/* Product details */}

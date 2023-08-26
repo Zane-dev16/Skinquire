@@ -7,10 +7,10 @@ const Logo = () => {
     <Link href="/">
       <div className={styles.logoContainer}>
         <Image
-          src="/skinquireLogo.png"
+          src="/skinquireLogo1.png"
           alt="skinquire logo"
-          width={64}
-          height={50}
+          width={60}
+          height={45}
         ></Image>
       </div>
     </Link>
