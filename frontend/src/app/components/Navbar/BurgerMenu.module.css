@@ -9,8 +9,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 24px;
-    height: 20px;
+    width: 35px;
+    height: 30px;
     cursor: pointer;
     transition: transform 0.3s ease;
   }
@@ -28,7 +28,7 @@
   }
   
   .hamburgerIcon.open span:first-child {
-    transform: translateY(8.2px);
+    transform: translateY(13px);
   }
   
   .hamburgerIcon.open span:nth-child(2) {
@@ -36,7 +36,7 @@
   }
   
   .hamburgerIcon.open span:last-child {
-    transform: translateY(-8.2px) rotate(-90deg);
+    transform: translateY(-13px) rotate(-90deg);
   }
   
 .menuBackground {

@@ -1,8 +1,16 @@
 
+
+@font-face {
+  font-family: 'Tiro Gurmukhi'; /* Provide a name for the font */
+  src: url('/fonts/TiroGurmukhi.ttf')
+}
+
+
 .heroSection {
     width: 100vw;
     height: 43vw;
     display: flex;
+    overflow: hidden;
     justify-content: space-between;
   }
 
@@ -56,7 +64,7 @@
 
 .heroTitle {
   padding-top: 3vw;
-  font-family: 'Tiro Gurmukhi', serif;
+  font-family: 'Tiro Gurmukhi';
   color: #9a6345;
   font-weight: normal;
   font-size: 3.6vw;
