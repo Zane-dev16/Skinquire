@@ -42,16 +42,23 @@ const ProductCard: FC<ProductCardProps> = ({
           className={styles["product-image"]}
         />
       </div>
-
       <div className={styles["product-content"]}>
-        <h3 className={styles["product-name"]}>{name}</h3>
+        <h3 className={styles["product-name"]}>{name.toUpperCase()}</h3>
         <div className={styles["product-brand"]}>
-          {brand.data.attributes.name}
+          {brand.data.attributes.name.toUpperCase()}
         </div>
-        <div className={styles["product-price"]}>{price}€</div>
-        <div className={styles["product-rating"]}>
-          <Image src="/rating-star.svg" alt="rating:" width={20} height={20} />
-          <div className={styles["rating"]}>{rating} </div>
+
+        <div className={styles.productStats}>
+          <div className={styles["product-rating"]}>
+            <Image
+              src="/rating-star.svg"
+              alt="rating:"
+              width={20}
+              height={20}
+            />
+            <div className={styles["rating"]}>{rating} </div>
+          </div>
+          <div className={styles["product-price"]}>{price}€</div>
         </div>
       </div>
     </motion.div>
