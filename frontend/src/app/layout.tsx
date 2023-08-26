@@ -37,6 +37,10 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body className={inter.className}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt USD-441677741 ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+          laboris nisi ut aliquip ex ea commodo consequat.
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-GPJSCM6C85" />
           <Script id="google-analytics">
             {`
