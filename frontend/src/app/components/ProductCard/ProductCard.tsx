@@ -31,12 +31,13 @@ const ProductCard: FC<ProductCardProps> = ({
   price,
 }) => {
   const imageUrl = image?.data?.attributes.url ?? "";
+  const mediaUrl = process.env.NEXT_PUBLIC_MEDIA_URL || "";
 
   return (
     <motion.div whileHover={{ scale: 1.05 }} className={styles["product-card"]}>
       <div className={styles["image-container"]}>
         <img
-          src={`${imageUrl}`}
+          src={`${mediaUrl}${imageUrl}`}
           alt={`${name} product image`}
           className={styles["product-image"]}
         />

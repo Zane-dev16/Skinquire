@@ -134,6 +134,7 @@ const ProductList = () => {
   };
   const ProductListQuery = createProductListQuery(searchParams);
   const { data, isLoading, error } = useSWR(ProductListQuery, fetcher);
+
   if (error) {
     console.error(error);
     return <h1>Error: failed to connect to database</h1>;
