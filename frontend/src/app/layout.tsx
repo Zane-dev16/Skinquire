@@ -37,14 +37,15 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body className={inter.className}>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-GPJSCM6C85"></Script>
-<Script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GPJSCM6C85');
-</Script>
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-GPJSCM6C85" />
+          <Script id="google-analytics">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-GPJSCM6C85');
+        `}
           </Script>
           <Navbar></Navbar>
           {children}
