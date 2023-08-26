@@ -61,7 +61,7 @@ const Form: React.FC<FormProps> = ({
       </div>
 
       <div className={styles.formContainer}>
-        <form
+        <motion.form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           className={styles.form}
@@ -122,7 +122,7 @@ const Form: React.FC<FormProps> = ({
           >
             {buttonText}
           </motion.button>
-        </form>
+        </motion.form>
         <a
           className={styles.googleLink}
           href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google`}

@@ -73,16 +73,6 @@ export default function SearchBar() {
     }
   };
 
-  const inputVariants = {
-    initial: {
-      scaleX: 0,
-    },
-    open: {
-      scaleX: 1,
-      transition: { type: "spring", duration: 4, stiffness: 50 },
-    },
-  };
-
   const buttonVariants = {
     initial: { x: "-15vw", scale: 1.7 },
     open: {
@@ -101,24 +91,22 @@ export default function SearchBar() {
 
   return (
     <motion.div className={styles.searchBarContainer}>
-      <motion.form
-        className={styles.searchForm}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <motion.input
-          ref={inputRef}
-          initial="initial"
-          animate={isOpen ? "open" : "initial"}
-          variants={inputVariants}
-          className={styles.searchInput}
-          transition={{ duration: 0.6 }}
-          type="text"
-          placeholder="Search for products..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => setInputFocused(true)}
-          onBlur={() => setInputFocused(false)}
-        />
+      <form className={styles.searchForm} onSubmit={handleSubmit(onSubmit)}>
+        {isOpen && (
+          <motion.input
+            ref={inputRef}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            transition={{ x: { duration: 1 } }}
+            className={styles.searchInput}
+            type="text"
+            placeholder="Search for products..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => setInputFocused(true)}
+            onBlur={() => setInputFocused(false)}
+          />
+        )}
 
         <motion.button
           onClick={() => {
@@ -142,7 +130,7 @@ export default function SearchBar() {
             height={25}
           />
         </motion.button>
-      </motion.form>
+      </form>
 
       {query && data && inputFocused && (
         <div className={styles.resultsContainer}>

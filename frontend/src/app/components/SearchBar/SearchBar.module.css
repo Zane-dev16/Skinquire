@@ -8,13 +8,19 @@
 .searchBarContainer {
     position: relative;
     justify-self: center;
+    align-self: center;
+    height: 33px;
     width: clamp(1px, 60%, 500px);
 }
-  
+
+.searchForm {
+    overflow: hidden;
+    padding-left: 3px;
+    padding-right: 3px;
+}
   .searchInput {
     width:100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 0 5px 0;
     font-size: 1.2rem;
     border: 1px solid #BF9778;
     border-radius: 5px;
@@ -24,6 +30,7 @@
     text-align: center;
     font-family: "Cormorant"; 
   }
+
 
   .searchInput::placeholder {
     text-align: center;
@@ -61,7 +68,7 @@
 
   .searchButton {  
     top:10%;
-right: 0;
+    right: 0;
     position: absolute;
     border: none;
     background-color: transparent;
