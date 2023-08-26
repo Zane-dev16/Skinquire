@@ -4,6 +4,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import ProfileMenu from "./ProfileMenu";
 import Logo from "./Logo";
 import Link from "next/link";
+import { Suspense } from "react";
+import Image from "next/image";
 
 export default async function Navbar() {
   return (
@@ -13,12 +15,20 @@ export default async function Navbar() {
       </Link>
       <div className={styles.navbar}>
         <BurgerMenu></BurgerMenu>
-        <SearchBar></SearchBar>
+        <Suspense fallback={<SearchBarFallback />}>
+          <SearchBar></SearchBar>
+        </Suspense>
         <div className={styles.navGroup}>
           <ProfileMenu></ProfileMenu>
           <Logo></Logo>
         </div>
       </div>
     </>
+  );
+}
+
+function SearchBarFallback() {
+  return (
+    <Image src="/search-icon.svg" alt="search-icon" width={25} height={25} />
   );
 }
