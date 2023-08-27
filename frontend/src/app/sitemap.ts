@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
   }))
 
-  const routes = ["", "/about", "/contact", "/terms-and-conditions", "/privacy-policys"].map((route) => ({
+  const routes = ["", "/product-list", "register","/about", "/contact", "/terms-and-conditions", "/privacy-policy"].map((route) => ({
     url: `https://www.skinquire.net${route}`,
     lastModified: new Date(),
   }));
