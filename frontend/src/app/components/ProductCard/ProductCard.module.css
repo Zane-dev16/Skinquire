@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'helvetica'; /* Provide a name for the font */
-  src: url('/fonts/helvetica.otf')
+  src: url('/fonts/helvetica.ttf')
 }
 
 .product-card {
