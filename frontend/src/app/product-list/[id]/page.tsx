@@ -1,12 +1,17 @@
 import Head from "next/head";
 import RatingButton from "./components/rating/RatingButton";
 import { asyncFetcher } from "@/utils/graphql";
+import { Metadata, ResolvingMetadata } from "next";
 
 interface Relation {
   attributes: {
     name: string;
   };
 }
+
+type Props = {
+  params: { id: number };
+};
 
 export async function generateStaticParams() {
   const data = await asyncFetcher("query {products {data {id }}}");
@@ -19,64 +24,47 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
-  const QUERY_PRODUCT_BY_ID = `
-  query {
-    product(id: ${params.id}) {
-      data {
-        id
-        attributes {
-          name
-          description
-          rating
-          price
-          categories {
-            data {
-              attributes {
-                name
-              }
-            }
-          }
-          brand {
-            data {
-              attributes {
-                name
-              }
-            }
-          }
-          ingredients {
-            data {
-              attributes {
-                name
-              }
-            }
-          }
-          skin_conditions {
-            data {
-              attributes {
-                  name
-              }
-            }
-          }
-          skin_types {
-            data {
-              attributes {
-                    name
-              }
-            }
-          }
-          image {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  `;
+export async function generateMetadata({ params }: Props) {
+  const QUERY_PRODUCT_BY_ID = createProductQuery(params.id);
+  const data = await asyncFetcher(QUERY_PRODUCT_BY_ID);
+  const product = data.product.data.attributes;
+  const imageUrl = product.image?.data?.attributes.formats.thumbnail?.url;
+  return {
+    title: `${product.name} - Skinquire`,
+    description: product.description,
+    openGraph: {
+      title: `${product.name} - Skinquire`,
+      description: product.description,
+      url: `https://www.skinquire.net/product-list/${data.product.data.id}`,
+      siteName: "Skinquire",
+      images: [
+        {
+          url: `${imageUrl}`,
+          width: 800,
+          height: 600,
+          alt: `${product.name} image`,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} - Skinquire`,
+      description: product.description,
+      images: {
+        url: `${imageUrl}`,
+        width: 800,
+        height: 600,
+        alt: `${product.name} image`,
+      },
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const QUERY_PRODUCT_BY_ID = createProductQuery(params.id);
   const data = await asyncFetcher(QUERY_PRODUCT_BY_ID);
 
   const product = data.product.data.attributes;
@@ -132,3 +120,122 @@ export default async function Page({ params }: { params: { id: number } }) {
     </div>
   );
 }
+
+const createProductQuery = (id: number) => {
+  return `
+  query {
+    product(id: ${id}) {
+      data {
+        id
+        attributes {
+          name
+          description
+          rating
+          price
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          brand {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          ingredients {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          skin_conditions {
+            data {
+              attributes {
+                  name
+              }
+            }
+          }
+          skin_types {
+            data {
+              attributes {
+                    name
+              }
+            }
+          }
+          image {
+            data {
+              attributes {
+                formats
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `;
+};
+
+const createProductMetadataQuery = (id: number) => {
+  return `
+  query {
+    product(id: ${id}) {
+      data {
+        id
+        attributes {
+          name
+          description
+          rating
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          brand {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          ingredients {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          skin_conditions {
+            data {
+              attributes {
+                  name
+              }
+            }
+          }
+          skin_types {
+            data {
+              attributes {
+                    name
+              }
+            }
+          }
+          image {
+            data {
+              attributes {
+                formats
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `;
+};
