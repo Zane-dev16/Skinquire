@@ -28,14 +28,22 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-      <div className={styles.logoContainer}>
-        <Image
-          src="/skinquireLogo1.png"
-          alt="skinquire logo"
-          width={150}
-          height={120}
-        ></Image>
-      </div>
+      <Link href="/">
+        <div className={styles.logoContainer}>
+          <div className={styles.logoCircle}>
+            <Image
+              src="/skinquireLogo1.png"
+              alt="skinquire logo"
+              sizes="100vh"
+              fill={true}
+              quality={100}
+              style={{
+                objectFit: "contain",
+              }}
+            ></Image>
+          </div>
+        </div>
+      </Link>
       <div className={styles.column}>
         <div>
           <Link className={styles.link} href="/terms-and-conditions">
