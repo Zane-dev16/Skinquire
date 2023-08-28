@@ -60,7 +60,7 @@ export default function RootLayout({
           <Navbar></Navbar>
           {children}
           <div>
-            <a href="https://sovrn.co/axjbxel">sovrn confirmation link</a>
+            <a href="https://sovrn.co/8uorqxt">sovrn confirmation link</a>
           </div>
           <Footer></Footer>
         </body>
