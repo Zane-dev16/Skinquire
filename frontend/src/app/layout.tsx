@@ -2,7 +2,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/HomeSections/Footer";
+import Footer from "./components/commons/Footer";
 import Script from "next/script";
 
 export const metadata: Metadata = {
