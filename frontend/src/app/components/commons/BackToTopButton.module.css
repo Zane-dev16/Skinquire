@@ -1,0 +1,22 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    color: #fffbed;
+    font-family: "Shamery";
+    font-size: 1.5rem;
+    line-height: 3rem;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button img { 
+    margin-bottom: 5px;
+    margin-right: 10px;
+}

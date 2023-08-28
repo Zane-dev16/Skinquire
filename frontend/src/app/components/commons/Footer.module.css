@@ -1,0 +1,26 @@
+.footer {
+    display: grid;
+    background-color:#9a6345;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    font-family: "Shamery";
+    font-size: 1.5rem;
+    line-height: 3rem;
+    margin-top: 80px;
+}
+
+.column:last-child {
+    text-align: right;
+  }
+
+.logoContainer {
+    border-radius: 200px;
+    padding: 40px 30px 30px 30px;
+    margin: 20px;
+    background-color: #fffbed;
+}
+
+.link {
+    color: #fffbed;
+}
