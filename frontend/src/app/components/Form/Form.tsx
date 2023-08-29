@@ -8,6 +8,7 @@ import {
   useForm,
   SubmitHandler,
 } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   email: string;
@@ -31,6 +32,7 @@ const Form: React.FC<FormProps> = ({
   error,
   isLoginForm,
 }) => {
+  const router = useRouter();
   const [showPassword, setShowConfirmPassword] = useState<boolean>(false);
   const {
     register,
@@ -123,20 +125,20 @@ const Form: React.FC<FormProps> = ({
             {buttonText}
           </motion.button>
         </motion.form>
-        <a
-          className={styles.googleLink}
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google?prompt=select_account+consent`}
+        <motion.button
+          onClick={() => {
+            router.replace(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google?prompt=select_account+consent`
+            );
+            closeForm();
+          }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring" }}
+          className={`${styles.button} ${styles.googleButton}`}
         >
-          <motion.button
-            onClick={closeForm}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring" }}
-            className={`${styles.button} ${styles.googleButton}`}
-          >
-            <Image src="/google-icon.svg" alt="" width={20} height={20} />
-            <span className={styles.googleText}>CONTINUE WITH GOOGLE</span>
-          </motion.button>
-        </a>
+          <Image src="/google-icon.svg" alt="" width={20} height={20} />
+          <span className={styles.googleText}>CONTINUE WITH GOOGLE</span>
+        </motion.button>
       </div>
     </section>
   );
