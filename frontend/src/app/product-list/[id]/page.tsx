@@ -55,8 +55,8 @@ export async function generateMetadata({ params }: Props) {
       description: product.description,
       images: {
         url: `${imageUrl}`,
-        width: 200,
-        height: 300,
+        width: 1500,
+        height: 2000,
         alt: `${product.name} image`,
       },
     },
