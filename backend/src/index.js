@@ -54,5 +54,19 @@ module.exports = {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/*{ strapi }*/) {},
+  async bootstrap({ strapi }) {
+    const pluginStore = strapi.store({
+      environment: "",
+      type: "plugin",
+      name: "users-permissions",
+    });
+    // Ensure profile scope for Google Auth
+    const grantConfig = await pluginStore.get({ key: "grant" });
+    if (grantConfig) {
+      grantConfig.google.custom_params = {
+        prompt: "select_account",
+      };
+      await pluginStore.set({ key: "grant", value: grantConfig });
+    }
+  },
 };
