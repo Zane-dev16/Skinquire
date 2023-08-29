@@ -19,6 +19,7 @@
     position: relative;
     z-index: 1;
     font-family: "HenriDidot";
+    color: black;
   }
 
   .image-container {

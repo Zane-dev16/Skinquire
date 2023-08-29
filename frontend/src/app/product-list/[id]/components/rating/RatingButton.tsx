@@ -75,7 +75,6 @@ type UserRatingData = {
 const RatingButton: FC<RatingButtonProps> = ({ product }) => {
   const [isOpen, setIsOpen] = useState(false);
   const access_token = Cookies.get("token");
-  console.log(access_token);
 
   const {
     data: userIdData,

@@ -33,6 +33,7 @@
     font-size: 2vw; /* Increase font size to make it larger */
     padding: 1vw; /* Add padding for rectangular shape */
     border: 1px solid black; /* Add a black border */
+    color: black;
     border-radius: 40px; /* Add rounded corners */
     display: flex;
     align-items: center;

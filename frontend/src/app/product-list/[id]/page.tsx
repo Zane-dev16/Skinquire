@@ -73,13 +73,8 @@ export default async function Page({ params }: Props) {
 
   return (
     <div>
-      <Head>
-        <title>{product.name} - Your Website Name</title>
-        <meta name="description" content={product.description} />
-        {/* Other meta tags, OG tags, etc. */}
-      </Head>
-
       <h1>{product.name}</h1>
+      <a href={`${product.links}`}>BUY NOW ON AMAZON</a>
       <img
         src={`${mediaUrl}${imageUrl}`}
         alt={`${product.name} product image`}
@@ -132,6 +127,7 @@ const createProductQuery = (id: number) => {
           description
           rating
           price
+          links
           categories {
             data {
               attributes {
