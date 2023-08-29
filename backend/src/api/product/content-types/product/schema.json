@@ -83,6 +83,9 @@
       "relation": "manyToMany",
       "target": "api::product-type.product-type",
       "inversedBy": "products"
+    },
+    "links": {
+      "type": "text"
     }
   }
 }

@@ -125,7 +125,7 @@ const Form: React.FC<FormProps> = ({
         </motion.form>
         <a
           className={styles.googleLink}
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google`}
+          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/connect/google?prompt=select_account+consent`}
         >
           <motion.button
             onClick={closeForm}
