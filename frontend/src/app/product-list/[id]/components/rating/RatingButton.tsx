@@ -10,6 +10,11 @@ import { AnimatePresence } from "framer-motion";
 interface RatingButtonProps {
   product: number;
 }
+type userRatingArgs = {
+  access_token: string | undefined;
+  id: number;
+  productId: number;
+};
 
 const getUserID = ({ access_token }: { access_token: string | undefined }) =>
   fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`, {
@@ -29,13 +34,7 @@ const getUserID = ({ access_token }: { access_token: string | undefined }) =>
     .then((response) => response.json())
     .then((data) => data.data.me.id);
 
-const getUserRating = ({
-  access_token,
-  id,
-}: {
-  access_token: string | undefined;
-  id: number;
-}) =>
+const getUserRating = ({ access_token, id, productId }: userRatingArgs) =>
   fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`, {
     method: "POST",
     headers: {
@@ -47,7 +46,7 @@ const getUserRating = ({
                 usersPermissionsUser(id: ${id}) {
                   data {
                     attributes {
-                      ratings {
+                      ratings(filters: {product: {id: {eq: ${productId}}}}) {
                         data {
                           id
                           attributes {
@@ -76,6 +75,7 @@ type UserRatingData = {
 const RatingButton: FC<RatingButtonProps> = ({ product }) => {
   const [isOpen, setIsOpen] = useState(false);
   const access_token = Cookies.get("token");
+  console.log(access_token);
 
   const {
     data: userIdData,
@@ -90,7 +90,7 @@ const RatingButton: FC<RatingButtonProps> = ({ product }) => {
     isLoading: userRatingLoading,
     mutate: revalidateUserRating,
   } = useSWR<UserRatingData>(
-    access_token ? { access_token, id: userIdData } : null, // Assuming `userIdData` contains the user ID
+    access_token ? { access_token, id: userIdData, productId: product } : null, // Assuming `userIdData` contains the user ID
     getUserRating
   );
   if (userRatingError) {
