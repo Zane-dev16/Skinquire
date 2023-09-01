@@ -13,14 +13,15 @@
 }
 
 .navbar {
+    height: 65px;
     display: grid;
     grid-template-columns: 2fr 5fr 2fr; /* Left - Middle - Right */
     align-items: center; /* Vertically center the items */
     position: sticky;
     background-color: #fffbed;
     border-bottom: 3px solid #BF9778;
-    top: 0px;
-    z-index: 999;
+    top: 0;
+    z-index: 900;
 }
 
 .navGroup {

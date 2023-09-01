@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./BrandMarquee.module.css"; // Import your CSS module
 import { useRef } from "react";
+import Link from "next/link";
 import {
   motion,
   useScroll,
@@ -70,28 +71,30 @@ const BrandMarquee = () => {
 
   return (
     <div className={styles.marqueeContainer}>
-      <motion.div
-        style={{ x }}
-        transition={{
-          repeat: Infinity,
-          duration: 12,
-          ease: "linear",
-        }}
-        className={styles.brandMarquee}
-      >
-        {doubledBrandList.map((brand, index) => (
-          <div key={index} className={styles.brandContainer}>
-            <Image
-              src="/brandMarqueeStar.svg"
-              alt="star separator between brands on marquee"
-              width={50}
-              height={50}
-              className={styles.marqueeIcon}
-            ></Image>
-            <div className={`${styles.brandText}`}>{brand}</div>
-          </div>
-        ))}
-      </motion.div>
+      <Link href="/product-list">
+        <motion.div
+          style={{ x }}
+          transition={{
+            repeat: Infinity,
+            duration: 12,
+            ease: "linear",
+          }}
+          className={styles.brandMarquee}
+        >
+          {doubledBrandList.map((brand, index) => (
+            <div key={index} className={styles.brandContainer}>
+              <Image
+                src="/brandMarqueeStar.svg"
+                alt="star separator between brands on marquee"
+                width={50}
+                height={50}
+                className={styles.marqueeIcon}
+              ></Image>
+              <div className={`${styles.brandText}`}>{brand}</div>
+            </div>
+          ))}
+        </motion.div>
+      </Link>
     </div>
   );
 };

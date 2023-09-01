@@ -48,6 +48,7 @@ const Home = () => {
   return (
     <div>
       <HeroSection></HeroSection>
+
       <BrandMarquee></BrandMarquee>
       <ProductCategorySection></ProductCategorySection>
       <SkinConditionSection></SkinConditionSection>

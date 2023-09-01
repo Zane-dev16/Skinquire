@@ -5,12 +5,14 @@
 }
 
 .marqueeContainer {
-    position: relative;
+    position: sticky;
+    top: 65px;
     background-color: #fffbed;
   overflow: hidden;
   border-top: 3px solid #BF9778;
   border-bottom: 3px solid #BF9778;
   padding: 10px 0 10px 0;
+  z-index: 900;
 }
 
 .brandMarquee {
@@ -24,11 +26,14 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  z-index: 900px;
+
 }
 
 .brandText {
   font-family: "Cormorant";
   font-size: 2em;
+  color: black;
   width: fit-content;
   text-align: center;
   margin: 0 20px 0 20px;

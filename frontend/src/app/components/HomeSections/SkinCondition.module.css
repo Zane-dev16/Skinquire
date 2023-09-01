@@ -1,0 +1,66 @@
+.skinConditionSection {
+    display: flex;
+    border: 4px #563425 solid;
+    border-right: none;
+}
+
+.titleContainer {
+    width: 10%;
+
+}
+
+.title {
+    margin: auto;
+    font-size: 1.5rem;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    font-family: "Shamery";
+    font-weight: lighter;
+    text-align: center;
+    height: 350px;
+}
+
+.carousel {
+    display: flex;
+    overflow: scroll;
+    width: 90%;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+.skinCondition {
+    scroll-snap-align: start;
+    border-left: 4px #563425 solid;
+}
+
+.skinConditionName {
+    position: relative;
+    margin: 0;
+    z-index: 1;
+    color: white;
+    padding: 0 20px 0 20px;
+    font-size: 3rem;
+    text-align: center;
+    font-family: "Cormorant";
+    font-weight: normal;
+}
+
+.skinConditionImage {
+    z-index: 0;
+    object-fit: cover;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 350px;
+    height: 350px;
+}
