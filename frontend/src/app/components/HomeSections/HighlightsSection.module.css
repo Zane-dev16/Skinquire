@@ -35,10 +35,11 @@
 .highlightsContainer {
     position: relative;
     margin: 40px 0 0 0;
-    padding-left: 4vw;
+    padding-left: 3vw;
     display: flex;
     width: 96vw;
     overflow: scroll;
+    scroll-snap-type: x mandatory;
     -ms-overflow-style: none; 
     scrollbar-width: none; 
 }
@@ -52,6 +53,7 @@
     padding: 0 70px 20px 70px;
     min-width: 270px;
     overflow: hidden;
+    scroll-snap-align: center;
 }
 
 .highlightImage {
