@@ -73,7 +73,7 @@
     background-size:contain;
     background-repeat: no-repeat;
 
-
+    background-position: center bottom;
     width: 240px;
     height: 300px;
 }

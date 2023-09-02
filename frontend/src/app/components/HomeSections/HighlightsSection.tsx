@@ -12,6 +12,7 @@ const HighlightsSection = async () => {
       attributes {
         products {
           data {
+            id
             attributes {
               name
               image {
