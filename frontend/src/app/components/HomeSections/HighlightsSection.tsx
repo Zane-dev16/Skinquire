@@ -29,7 +29,7 @@ const HighlightsSection = async () => {
   }
 }`;
   const data = await asyncFetcher(HIGHLIGHTS_QUERY);
-  const highlights = data?.highlightSection.data.attributes.products.data;
+  const highlights = data?.highlightSection?.data?.attributes?.products?.data;
   if (!highlights) {
     return null;
   }
