@@ -1,4 +1,5 @@
 .skinConditionSection {
+    position: relative;
     display: flex;
     border: 4px #563425 solid;
     border-right: none;
@@ -40,7 +41,6 @@
 }
 
 .skinConditionName {
-    position: relative;
     margin: 0;
     z-index: 1;
     color: white;
@@ -63,4 +63,23 @@
     position: relative;
     width: 350px;
     height: 350px;
+}
+
+.button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: black;
+    z-index: 2;
+}
+
+.leftButton {
+    left: 170px;
+}
+
+.rightButton {
+    right: 50px;
 }

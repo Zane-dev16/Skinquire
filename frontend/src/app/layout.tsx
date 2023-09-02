@@ -38,10 +38,6 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body className={inter.className}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt USD-441677741 ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea commodo consequat.
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-GPJSCM6C85" />
           <Script id="google-analytics">
             {`
@@ -50,11 +46,6 @@ export default function RootLayout({
           gtag('js', new Date());
  
           gtag('config', 'G-GPJSCM6C85');
-        `}
-          </Script>
-          <Script id="impact-radius">
-            {`
-(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A4734627-80d5-4500-881a-8b588c513ce91.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');
         `}
           </Script>
           <Navbar></Navbar>
