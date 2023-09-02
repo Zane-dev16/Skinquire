@@ -57,9 +57,11 @@
 }
 
 .highlightImage {
-    background: url("/hero-image.jpg");
-    background-size: cover;
-    background-position: center bottom;
+    background-color: #f3f0e2;
+    background-size:200px;
+    background-repeat: no-repeat;
+
+    background-position: center bottom 40%;
     border-radius: 4%;
     width: 270px;
     height: 400px;

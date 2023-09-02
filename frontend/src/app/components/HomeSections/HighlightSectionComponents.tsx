@@ -33,6 +33,13 @@ export function HighlightTitle() {
 type HighlightItem = {
   attributes: {
     name: string;
+    image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
   };
 };
 
@@ -56,6 +63,7 @@ export const HighlightList: FC<HighlightListProps> = ({ highlights }) => {
       },
     },
   };
+
   return (
     <motion.div
       variants={container}
@@ -64,13 +72,17 @@ export const HighlightList: FC<HighlightListProps> = ({ highlights }) => {
       className={styles.highlightsContainer}
     >
       {highlights.map((highlight, index) => (
-        <HighlightCard key={index} title={highlight.attributes.name} />
+        <HighlightCard key={index} highlight={highlight} />
       ))}
     </motion.div>
   );
 };
 
-const HighlightCard = ({ title }: { title: string }) => {
+type HighlightCardProps = {
+  highlight: HighlightItem;
+};
+
+const HighlightCard: FC<HighlightCardProps> = ({ highlight }) => {
   const card = {
     hidden: { x: "-150%" },
     show: { x: 0, transition: { duration: 1 } },
@@ -79,10 +91,18 @@ const HighlightCard = ({ title }: { title: string }) => {
     hidden: { y: "-100%" },
     show: { transition: { duration: 1 }, y: 0 },
   };
+
+  const title = highlight.attributes.name;
+  const imageUrl = highlight.attributes.image?.data?.attributes.url ?? "";
+  const mediaUrl = process.env.NEXT_PUBLIC_MEDIA_URL || "";
+
   return (
     <div className={styles.highlightCard}>
       <motion.div variants={card}>
-        <div className={styles.highlightImage}></div>
+        <div
+          className={styles.highlightImage}
+          style={{ backgroundImage: `url(${mediaUrl}${imageUrl})` }}
+        ></div>
         <h3 className={styles.highlightName}>{title}</h3>
         <Link href={"/"} className={styles.link}>
           VIEW DETAILS

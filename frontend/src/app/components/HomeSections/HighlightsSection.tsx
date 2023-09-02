@@ -1,9 +1,7 @@
 // pages/index.js
-"use client";
 
 import { asyncFetcher } from "@/utils/graphql";
 import styles from "./HighlightsSection.module.css";
-import Link from "next/link";
 import { HighlightTitle, HighlightList } from "./HighlightSectionComponents";
 
 const HighlightsSection = async () => {
@@ -16,6 +14,13 @@ const HighlightsSection = async () => {
           data {
             attributes {
               name
+              image {
+                data {
+                    attributes {
+                    url
+                    }
+                }
+                }
             }
           }
         }
@@ -24,7 +29,10 @@ const HighlightsSection = async () => {
   }
 }`;
   const data = await asyncFetcher(HIGHLIGHTS_QUERY);
-  const highlights = data?.highlightSection.data.attributes.products.data || [];
+  const highlights = data?.highlightSection.data.attributes.products.data;
+  if (!highlights) {
+    return null;
+  }
 
   return (
     <section className={styles.highlightsSection}>
