@@ -3,6 +3,7 @@
     display: flex;
     border: 4px #563425 solid;
     border-right: none;
+    border-left: none;
 }
 
 .titleContainer {

@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "highlight_sections",
+  "info": {
+    "singularName": "highlight-section",
+    "pluralName": "highlight-sections",
+    "displayName": "Highlight Section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}
