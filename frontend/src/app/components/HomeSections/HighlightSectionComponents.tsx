@@ -99,10 +99,13 @@ const HighlightCard: FC<HighlightCardProps> = ({ highlight }) => {
   return (
     <div className={styles.highlightCard}>
       <motion.div variants={card}>
-        <div
-          className={styles.highlightImage}
-          style={{ backgroundImage: `url(${mediaUrl}${imageUrl})` }}
-        ></div>
+        <div className={styles.imageContainer}>
+          <div
+            className={styles.highlightImage}
+            style={{ backgroundImage: `url(${mediaUrl}${imageUrl})` }}
+          ></div>
+        </div>
+
         <h3 className={styles.highlightName}>{title}</h3>
         <Link href={"/"} className={styles.link}>
           VIEW DETAILS

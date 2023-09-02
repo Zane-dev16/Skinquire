@@ -56,15 +56,26 @@
     scroll-snap-align: center;
 }
 
-.highlightImage {
+.imageContainer {
+    position: relative;
     background-color: #f3f0e2;
-    background-size:200px;
-    background-repeat: no-repeat;
-
-    background-position: center bottom 40%;
     border-radius: 4%;
     width: 270px;
     height: 400px;
+
+}
+
+.highlightImage {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10%;
+    background-size:contain;
+    background-repeat: no-repeat;
+
+    background-position: center bottom;
+    width: 200px;
+    height: 320px;
 }
 
 
