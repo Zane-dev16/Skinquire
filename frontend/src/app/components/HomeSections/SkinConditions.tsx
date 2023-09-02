@@ -6,7 +6,6 @@ import styles from "./SkinCondition.module.css";
 import Image from "next/image";
 
 const SkinConditionSection: FC = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollXValue, setScrollXValue] = useState<number>(1);
   const imageUrlList = [
     "/skin-condition-image-1.jpg",
@@ -43,55 +42,42 @@ const SkinConditionSection: FC = () => {
   }, [scrollX]);
 
   return (
-    <>
-      <div
-        style={{
-          position: "fixed",
-          top: 700,
-          fontFamily: "monospace",
-          fontWeight: 600,
-          zIndex: 50,
-        }}
-      >
-        {" | x: " + scrollXValue}
+    <section className={styles.skinConditionSection}>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>Skin Conditions</h2>
       </div>
-      <section className={styles.skinConditionSection}>
-        <div className={styles.titleContainer}>
-          <h2 className={styles.title}>Skin Conditions</h2>
-        </div>
-        <div className={styles.carousel} ref={carouselRef}>
-          {imageUrlList.map((imageUrl: string, key) => (
-            <div key={key} className={styles.skinCondition}>
-              <div className={styles.imageContainer}>
-                <Image
-                  className={styles.SkinConditionImage}
-                  src={`${imageUrl}`}
-                  alt={`skin-condition-image-${key}`}
-                  sizes="100vh"
-                  fill={true}
-                  quality={100}
-                  style={{}}
-                />
-                <h3 className={styles.skinConditionName}>
-                  {"Skin Condition".toUpperCase()} {key + 1}
-                </h3>
-              </div>
+      <div className={styles.carousel} ref={carouselRef}>
+        {imageUrlList.map((imageUrl: string, key) => (
+          <div key={key} className={styles.skinCondition}>
+            <div className={styles.imageContainer}>
+              <Image
+                className={styles.SkinConditionImage}
+                src={`${imageUrl}`}
+                alt={`skin-condition-image-${key}`}
+                sizes="100vh"
+                fill={true}
+                quality={100}
+                style={{}}
+              />
+              <h3 className={styles.skinConditionName}>
+                {"Skin Condition".toUpperCase()} {key + 1}
+              </h3>
             </div>
-          ))}
-        </div>
-        {scrollX.get() > 0 && (
-          <div
-            onClick={() => paginate(-1)}
-            className={`${styles.button} ${styles.leftButton}`}
-          ></div>
-        )}
-
+          </div>
+        ))}
+      </div>
+      {scrollX.get() > 0 && (
         <div
-          onClick={() => paginate(1)}
-          className={`${styles.button} ${styles.rightButton}`}
+          onClick={() => paginate(-1)}
+          className={`${styles.button} ${styles.leftButton}`}
         ></div>
-      </section>
-    </>
+      )}
+
+      <div
+        onClick={() => paginate(1)}
+        className={`${styles.button} ${styles.rightButton}`}
+      ></div>
+    </section>
   );
 };
 
