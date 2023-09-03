@@ -109,9 +109,9 @@ const HighlightCard: FC<HighlightCardProps> = ({ highlight }) => {
         </div>
 
         <h3 className={styles.highlightName}>{title}</h3>
-        <a href={`/product-list/${productId}`} className={styles.link}>
+        <Link href={`/product-list/${productId}`} className={styles.link}>
           VIEW DETAILS
-        </a>
+        </Link>
       </motion.div>
       <motion.div variants={line} className={styles.separator}></motion.div>
     </div>
