@@ -100,6 +100,7 @@ const SkinConditionSection: FC = () => {
       <div className={styles.carousel} ref={carouselRef}>
         {SkinConditionData.map((skinConditionItem, key) => (
           <Link
+            key={key}
             href={createSearchQueryWithTitleUrl(
               "/product-list",
               params,
@@ -108,7 +109,7 @@ const SkinConditionSection: FC = () => {
               skinConditionItem.name
             )}
           >
-            <div key={key} className={styles.skinCondition}>
+            <div className={styles.skinCondition}>
               <div className={styles.imageContainer}>
                 <Image
                   className={styles.SkinConditionImage}
