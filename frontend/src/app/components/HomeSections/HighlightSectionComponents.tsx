@@ -98,21 +98,46 @@ const HighlightCard: FC<HighlightCardProps> = ({ highlight }) => {
   const imageUrl = highlight.attributes.image?.data?.attributes.url ?? "";
   const mediaUrl = process.env.NEXT_PUBLIC_MEDIA_URL || "";
 
+  const buttonBackgroundVariants = {
+    initial: { scale: 0, x: "-50%", y: "-50%" },
+    whileHover: { scale: 2 },
+  };
+  const buttonVariants = {
+    whileHover: {
+      color: "#fff",
+      scale: 1.1,
+      transition: { type: "spring" },
+    },
+  };
+
+  const imageVariants = {
+    initial: { x: "-50%" },
+    whileHover: { y: -10 },
+  };
+
   return (
     <div className={styles.highlightCard}>
-      <motion.div variants={card}>
-        <div className={styles.imageContainer}>
-          <div
-            className={styles.highlightImage}
-            style={{ backgroundImage: `url(${mediaUrl}${imageUrl})` }}
-          ></div>
-        </div>
+      <Link href={`/product-list/${productId}`}>
+        <motion.div initial="initial" whileHover="whileHover" variants={card}>
+          <div className={styles.imageContainer}>
+            <motion.div
+              className={styles.highlightImage}
+              style={{ backgroundImage: `url(${mediaUrl}${imageUrl})` }}
+              variants={imageVariants}
+            ></motion.div>
+          </div>
+          <h3 className={styles.highlightName}>{title}</h3>
+          <motion.button variants={buttonVariants} className={styles.button}>
+            <motion.div
+              variants={buttonBackgroundVariants}
+              className={styles.buttonHoverBackground}
+              transition={{ duration: 0.3 }}
+            ></motion.div>
+            <span>VIEW DETAILS</span>
+          </motion.button>
+        </motion.div>
+      </Link>
 
-        <h3 className={styles.highlightName}>{title}</h3>
-        <Link href={`/product-list/${productId}`} className={styles.link}>
-          VIEW DETAILS
-        </Link>
-      </motion.div>
       <motion.div variants={line} className={styles.separator}></motion.div>
     </div>
   );

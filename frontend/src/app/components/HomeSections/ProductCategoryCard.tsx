@@ -31,7 +31,7 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
     },
   };
   const cardVariants = {
-    whileHover: { scale: 1.05 },
+    whileHover: { y: -10 },
   };
 
   const imageVariants = {
@@ -87,7 +87,7 @@ const ProductCategoryCard: FC<ProductCategoryCardProps> = ({
             <motion.div
               variants={buttonBackgroundVariants}
               className={styles.buttonHoverBackground}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             ></motion.div>
             <span>EXPLORE</span>
           </motion.button>

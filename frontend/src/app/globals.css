@@ -18,4 +18,5 @@ body::-webkit-scrollbar {
 
 a {
     text-decoration: none; /* Remove underline */
+    color: black;
 }
