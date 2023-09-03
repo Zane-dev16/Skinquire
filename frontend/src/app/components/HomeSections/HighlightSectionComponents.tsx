@@ -31,6 +31,7 @@ export function HighlightTitle() {
 }
 
 type HighlightItem = {
+  id: number;
   attributes: {
     name: string;
     image: {
@@ -93,6 +94,7 @@ const HighlightCard: FC<HighlightCardProps> = ({ highlight }) => {
   };
 
   const title = highlight.attributes.name;
+  const productId = highlight.id;
   const imageUrl = highlight.attributes.image?.data?.attributes.url ?? "";
   const mediaUrl = process.env.NEXT_PUBLIC_MEDIA_URL || "";
 
@@ -107,9 +109,9 @@ const HighlightCard: FC<HighlightCardProps> = ({ highlight }) => {
         </div>
 
         <h3 className={styles.highlightName}>{title}</h3>
-        <Link href={"/"} className={styles.link}>
+        <a href={`/product-list/${productId}`} className={styles.link}>
           VIEW DETAILS
-        </Link>
+        </a>
       </motion.div>
       <motion.div variants={line} className={styles.separator}></motion.div>
     </div>
