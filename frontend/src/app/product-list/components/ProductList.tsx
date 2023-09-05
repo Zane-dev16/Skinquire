@@ -104,9 +104,10 @@ const ProductList = () => {
       .join(",");
     return `
       query {
-          products(sort: "${sortOption}${order}" ${
-      filters ? `filters: {${filters}}` : ""
-    }) {
+          products(
+            sort: "${sortOption}${order}" 
+          ${filters ? `filters: {${filters}}` : ""}
+          pagination: {page: 1, pageSize: 50}) {
               data {
               id
               attributes {
