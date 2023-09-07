@@ -20,7 +20,7 @@ module.exports = ({ env }) => ({
       playgroundAlways: false,
       defaultLimit: 10,
       depthLimit: 10,
-      maxLimit: 20,
+      maxLimit: 60,
       generateArtifacts: false,
       apolloServer: {
         ...ApolloArmor.protect(),
