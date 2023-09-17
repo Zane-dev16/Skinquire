@@ -14,7 +14,7 @@ const About = () => {
     <div className={styles.container}>
       <h1 className={styles.heading}>About</h1>
       <p className={styles.text}>
-        Welcome to Skinquire.net, your ultimate destination for skincare product
+        Welcome to Skinquire, your ultimate destination for skincare product
         ratings and reviews! Are you tired of sifting through conflicting
         recommendations and product claims? We were too, and that&apos;s why we
         embarked on a journey to create a centralized platform that simplifies
@@ -27,9 +27,8 @@ const About = () => {
           searching for the perfect skincare products amidst a sea of
           conflicting opinions. It became clear that there was a need for a
           reliable source of information, just like IMDb helps us find the best
-          movies. And so, Skinquire.net was born – a platform dedicated to
-          providing you with accurate and community-driven skincare product
-          ratings.
+          movies. And so, Skinquire was born – a platform dedicated to providing
+          you with accurate and community-driven skincare product ratings.
         </p>
       </div>
       <div className={styles.section}>
@@ -40,7 +39,7 @@ const About = () => {
           users like you. Dermatologist recommendations are valuable, but with
           the ever-expanding array of options, finding what truly works can be a
           challenge. That&apos;s where our community steps in. Every rating and
-          review you find on Skinquire.net comes from genuine users who&apos;ve
+          review you find on Skinquire comes from genuine users who&apos;ve
           experienced these products firsthand.
         </p>
       </div>
@@ -58,9 +57,9 @@ const About = () => {
         <h2 className={styles.subheading}>Your Skincare Journey, Simplified</h2>
         <p className={styles.text}>
           Navigating the world of skincare can be overwhelming, but it
-          doesn&apos;t have to be. At Skinquire.net, we&apos;ve curated a
-          diverse range of products, each with a reliable rating and review to
-          guide you. Whether you&apos;re looking to address specific concerns or
+          doesn&apos;t have to be. At Skinquire, we&apos;ve curated a diverse
+          range of products, each with a reliable rating and review to guide
+          you. Whether you&apos;re looking to address specific concerns or
           simply enhance your skincare routine, we&apos;re here to make your
           journey smoother.
         </p>
@@ -102,9 +101,9 @@ const About = () => {
       </div>
 
       <p className={styles.text}>
-        At Skinquire.net, we&apos;re excited to be your skincare companion,
-        offering you a reliable source of information and a warm community to be
-        a part of. Let&apos;s embark on this journey to better skin together!
+        At Skinquire, we&apos;re excited to be your skincare companion, offering
+        you a reliable source of information and a warm community to be a part
+        of. Let&apos;s embark on this journey to better skin together!
       </p>
     </div>
   );

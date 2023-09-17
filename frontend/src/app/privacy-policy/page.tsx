@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy - Skinquire",
   description:
-    "Our Privacy Policy outlines how we safeguard your personal information on Skinquire.net. Understand how your data is collected, used, and protected while engaging with our skincare product ratings and reviews community.",
+    "Our Privacy Policy outlines how we safeguard your personal information on Skinquire. Understand how your data is collected, used, and protected while engaging with our skincare product ratings and reviews community.",
 };
 
 const PrivacyPolicyPage = () => {
